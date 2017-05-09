@@ -1,0 +1,7 @@
+Resources:存放css，js，图片等静态资源
+Controllers:控制器
+Models:模型
+Service:逻辑
+Views:视图
+Env:环境和配置文件
+Plugin:第三方插件

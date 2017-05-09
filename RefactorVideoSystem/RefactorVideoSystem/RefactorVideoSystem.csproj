@@ -122,9 +122,19 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Env\Env.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Models\BaseDbContext.cs" />
+    <Compile Include="Models\Models\BaseModel.cs" />
+    <Compile Include="Models\Models\Code.cs" />
+    <Compile Include="Models\Models\Manager.cs" />
+    <Compile Include="Models\Models\Product.cs" />
+    <Compile Include="Models\Models\Suggest.cs" />
+    <Compile Include="Models\Models\User.cs" />
+    <Compile Include="Models\Models\Video.cs" />
+    <Compile Include="Models\Repository\BaseRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -145,11 +155,12 @@
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\Back\" />
     <Folder Include="Controllers\Front\" />
-    <Folder Include="Models\" />
     <Folder Include="Resources\css\" />
     <Folder Include="Resources\img\" />
     <Folder Include="Resources\js\" />
-    <Folder Include="Services\" />
+    <Folder Include="Resources\Plugin\" />
+    <Folder Include="Services\ServiceImpi\" />
+    <Folder Include="Services\ServiceInter\" />
     <Folder Include="Views\Back\" />
     <Folder Include="Views\Front\" />
   </ItemGroup>
