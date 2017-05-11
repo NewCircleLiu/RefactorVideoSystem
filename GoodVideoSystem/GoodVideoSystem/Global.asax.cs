@@ -1,4 +1,11 @@
-﻿using System;
+﻿using GoodVideoSystem.App_Start;
+using GoodVideoSystem.Models.Repository;
+using GoodVideoSystem.Repositories.IRepository;
+using GoodVideoSystem.Repositories.Repository;
+using GoodVideoSystem.Services.IService;
+using GoodVideoSystem.Services.Service;
+using RefactorVideoSystem.Models.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,12 +23,39 @@ namespace GoodVideoSystem
     {
         protected void Application_Start()
         {
+
+            registerService();
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+
+        protected void registerService()
+        {
+            IocConfig Ioc = new IocConfig();
+            //register repository
+            Ioc.Register<IActionLogRepository, ActionLogRepository>();
+            Ioc.Register<ICodeRepository, CodeRepository>();
+            Ioc.Register<IExceptionLogRepository, ExceptionLogRepository>();
+            Ioc.Register<IManagerRepository, ManagerRepository>();
+            Ioc.Register<IProductRepository, ProductRepository>();
+            Ioc.Register<ISuggestRepository, SuggestRepository>();
+            Ioc.Register<IUserRepository, UserRepository>();
+            Ioc.Register<IVideoRepository, VideoRepository>();
+
+            //register service
+            Ioc.Register<IActionLogService,ActionLogService>();
+            Ioc.Register<ICodeService,CodeService>();
+            Ioc.Register<IExceptionLogServcei,ExceptionLogServcei>();
+            Ioc.Register<IManagerService,ManagerService>();
+            Ioc.Register<IProductService,ProductService>();
+            Ioc.Register<ISuggestService,SuggestService>();
+            Ioc.Register<IUserService,UserService>();
+            Ioc.Register<IVideoService, VideoService>();
+            DependencyResolver.SetResolver(Ioc);
         }
     }
 }
