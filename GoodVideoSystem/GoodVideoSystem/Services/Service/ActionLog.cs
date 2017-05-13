@@ -9,7 +9,7 @@ namespace GoodVideoSystem.Services.Service
 {
     public class ActionLogService : BaseService, IActionLogService
     {
-        public IActionLogRepository actionLogRepository{get;set;}
+        private IActionLogRepository actionLogRepository;
         public ActionLogService(IActionLogRepository actionLogRepository)
         {
             this.actionLogRepository = actionLogRepository;

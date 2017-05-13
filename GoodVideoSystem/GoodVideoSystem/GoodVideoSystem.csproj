@@ -132,7 +132,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="IActionLog.cs" />
     <Compile Include="Migrations\201705091613062_init.cs" />
     <Compile Include="Migrations\201705091613062_init.Designer.cs">
       <DependentUpon>201705091613062_init.cs</DependentUpon>
@@ -212,6 +211,7 @@
     <Folder Include="Resources\img\" />
     <Folder Include="Resources\js\" />
     <Folder Include="Resources\Plugin\" />
+    <Folder Include="Services\filters\" />
     <Folder Include="Views\Back\" />
     <Folder Include="Views\Front\" />
   </ItemGroup>

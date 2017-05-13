@@ -9,7 +9,8 @@ namespace GoodVideoSystem.Services.Service
 {
     public class SuggestService : BaseService, ISuggestService
     {
-        private ISuggestRepository suggestRepository { get; set; }
+        private ISuggestRepository suggestRepository;
+
         public SuggestService(ISuggestRepository suggestRepository)
         {
             this.suggestRepository = suggestRepository;

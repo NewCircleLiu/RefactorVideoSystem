@@ -9,7 +9,8 @@ namespace GoodVideoSystem.Services.Service
 {
     public class VideoService : BaseService, IVideoService
     {
-        public IVideoRepository videoRepository { get; set; }
+        private IVideoRepository videoRepository;
+
         public VideoService(IVideoRepository videoRepository)
         {
             this.videoRepository = videoRepository;
