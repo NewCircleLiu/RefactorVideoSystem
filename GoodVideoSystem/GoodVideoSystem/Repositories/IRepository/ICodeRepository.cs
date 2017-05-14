@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GoodVideoSystem.Repositories.IRepository
 {
-    interface ICodeRepository
+    public interface ICodeRepository
     {
     }
 }

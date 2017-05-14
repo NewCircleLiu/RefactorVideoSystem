@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GoodVideoSystem.Services.Service
 {
-    interface IUserService
+    public interface IUserService
     {
     }
 }

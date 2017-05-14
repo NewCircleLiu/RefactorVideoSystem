@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GoodVideoSystem.Services.IService
 {
-    interface IVideoService
+    public interface IVideoService
     {
     }
 }

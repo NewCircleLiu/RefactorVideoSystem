@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GoodVideoSystem.Services.IService
 {
-    interface ICodeService
+    public interface ICodeService
     {
     }
 }

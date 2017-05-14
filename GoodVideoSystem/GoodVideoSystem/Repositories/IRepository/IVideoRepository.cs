@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GoodVideoSystem.Repositories.Repository
 {
-    interface IVideoRepository
+    public interface IVideoRepository
     {
     }
 }
