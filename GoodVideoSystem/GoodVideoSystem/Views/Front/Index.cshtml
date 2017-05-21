@@ -1,0 +1,40 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>青海古驿平安</title>
+    @Styles.Render("~/Resources/css")
+    @Scripts.Render("~/Resources/js")
+
+</head>
+<body>
+    <div id="div_1" style="text-align:center; margin-top:10px">
+        <p id="info" style="color:blue; text-align:center; font-family:micsofy 'Microsoft YaHei'; font-size:20px"></p>
+        <img id="welcome" src="/Resources/img/welcome.jpg" / style="vertical-align:middle" >  
+    </div>
+
+</body>
+    <script>
+        jQuery(function () {
+            showTime();
+        })
+
+        //设定倒数秒数  
+        var t = 3;
+        //显示倒数秒数  
+        function showTime() {
+            jQuery("#info").text("将在" + t + "秒后进入系统");
+            if (t == 1) {
+                location.href = '/User/Home';
+            }
+            t -= 1;
+            //每秒执行一次,showTime()  
+            setTimeout("showTime()", 1000);
+        }
+    </script>
+</html>

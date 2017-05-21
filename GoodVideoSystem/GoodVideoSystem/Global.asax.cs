@@ -23,7 +23,6 @@ namespace GoodVideoSystem
     {
         protected void Application_Start()
         {
-
             registerService();
             AreaRegistration.RegisterAllAreas();
 
@@ -31,6 +30,14 @@ namespace GoodVideoSystem
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            RegisterView();
+        }
+
+        protected void RegisterView()
+        {
+            ViewEngines.Engines.Clear();
+            ViewEngines.Engines.Add(new MyViewEngine());
         }
 
         protected void registerService()

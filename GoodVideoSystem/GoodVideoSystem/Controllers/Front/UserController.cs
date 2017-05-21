@@ -15,7 +15,7 @@ namespace GoodVideoSystem.Controllers.Front
         */
         public ActionResult Index()
         {
-            return Content("index");
+            return View();
         }
 
         /*
@@ -25,7 +25,7 @@ namespace GoodVideoSystem.Controllers.Front
         */
         public ActionResult Home()
         {
-            return Content("home");
+            return View();
         }
 
         /*
