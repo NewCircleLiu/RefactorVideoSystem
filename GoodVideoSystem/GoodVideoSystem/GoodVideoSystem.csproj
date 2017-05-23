@@ -153,6 +153,8 @@
     <Compile Include="Models\Suggest.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Video.cs" />
+    <Compile Include="Models\VO\ErrorInfo.cs" />
+    <Compile Include="Models\VO\MyViewData.cs" />
     <Compile Include="Repositories\IRepository\IActionLogRepository.cs" />
     <Compile Include="Repositories\IRepository\ICodeRepository.cs" />
     <Compile Include="Repositories\IRepository\IExceptionLogRepository.cs" />
@@ -195,6 +197,13 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Resources\css\app.css" />
+    <Content Include="Resources\css\contact.css" />
+    <Content Include="Resources\css\login.css" />
+    <Content Include="Resources\css\main.css" />
+    <Content Include="Resources\css\myvideo.css" />
+    <Content Include="Resources\css\product.css" />
+    <Content Include="Resources\css\registe.css" />
+    <Content Include="Resources\css\video.css" />
     <Content Include="Resources\img\appimg.png" />
     <Content Include="Resources\img\backlogin.JPG" />
     <Content Include="Resources\img\back_index.jpg" />
@@ -602,6 +611,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Front\Home.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Front\Product.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Front\About.cshtml" />
+    <Content Include="Views\Front\Contact.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

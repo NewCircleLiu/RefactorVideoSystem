@@ -11,10 +11,10 @@ namespace GoodVideoSystem
             bundles.Add(new ScriptBundle("~/Resources/js").Include(
                         "~/Resources/js/common/*.js",
                         "~/Resources/js/custom/*.js",
-                        "~/Resources/Plugin/bootstrap/js/bootstrap.min.js"));
+                        "~/Resources/Plugin/bootstrap/js/bootstrap.js"));
 
-            bundles.Add(new StyleBundle("~/Resources/css").Include("~/Resources/*.css",
-                "~/Resources/Plugin/bootstrap/css/bootstrap.min.css"));
+            bundles.Add(new StyleBundle("~/Resources/css").Include("~/Resources/Plugin/bootstrap/css/bootstrap.css",
+                "~/Resources/css/*.css"));
         }
     }
 }

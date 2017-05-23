@@ -87,4 +87,3 @@ E:\myproject\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\obj\Debug\GoodV
 E:\myproject\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\obj\Debug\GoodVideoSystem.csproj.GenerateResource.Cache
 E:\myproject\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\obj\Debug\GoodVideoSystem.dll
 E:\myproject\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\obj\Debug\GoodVideoSystem.pdb
-E:\myproject\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\obj\Debug\GoodVideoSystem.csprojResolveAssemblyReference.cache

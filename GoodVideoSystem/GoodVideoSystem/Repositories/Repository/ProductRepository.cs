@@ -10,5 +10,10 @@ namespace GoodVideoSystem.Models.Repository
     public class ProductRepository : BaseRepository<Product>, IProductRepository
     {
         public ProductRepository(BaseDbContext context) : base(context) { }
+
+        public IEnumerable<Product> getProducts()
+        {
+            return this.Get();
+        }
     }
 }

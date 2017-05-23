@@ -4,11 +4,9 @@
 }
 
 
-@using VideoSystem.Models
-@model VideoSystem.Models.Code[]
+@using RefactorVideoSystem.Models.Models
+@model RefactorVideoSystem.Models.Models.Code[]
 
-
-<link href="@Url.Content("~/content/pagecss/main.css")" rel="stylesheet" type="text/css">
 <style>
     a:hover {
         text-decoration: none;
@@ -17,7 +15,6 @@
 
 @Html.Partial("HomePartialView")
 
-<link href="@Url.Content("~/content/pagecss/myvideo.css")" rel="stylesheet" type="text/css">
 <div class="gallery">
     <div class="container">
         <form class="form-inline" role="form" action="#">
@@ -40,7 +37,7 @@
                         视频库空空如也，赶紧在上方的文本框里输入你的邀请码吧！<br />
                        <span style="color:red">注意邀请码的长度为10位，并且区分大小写哦！</span> 
                         <br />安卓手机端请扫描下方二维码，下载并安装平安串珠APP。
-                        <br /><img src="/Image/appimg.png" width="200" />
+                        <br /><img src="/Resources/img/appimg.png" width="200" />
                    </div>
                 }
                 else
@@ -52,7 +49,7 @@
                                 <a href="~/Home/PlayVideo?videoID=@c.VideoID" class="b-link-stripe b-animate-go  swipebox">
                                     @if (c.Video.VideoImageLocal == "null")
                                     {
-                                        <img src="@Url.Content("~/Image/qhpa.jpg")" alt="" class="img-responsive">
+                                        <img src="@Url.Content("~/Resources/img/qhpa.jpg")" alt="" class="img-responsive">
                                     }
                                     else
                                     {

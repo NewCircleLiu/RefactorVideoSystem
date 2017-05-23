@@ -1,4 +1,8 @@
-﻿using System;
+﻿using GoodVideoSystem.Services.filters;
+using GoodVideoSystem.Services.IService;
+using GoodVideoSystem.Services.Service;
+using RefactorVideoSystem.Models.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +12,18 @@ namespace GoodVideoSystem.Controllers.Front
 {
     public class UserController : Controller
     {
+        private ICodeService codeService;
+        private IProductService productService;
+        private IUserService userService;
+
+        //通过构造方法注入服务层
+        public UserController(ICodeService codeService, IProductService productService, IUserService userService)
+        {
+            this.codeService = codeService;
+            this.productService = productService;
+            this.userService = userService;
+        }
+
         /*
         * @desc 欢迎首页
         * @url /
@@ -23,9 +39,13 @@ namespace GoodVideoSystem.Controllers.Front
         * @url /user/home
         * @method GET
         */
-        public ActionResult Home()
+        public ActionResult Home(User userInput)
         {
-            return View();
+            //这里暂时这样写
+            User user = userService.userLogin(userInput);
+            Session["User"] = user;
+ 
+            return View(codeService.getCodes().ToArray());
         }
 
         /*
@@ -55,7 +75,7 @@ namespace GoodVideoSystem.Controllers.Front
          */
         public ActionResult Product()
         {
-            return Content("product");
+            return View(productService.getProducts().ToArray());
         }
 
         /*
@@ -63,6 +83,7 @@ namespace GoodVideoSystem.Controllers.Front
         * @url /user/play
         * @method GET
         */
+        [UserAuthorise]
         public ActionResult Play()
         {
             return Content("play");

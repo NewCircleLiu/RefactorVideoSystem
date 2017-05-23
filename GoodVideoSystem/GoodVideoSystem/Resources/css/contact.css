@@ -1,0 +1,94 @@
+.contact-top{
+	  padding-top: 3em;
+}
+.contact-top-left iframe{
+	width: 100%;
+	height: 528px;
+}
+.contact-textarea input[type="text"], 
+.contact-textarea input[type="tel"] {
+	width: 100%;
+	color: #000;
+	outline: none;
+	font-size: 17px;
+	padding: 8px;
+	border: none;
+	margin-bottom: 1em;
+    margin-top: 1em;
+	-webkit-appearance: none;
+	background: none;
+    border: 1px solid rgba(153, 153, 153, 1);
+	border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
+	-moz-border-radius: 0.3em;
+	-o-border-radius: 0.3em;
+	-ms-border-radius: 0.3em;
+}
+
+.contact-textarea textarea {
+	resize: none;
+	width: 100%;
+	color: #000;
+	font-size: 17px;
+	outline: none;
+	padding: 8px;
+	border: none;
+	min-height: 13em;
+	-webkit-appearance: none;
+	background: none;
+	   border: 1px solid rgba(153, 153, 153, 1);
+	border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
+	-moz-border-radius: 0.3em;
+	-o-border-radius: 0.3em;
+	-ms-border-radius: 0.3em;
+}
+.contact-textarea input[type="button"] {
+  border: none;
+  outline: none;
+  color: #fff;
+  background: #f15f43; /*#3f67bf;*/
+  width: 100%;
+  padding: 15px 0px;
+  font-size: 18px;
+  margin: 10px 7px 0px 0px;
+  -webkit-appearance: none;
+  border-radius: 0.3em;
+  -webkit-border-radius: 0.3em;
+  -moz-border-radius: 0.3em;
+  -o-border-radius: 0.3em;
+  -ms-border-radius: 0.3em;
+}
+.contact-textarea input[type="submit"]:hover {
+	background:#0ACF66;
+	transition: 0.5s all;
+	-webkit-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+	-ms-transition: 0.5s all;
+	-o-transition: 0.5s all;
+}
+.contact-textarea input[type="reset"] {
+  border: none;
+  outline: none;
+  color: #fff;
+  background: #f15f43; /*#3f67bf;*/
+  width: 49%;
+  padding: 15px 0px;
+  font-size: 18px;
+  margin: 10px 0px 0px 0px;
+  -webkit-appearance: none;
+  border-radius: 0.3em;
+  -webkit-border-radius: 0.3em;
+  -moz-border-radius: 0.3em;
+  -o-border-radius: 0.3em;
+  -ms-border-radius: 0.3em;
+  cursor: pointer;
+}
+.contact-textarea input[type="reset"]:hover {
+	background:#0ACF66;
+	transition: 0.5s all;
+	-webkit-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+	-ms-transition: 0.5s all;
+	-o-transition: 0.5s all;
+}

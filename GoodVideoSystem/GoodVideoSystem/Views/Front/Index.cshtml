@@ -30,7 +30,7 @@
         function showTime() {
             jQuery("#info").text("将在" + t + "秒后进入系统");
             if (t == 1) {
-                location.href = '/User/Home';
+                location.href = '/User/Home?UserUniqueCode=123456789&Phone=11111111111';
             }
             t -= 1;
             //每秒执行一次,showTime()  

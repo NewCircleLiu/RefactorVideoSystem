@@ -1,5 +1,6 @@
 ﻿using GoodVideoSystem.Repositories.IRepository;
 using GoodVideoSystem.Services.IService;
+using RefactorVideoSystem.Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,11 @@ namespace GoodVideoSystem.Services.Service
         {
             this.codeRepository = codeRepository;
             this.AddDisposableObject(codeRepository);
+        }
+
+        public IEnumerable<Code> getCodes()
+        {
+            return codeRepository.getCodes(); ;
         }
     }
 }
