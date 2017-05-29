@@ -11,10 +11,19 @@ namespace GoodVideoSystem.Models.Repository
     {
         public CodeRepository(BaseDbContext context) : base(context) { }
 
-        public IEnumerable<Code> getCodes()
+        public IEnumerable<Code> getCodes(string deviceCode)
         {
-            return this.Get();
+            return Get(item => item.DeviceUniqueCode.Contains(deviceCode));
         }
 
+        public Code getCode(string inviteCode)
+        {
+            return  Get(item => item.CodeValue.Contains(inviteCode)).FirstOrDefault();
+        }
+
+        public void updateCode(Code code)
+        {
+            Update(code);
+        }
     }
 }

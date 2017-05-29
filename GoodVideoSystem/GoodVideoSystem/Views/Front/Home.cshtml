@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "View1";
+    ViewBag.Title = "我的视频-青海古驿平安串珠";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -31,16 +31,7 @@
 
         <div class="gallery-main" style="padding-left: 0; padding-right: 0">
             <div class="gallery-bottom">
-                @if (Model.Length <= 0)
-                {
-                   <div style=" background-color: #ddd; font-family:'Microsoft yahei'; font-size: 1.2em; line-height:2; text-align: center; padding-top: 50px; padding-bottom: 50px">
-                        视频库空空如也，赶紧在上方的文本框里输入你的邀请码吧！<br />
-                       <span style="color:red">注意邀请码的长度为10位，并且区分大小写哦！</span> 
-                        <br />安卓手机端请扫描下方二维码，下载并安装平安串珠APP。
-                        <br /><img src="/Resources/img/appimg.png" width="200" />
-                   </div>
-                }
-                else
+                @if(Model != null && Model.Length > 0)
                 {
                     foreach (Code c in Model)
                     {
@@ -55,10 +46,6 @@
                                     {
                                         <img src="@c.Video.VideoImageLocal" alt="" class="img-responsive">
                                     }
-                                    <!--
-                                        <div class="mask" style="width:100%; height: 100%; background-image: url(/Image/video_image/play_icon.png); background-repeat: no-repeat; background-position: center center">
-                                        </div>
-                                    -->
                                     <h4 style="line-height:1.2; clear:both; overflow:visible;margin-top:8px; color:black; font-family:'Microsoft YaHei'">
                                         @{
                                             string name = c.Video.VideoName.Split('.')[0];
@@ -70,11 +57,21 @@
                         </div>	
                     }
                 }
+                else
+                {
+                   <div style=" background-color: #ddd; font-family:'Microsoft yahei'; font-size: 1.2em; line-height:2; text-align: center; padding-top: 50px; padding-bottom: 50px">
+                        视频库空空如也，赶紧在上方的文本框里输入你的邀请码吧！<br />
+                       <span style="color:red">注意邀请码的长度为10位，并且区分大小写哦！</span> 
+                        <br />安卓手机端请扫描下方二维码，下载并安装平安串珠APP。
+                        <br /><img src="/Resources/img/appimg.png" width="200" />
+                   </div>
+                }
                 <div class="clearfix"></div>
             </div>
         </div>
     </div>
 </div>
+
 <script>
     function getVideo() {
         var videoCode = jQuery("#videoCode");
@@ -84,16 +81,16 @@
         }
 
         jQuery.post(
-            "/Home/GetVideo",
+            "/User/GetVideo",
             {
-                "videoCode": videoCode.val()
+                "videoInviteCode": videoCode.val()
             },
             function (data) {
                 if (data == "invalid") {
-                    jQuery("#info").text("此验证码无效");
+                    jQuery("#info").text("邀请码无效");
                 }
                 else if (data == "outOfCount") {
-                    jQuery("#info").text("此验证码已使用");
+                    jQuery("#info").text("邀请码使用次数超过3次");
                 }
                 else if (data == "ok") {
                     location.reload();

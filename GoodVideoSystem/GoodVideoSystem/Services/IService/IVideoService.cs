@@ -8,5 +8,6 @@ namespace GoodVideoSystem.Services.IService
 {
     public interface IVideoService
     {
+        
     }
 }

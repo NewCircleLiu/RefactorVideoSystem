@@ -24,16 +24,22 @@ namespace GoodVideoSystem.Models.Repository
             return this.Get(p => p.Phone == phone).FirstOrDefault();
         }
 
-        //根据账号获取用户
-        public User getUserByAccount(string account)
+        //根据邀请码获取用户
+        public User getUserByInviteCode(string inviteCode)
         {
-            return this.Get(p => p.UserUniqueCode == account).FirstOrDefault();
+            return this.Get(p => p.InviteCodes.Contains(inviteCode)).FirstOrDefault();
         }
 
         //添加用户
         public void addUser(User user)
         {
             this.Add(user);
+        }
+
+        //更新用户
+        public void updateUser(User user)
+        {
+            this.Update(user);
         }
     }
 }

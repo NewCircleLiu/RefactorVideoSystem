@@ -131,16 +131,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Front\UserController.cs" />
+    <Compile Include="Controllers\Front\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201705091613062_init.cs" />
-    <Compile Include="Migrations\201705091613062_init.Designer.cs">
-      <DependentUpon>201705091613062_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705111417588_update.cs" />
-    <Compile Include="Migrations\201705111417588_update.Designer.cs">
-      <DependentUpon>201705111417588_update.cs</DependentUpon>
+    <Compile Include="Migrations\201705290643215_Modify.cs" />
+    <Compile Include="Migrations\201705290643215_Modify.Designer.cs">
+      <DependentUpon>201705290643215_Modify.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ActionLog.cs" />
@@ -268,6 +265,8 @@
     <Content Include="Resources\js\custom\userLogin.js" />
     <Content Include="Resources\js\custom\userSuggest.js" />
     <Content Include="Resources\js\custom\videoManager.js" />
+    <Content Include="Resources\js\utility\getBrowserInfo.js" />
+    <Content Include="Resources\js\utility\welcome.js" />
     <Content Include="Resources\Plugin\bootstrap\css\bootstrap-theme.css" />
     <Content Include="Resources\Plugin\bootstrap\css\bootstrap-theme.min.css" />
     <Content Include="Resources\Plugin\bootstrap\css\bootstrap.css" />
@@ -533,14 +532,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705091613062_init.resx">
-      <DependentUpon>201705091613062_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705111417588_update.resx">
-      <DependentUpon>201705111417588_update.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Front\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -618,6 +609,11 @@
   <ItemGroup>
     <Content Include="Views\Front\About.cshtml" />
     <Content Include="Views\Front\Contact.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201705290643215_Modify.resx">
+      <DependentUpon>201705290643215_Modify.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

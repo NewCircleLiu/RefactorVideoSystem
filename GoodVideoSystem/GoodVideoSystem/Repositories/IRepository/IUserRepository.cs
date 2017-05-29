@@ -15,10 +15,13 @@ namespace GoodVideoSystem.Repositories.IRepository
         //根据电话获取用户
         User getUserByPhone(string phone);
 
-        //根据账号获取用户
-        User getUserByAccount(string account);
+        //根据邀请码获取用户
+        User getUserByInviteCode(string inviteCode);
 
         //添加用户
         void addUser(User user);
+
+        //更新用户
+        void updateUser(User user);
     }
 }

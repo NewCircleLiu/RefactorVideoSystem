@@ -4,6 +4,7 @@ using GoodVideoSystem.Services.Service;
 using RefactorVideoSystem.Models.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -12,9 +13,10 @@ namespace GoodVideoSystem.Controllers.Front
 {
     public class UserController : Controller
     {
+        private IUserService userService;
         private ICodeService codeService;
         private IProductService productService;
-        private IUserService userService;
+
 
         //通过构造方法注入服务层
         public UserController(ICodeService codeService, IProductService productService, IUserService userService)
@@ -39,13 +41,11 @@ namespace GoodVideoSystem.Controllers.Front
         * @url /user/home
         * @method GET
         */
-        public ActionResult Home(User userInput)
+        public ActionResult Home()
         {
-            //这里暂时这样写
-            User user = userService.userLogin(userInput);
-            Session["User"] = user;
- 
-            return View(codeService.getCodes().ToArray());
+            string deviceUniqueCode = (string)Session["deviceUniqueCode"];
+            Code[] codes = codeService.getCodes(deviceUniqueCode).ToArray();
+            return View(codes);
         }
 
         /*
@@ -106,9 +106,16 @@ namespace GoodVideoSystem.Controllers.Front
         * @method POST
         */
         [HttpPost]
-        public ActionResult GetVideo()
+        public ActionResult GetVideo(string videoInviteCode)
         {
-            return Content("get video");
+            Code returnCode = null;
+            string returnInfo = codeService.checkCode(videoInviteCode, out returnCode);
+            if (returnInfo.Equals("AVAILABLE"))
+            {
+                userService.updateUserInfo(returnCode, (string)Session["deviceUniqueCode"]);
+                codeService.updateCodeInfo(returnCode, (string)Session["deviceUniqueCode"]);
+            }
+            return Content(returnInfo);
         }
     }
 }

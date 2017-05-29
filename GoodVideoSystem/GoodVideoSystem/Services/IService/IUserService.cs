@@ -9,10 +9,13 @@ namespace GoodVideoSystem.Services.Service
 {
     public interface IUserService
     {
-        //用户登录
-        User userLogin(User user);
+        //根据设备信息处理用户
+        void updateUserInfo(Code inviteCode, string deviceUniqueCode);
 
         //用户注册
-        User userRregister(User user);
+        void registeUser(User user);
+
+        //更新用户信息
+        void updateUser(User user);
     }
 }

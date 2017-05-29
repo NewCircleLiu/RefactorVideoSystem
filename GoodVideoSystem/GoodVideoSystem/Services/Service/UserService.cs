@@ -10,36 +10,56 @@ namespace GoodVideoSystem.Services.Service
 {
     public class UserService : BaseService, IUserService
     {
-        private IUserRepository userRepository;
+        private IUserRepository userRepository { get; set; }
+        private ICodeRepository codeRepository { get; set; }
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository, ICodeRepository codeRepository)
         {
             this.userRepository = userRepository;
             this.AddDisposableObject(userRepository);
+
+            this.codeRepository = codeRepository;
+            this.AddDisposableObject(codeRepository);
         }
 
-        //用户登录
-        public User userLogin(User user)
+        //根据设备信息获取用户
+        public void updateUserInfo(Code inviteCode, string deviceUniqueCode)
         {
-            User userDB = userRepository.getUserByAccount(user.UserUniqueCode);
-            if (userDB == null)
-            {
-                //对登录失败的情况做处理
-                
-                return userRregister(user);
+            deviceUniqueCode = deviceUniqueCode.Trim();
+            if (string.IsNullOrEmpty(deviceUniqueCode))
+                return;
+
+            bool isNewDevice = (codeRepository.getCodes(deviceUniqueCode).FirstOrDefault() != null);
+            bool isNewInviteCode = (inviteCode.BindedDeviceCount != 0);
+           
+            if (isNewInviteCode) //但凡用户输入新的有效的邀请码，必须更新用户的邀请码
+            { 
+                if (isNewDevice) // 1.如果在一台新的设备上播放，需要新建用户（无法确定设备属于哪个用户）
+                {
+                    User user = new User() { InviteCodes = inviteCode.CodeValue };
+                    registeUser(user);
+                }
+
+                else // 2.如果在一台旧的设备上播放，用户的邀请码更新，寻找用户得通过设备信息-》邀请码-》用户
+                {
+                    Code existingCode = codeRepository.getCodes(deviceUniqueCode).FirstOrDefault();
+                    User user = userRepository.getUserByInviteCode(existingCode.CodeValue);
+                    user.InviteCodes += ("," + inviteCode.CodeValue);
+                    updateUser(user);
+                }
             }
-
-            //用户登录成功后应该查找用户拥有的视频
-
-            return userDB;
         }
 
         //用户注册
-        public User userRregister(User user)
+        public void registeUser(User user)
         {
             userRepository.addUser(user);
-            User userDB = userRepository.getUserByAccount(user.UserUniqueCode);
-            return userDB;
+        }
+
+        //更新用户信息
+        public void updateUser(User user)
+        {
+            userRepository.updateUser(user);
         }
     }
 }
