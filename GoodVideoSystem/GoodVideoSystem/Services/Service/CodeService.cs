@@ -52,7 +52,7 @@ namespace GoodVideoSystem.Services.Service
                 if (inviteCode.BindedDeviceCount < MAX_DEVICE_COUNT)
                 {
                     inviteCode.DeviceUniqueCode += ("," + deviceUniqueCode);
-                    inviteCode.BindedDeviceCount = inviteCode.CodeValue.Split(',').Count();
+                    inviteCode.BindedDeviceCount = inviteCode.CodeValue.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Count();
                     codeRepository.updateCode(inviteCode);
                 }
             }
