@@ -9,5 +9,6 @@ namespace GoodVideoSystem.Repositories.Repository
     public interface IVideoRepository
     {
         Video getVideo(string inviteCode);
+        Video getVideo(int videoID);
     }
 }

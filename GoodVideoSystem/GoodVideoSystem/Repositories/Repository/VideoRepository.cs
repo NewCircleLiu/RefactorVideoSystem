@@ -17,5 +17,10 @@ namespace GoodVideoSystem.Models.Repository
             Code code = codes.Get(item => item.CodeValue == inviteCode).FirstOrDefault();
             return code != null ? Get(item => item.VideoID == code.VideoID).FirstOrDefault() : null;
         }
+
+        public Video getVideo(int videoID)
+        {
+           return  this.Get(item => item.VideoID == videoID).FirstOrDefault();
+        }
     }
 }

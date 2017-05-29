@@ -20,7 +20,7 @@
         <form class="form-inline" role="form" action="#">
             <div id="search_wrapper1" style="margin-top: 3em">
                 <div id="search_form" class="clearfix">
-                        <input type="text" class="text" id="videoCode" placeholder="输入邀请码" onfocus="clearInfo();" size="30">
+                        <input type="text" class="text" id="videoCode" placeholder="输入邀请码"" size="30">
                         <input onclick="getVideo();" class="getVideoButton" type="button" style="width:150px" value="获取视频" >
                         <p id="info" style="color:red;"></p>
                  </div>
@@ -75,7 +75,8 @@
 <script>
     function getVideo() {
         var videoCode = jQuery("#videoCode");
-        if (videoCode.val().length <= 0) {
+        var trimedVideoCode = jQuery.trim(videoCode.val());
+        if (trimedVideoCode.length <= 0) {
             jQuery("#info").text("邀请码不能为空");
             return;
         }
@@ -83,26 +84,19 @@
         jQuery.post(
             "/User/GetVideo",
             {
-                "videoInviteCode": videoCode.val()
+                "videoInviteCode": trimedVideoCode
             },
             function (data) {
-                if (data == "invalid") {
+                if (data == "INVALID") {
                     jQuery("#info").text("邀请码无效");
                 }
-                else if (data == "outOfCount") {
+                else if (data == "OUTOFTIMES") {
                     jQuery("#info").text("邀请码使用次数超过3次");
                 }
-                else if (data == "ok") {
+                else if (data == "AVAILABLE") {
                     location.reload();
-                }
-                else if (data == "error") {
-                    jQuery("#info").text("视频获取失败");
                 }
             }
         );
-    }
-
-    function clearInfo() {
-        jQuery("#info").text("");
     }
 </script>

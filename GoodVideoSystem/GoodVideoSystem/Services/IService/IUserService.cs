@@ -17,5 +17,8 @@ namespace GoodVideoSystem.Services.Service
 
         //更新用户信息
         void updateUser(User user);
+
+        //获取当前用户
+        User GetCurrentUser(string deviceUniqueCode)
     }
 }

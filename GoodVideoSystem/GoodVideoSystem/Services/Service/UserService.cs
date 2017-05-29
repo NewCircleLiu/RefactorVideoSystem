@@ -61,5 +61,12 @@ namespace GoodVideoSystem.Services.Service
         {
             userRepository.updateUser(user);
         }
+
+        public User GetCurrentUser(string deviceUniqueCode)
+        {
+            Code existingCode = codeRepository.getCodes(deviceUniqueCode).FirstOrDefault();
+            User user = userRepository.getUserByInviteCode(existingCode.CodeValue);
+            return user;
+        }
     }
 }
