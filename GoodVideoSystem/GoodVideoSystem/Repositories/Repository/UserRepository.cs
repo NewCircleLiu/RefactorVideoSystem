@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Linq.Expressions;
 
 namespace GoodVideoSystem.Models.Repository
 {
@@ -12,10 +13,10 @@ namespace GoodVideoSystem.Models.Repository
         public UserRepository(BaseDbContext context) : base(context) { }
 
         //获取用户列表
-        public IEnumerable<User> getUsers(int pageIndex, int pageSize, out int recordCount)
+        public IEnumerable<User> getUsers(Expression<Func<User, bool>> filter, out int recordCount)
         {
             recordCount = this.DbSet.Count();
-            return this.Get(p=>true,pageIndex,pageSize,p=>p.ModifyTime,true);
+            return this.Get(filter);
         }
 
         //根据电话获取用户
@@ -29,7 +30,12 @@ namespace GoodVideoSystem.Models.Repository
         {
             return this.Get(p => p.InviteCodes.Contains(inviteCode)).FirstOrDefault();
         }
+        //根据id获取用户
 
+        public User getUserById(int UserId)
+        {
+            return this.Get(p => p.UserId == UserId).FirstOrDefault();
+        }
         //添加用户
         public void addUser(User user)
         {

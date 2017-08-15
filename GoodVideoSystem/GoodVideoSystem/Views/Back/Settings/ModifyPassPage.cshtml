@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "古驿平安-修改密码";
+    Layout = "~/Views/Shared/_BackLayout.cshtml";
+}
+<script src="~/Resources/js/custom/setting.js"></script>
+<div class="col-lg-9 col-lg-offset-2 main" style="margin-left: 290px;">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="@Url.Content("~/Qhgypacz/BackMain/")"><span class="glyphicon glyphicon-home"></span></a></li>
+            <li class="active">修改密码</li>
+        </ol>
+    </div>
+    <!--/.row-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">信息</div>
+                <div class="panel-body">
+                    <p id="erro_info" style="color:red;text-align:center">@TempData["erroInfo"]</p>
+                    <form role="form" action="@Url.Content("~/Settings/ModifyPass")" method="post" id="modifyPassForm">
+                        <table style="width:350px;margin:auto;font-size:1.5em;" class="table table-bordered">
+                            <tr>
+                                <td>原始密码：</td>
+                                <td>
+                                    <input type="password" class="form-control" id="password" name="oldPass" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>新密码：</td>
+                                <td>
+                                    <input type="password" class="form-control" id="newPass" name="newPass" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>确认密码：</td>
+                                <td>
+                                    <input type="password" class="form-control" id="passConfirm" name="newPassConfirm" required>
+                                </td>
+                            </tr>
+                        </table>
+                        <div style="text-align:center;margin-top:20px;">
+                            <button type="button" class="btn btn-primary" onclick="modify();">修改</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

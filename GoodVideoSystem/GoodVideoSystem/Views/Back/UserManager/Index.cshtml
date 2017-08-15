@@ -1,0 +1,122 @@
+﻿@{
+    ViewBag.Title = "古驿平安-用户管理";
+    Layout = "~/Views/Shared/_BackLayout.cshtml";
+}
+@using RefactorVideoSystem.Models.Models;
+@model GoodVideoSystem.Models.Concrete.Paging
+
+
+<style>
+    th {
+        font-weight:normal;
+        vertical-align: middle;
+    }
+
+    a:hover {
+        text-decoration:none;
+    }
+</style>
+
+<div class="main" style="margin-left:290px;width:80%">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="@Url.Content("~/Qhgypacz/BackMain/")"><span class="glyphicon glyphicon-home"></span></a></li>
+            <li class="active">用户列表</li>
+        </ol>
+    </div>
+    <!--/.row-->
+    <div class="row">
+        <div >
+            <div class="panel panel-default">
+                <div class="panel-heading">用户列表</div>
+                <div class="panel-body">
+                    <form role="form" action="@Url.Content("~/Search")" method="get">
+                        <input type="hidden" name="model" value="User"/>
+                        <table>
+                            <tr>
+                                <td id="searchValue">
+                                    <input type="text" class="form-control" name="searchValue" placeholder="请输入用户手机号" style="width: 200px;" />
+                                </td>
+                                <td>
+                                    <select class="form-control" style="width: 120px;" id="searchType" name="searchType">
+                                        <option value="phone">按电话</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <button type="submit" class="btn btn-default">搜索</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                    <table class="table table-bordered table-hover class" style="margin-top:10px;">
+                        <thead>
+                            <tr>
+                                <th>编号</th>
+                                <th>电话</th>
+                                <th>视频</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach(User u in Model.returnData){
+                                    <tr>
+                                        <td>@u.UserId</td>
+                                        @if (u.Phone == "no")
+                                        {
+                                            <td>无</td>
+                                        }else { 
+                                            <td> @u.Phone</td>
+                                        }
+                                        <td>
+                                            <a onclick="getVideo(@u.UserId);">查看</a>
+                                        </td>
+                                        <td>
+                                            
+                                        </td>
+                                    </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    @{
+                        int prePageId = (Model.request_page > 1) ? Model.request_page - 1 : 1;
+                        int nextPageId = (Model.request_page < Model.total_pages) ? Model.request_page + 1 : Model.total_pages;
+                    }
+
+                    <div style="text-align: center">
+                        <ul class="pagination">
+                            <li><a href="@ViewBag.searchAction">首页</a></li>
+                            <li><a href="@ViewBag.searchAction@prePageId">&laquo;</a></li>
+                            @for (int i = Model.start_page_num; i <= Model.end_page_num; i++)
+                            {
+                                <li><a id="@i" href="@ViewBag.searchAction@i">@i</a></li>
+                            }
+                            <li><a href="@ViewBag.searchAction@nextPageId">&raquo;</a></li>
+                            <li><a href="@ViewBag.searchAction@Model.total_pages">末页</a></li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+    jQuery("#searchType").on("change", function () {
+        var searchType = this.value;
+        var searchValue = jQuery("#searchValue");
+        var placeholder = "";
+        
+        if (searchType == "phone") {
+            placeholder = "请输入用户电话";
+        }
+        searchValue.html("<input type='text' class='form-control' name='searchValue' style='width: 200px;' placeholder=" + placeholder + " required/>");
+    });
+
+    //获取视频
+    function getVideo(userID)
+    {
+        jQuery.jBox.open("iframe:/UserManager/GetUserVideo?userID=" + userID, "用户视频", 600, 350, { buttons: { "关闭": true } });
+    }
+</script>

@@ -10,5 +10,10 @@ namespace GoodVideoSystem.Repositories.Repository
     {
         Video getVideo(string inviteCode);
         Video getVideo(int videoID);
+        IEnumerable<Video> getVideos(object tar, bool isID);
+        void updateVideo(Video video);
+        IEnumerable<Video> getVideos();
+        void addVideo(Video v);
+        void deleteVideo(Video v);
     }
 }

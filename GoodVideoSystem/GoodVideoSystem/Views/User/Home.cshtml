@@ -7,13 +7,28 @@
 @using RefactorVideoSystem.Models.Models
 @model RefactorVideoSystem.Models.Models.Code[]
 
+
+@Html.Partial("HomePartialView")
 <style>
     a:hover {
         text-decoration: none;
     }
+    body{
+        background: #fff;
+        padding-top:0px;
+    }
+    .navbar {
+        min-height:50px;
+        margin-bottom: 0px;
+    }
+    #top_bar {
+        margin-top:50px;
+    }
+    .navbar-header {
+    float: left;
+    width:auto;
+    }
 </style>
-
-@Html.Partial("HomePartialView")
 
 <div class="gallery">
     <div class="container">

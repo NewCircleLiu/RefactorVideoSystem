@@ -46,6 +46,18 @@
     <Reference Include="Ninject">
       <HintPath>..\..\..\GYPACZ_NoLogin\GYPACZ_NoLogin\VideoSystem\bin\Ninject.dll</HintPath>
     </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\..\..\..\NoLoginVideoSystem\GYPACZ_NoLogin\GYPACZ_NoLogin\VideoSystem\bin\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>..\..\..\..\NoLoginVideoSystem\GYPACZ_NoLogin\GYPACZ_NoLogin\VideoSystem\bin\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>..\..\..\..\NoLoginVideoSystem\GYPACZ_NoLogin\GYPACZ_NoLogin\VideoSystem\bin\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats">
+      <HintPath>..\..\..\..\NoLoginVideoSystem\GYPACZ_NoLogin\GYPACZ_NoLogin\VideoSystem\bin\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -130,6 +142,15 @@
     <Compile Include="App_Start\MyViewEngine.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Back\ProductController.cs" />
+    <Compile Include="Controllers\Back\QhgypaczController.cs" />
+    <Compile Include="Controllers\Back\SearchController.cs" />
+    <Compile Include="Controllers\Back\SettingsController.cs" />
+    <Compile Include="Controllers\Back\UploadController.cs" />
+    <Compile Include="Controllers\Back\UserManagerController.cs" />
+    <Compile Include="Controllers\Back\VerifyCodeController.cs" />
+    <Compile Include="Controllers\Back\VideoCodeController.cs" />
+    <Compile Include="Controllers\Back\VideoManagerController.cs" />
     <Compile Include="Controllers\Front\UserController.cs" />
     <Compile Include="Controllers\Front\LoginController.cs" />
     <Compile Include="Global.asax.cs">
@@ -140,11 +161,25 @@
       <DependentUpon>201705290643215_Modify.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Abstract\ICreateCode.cs" />
+    <Compile Include="Models\Abstract\IEncryption.cs" />
+    <Compile Include="Models\Abstract\IExportExcel.cs" />
+    <Compile Include="Models\Abstract\IPaging.cs" />
+    <Compile Include="Models\Abstract\IUploadFile.cs" />
+    <Compile Include="Models\Abstract\IVerifyCode.cs" />
     <Compile Include="Models\ActionLog.cs" />
     <Compile Include="Models\BaseDbContext.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Code.cs" />
+    <Compile Include="Models\Concrete\CreateCode.cs" />
+    <Compile Include="Models\Concrete\Encryption.cs" />
+    <Compile Include="Models\Concrete\ExportExcel.cs" />
+    <Compile Include="Models\Concrete\GetCode.cs" />
+    <Compile Include="Models\Concrete\Paging.cs" />
+    <Compile Include="Models\Concrete\UploadFile.cs" />
+    <Compile Include="Models\Concrete\VerifyCode.cs" />
     <Compile Include="Models\ExceptionLog.cs" />
+    <Compile Include="Models\LCUtils\LCUtils.cs" />
     <Compile Include="Models\Manager.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Suggest.cs" />
@@ -200,6 +235,7 @@
     <Content Include="Resources\css\myvideo.css" />
     <Content Include="Resources\css\product.css" />
     <Content Include="Resources\css\registe.css" />
+    <Content Include="Resources\css\styles.css" />
     <Content Include="Resources\css\video.css" />
     <Content Include="Resources\img\appimg.png" />
     <Content Include="Resources\img\backlogin.JPG" />
@@ -525,14 +561,13 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Common\" />
-    <Folder Include="Controllers\Back\" />
-    <Folder Include="Views\Back\" />
+    <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Front\Index.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_BackLayout.cshtml" />
@@ -601,14 +636,14 @@
     <Content Include="Resources\img\back.psd" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Front\Home.cshtml" />
+    <Content Include="Views\User\Home.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Front\Product.cshtml" />
+    <Content Include="Views\User\Product.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Front\About.cshtml" />
-    <Content Include="Views\Front\Contact.cshtml" />
+    <Content Include="Views\User\About.cshtml" />
+    <Content Include="Views\User\Contact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201705290643215_Modify.resx">
@@ -616,7 +651,46 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Front\Error.cshtml" />
+    <Content Include="Views\User\Error.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Back\Qhgypacz\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Back\Qhgypacz\BackMain.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Back\UserManager\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Back\Settings\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Back\Settings\ModifyPassPage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Back\Product\AddProductPage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Back\Product\EditProductPage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Back\Product\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Back\UserManager\GetUserVideo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Back\UserManager\UserSuggestsPage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Back\VideoManager\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Back\VideoManager\getCode.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Back\VideoManager\UploadPage.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

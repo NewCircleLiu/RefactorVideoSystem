@@ -9,6 +9,11 @@ namespace GoodVideoSystem.Services.IService
 {
     public interface IProductService
     {
-        IEnumerable<Product> getProducts();
+        IEnumerable<Product> getProducts(int page_id, int pageSize, out int recordcount);
+        IEnumerable<Product> getProducts(out int recordcount);
+        Product getProduct(int id);
+        void addProduct(Product product);
+        void editProduct(Product p);
+        void deleteProduct(Product p);
     }
 }

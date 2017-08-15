@@ -11,6 +11,13 @@ namespace GoodVideoSystem.Repositories.IRepository
     {
         IEnumerable<Code> getCodes(string deviceCode);
         Code getCode(string inviteCode);
+        void addCode(Code code);
+        Code getCodeById(int id);
+        IEnumerable<Code> getCodes(Object tar, int videoID, int pageIndex, int pageSize, bool isStatus);
+        IEnumerable<Code> getCodes(Object tar, int videoID, bool isStatus);
+        void getCounts(int videoID, out int codeCount, out int codeCountNotExport, out int codeCountNotUsed, out int codeCountUsed);
         void updateCode(Code code);
+        void deleteCode(Code code);
+
     }
 }

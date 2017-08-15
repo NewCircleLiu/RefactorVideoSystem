@@ -22,5 +22,34 @@ namespace GoodVideoSystem.Models.Repository
         {
            return  this.Get(item => item.VideoID == videoID).FirstOrDefault();
         }
+
+        public IEnumerable<Video> getVideos(object tar, bool isID)
+        {
+            if (isID)
+            {
+                return this.Get(item => item.VideoID == (int)tar);
+            }
+            else
+            {
+                return this.Get(item => item.VideoName.Contains((string)tar));
+            }
+        }
+        public IEnumerable<Video> getVideos() //获得所有video
+        {
+            return Get(item => true);
+        }
+
+        public void updateVideo(Video video)
+        {
+            Update(video);
+        }
+        public void addVideo(Video v)
+        {
+            Add(v);
+        }
+        public void deleteVideo(Video v)
+        {
+            Delete(v);
+        }
     }
 }

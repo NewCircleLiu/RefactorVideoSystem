@@ -61,12 +61,36 @@ namespace GoodVideoSystem.Services.Service
         {
             userRepository.updateUser(user);
         }
-
+/*        public IEnumerable<User> getUsers(int page_id,int pageSize,out int recordCount)
+        {
+            return userRepository.getUsers(p=>true,page_id,pageSize,out recordCount);
+        }
+ */
+        public IEnumerable<User> getUsers(out int recordCount)
+        {
+            return userRepository.getUsers(p => true, out recordCount);
+        }
+        public IEnumerable<User> getUsersByPhone(string phone, out int recordCount)
+        {
+            return userRepository.getUsers(p => p.Phone.Contains(phone), out recordCount);
+        }
+        public User getUserById(int userid)
+        {
+            return userRepository.getUserById(userid)
+;
+        }
         public User GetCurrentUser(string deviceUniqueCode)
         {
             Code existingCode = codeRepository.getCodes(deviceUniqueCode).FirstOrDefault();
-            User user = userRepository.getUserByInviteCode(existingCode.CodeValue);
-            return user;
+            if (existingCode == null)
+            {
+                return null;
+            }
+            else
+            {
+                User user = userRepository.getUserByInviteCode(existingCode.CodeValue);
+                return user;
+            }
         }
     }
 }

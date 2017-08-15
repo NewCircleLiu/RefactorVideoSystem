@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "古驿平安-上产图片";
+    Layout = "~/Views/Shared/_BackLayout.cshtml";
+}
+
+@model RefactorVideoSystem.Models.Models.Video
+
+
+<link rel="stylesheet" type="text/css" href="~/plugin/WebUploader/webuploader.css">
+
+<script type="text/javascript" src="~/plugin/WebUploader/webuploader.js"></script>
+<script type="text/javascript" src="~/plugin/WebUploader/MyUpload.js"></script>
+
+
+<div class="main" style="margin-left:290px;width:80%">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="@Url.Content("~/Qhgypacz/BackMain/")"><span class="glyphicon glyphicon-home"></span></a></li>
+            <li class="active">上传首图</li>
+        </ol>
+    </div>
+    <!--/.row-->
+    <div class="row">
+        <div class="">
+            <div class="panel panel-default">
+                <div class="panel-heading">上传首图</div>
+                <div class="panel-body">
+                    <p style="color:red;text-align:center;">@TempData["info"]</p>
+                    <form role="form" style="width:600px;margin:auto;" id="uploadForm" action="@Url.Action("UploadImg","VideoManager")" method="post">
+                            <table class="uploadTable">
+                                <tr>
+                                    <td class="ut_title">
+                                        <label class=" control-label">视频名称</label>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" id="VideoName" name="VideoName" value="@Model.VideoName">
+                                        <input type="hidden" name="videoID" value="@Model.VideoID"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ut_title">
+                                        <label class=" control-label">视频首图</label>
+                                    </td>
+                                    <td>
+                                        <input type="hidden" class="form-control" id="ImageUrl" name="VideoImageLocal">
+                                        <div id="uploader-demo">
+                                            <!--用来存放item-->
+                                            <div id="thelist" class="uploader-list"></div>
+                                            <div id="picker">选择图片</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <div style="text-align:center;margin-top:20px;">
+                                    <button type="submit" id="" class="btn btn-primary">确定</button>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

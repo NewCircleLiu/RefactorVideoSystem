@@ -18,6 +18,7 @@ namespace GoodVideoSystem
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "User", action = "Index", id = UrlParameter.Optional }
             );
+
         }
     }
 }

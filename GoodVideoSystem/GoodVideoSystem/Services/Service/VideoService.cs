@@ -22,10 +22,45 @@ namespace GoodVideoSystem.Services.Service
         {
             return videoRepository.getVideo(videoID);
         }
-
-        IEnumerable<Code> getCodes(int videoID)
+        public IEnumerable<Code> getCodes(int videoID) 
         {
-            return get
+            return videoRepository.getVideo(videoID).Code;
+        }
+        public IEnumerable<Video> getVideosById(int videoID)
+        {
+            if (videoID != -1)
+            {
+                return videoRepository.getVideos(videoID, true);
+            }
+            else
+            {
+                return videoRepository.getVideos();
+            }
+            
+        }
+        public IEnumerable<Video> getVideosByName(string name)
+        {
+            return videoRepository.getVideos(name, false);
+        }
+        public IEnumerable<Video> getVideos()
+        {
+            return videoRepository.getVideos();
+        }
+        public int getVideoCount()
+        {
+            return videoRepository.getVideos().Count();
+        }
+        public void updateVideo(Video video)
+        {
+            videoRepository.updateVideo(video);
+        }
+        public void addVideo(Video v)
+        {
+            videoRepository.addVideo(v);
+        }
+        public void deleteVideo(Video v)
+        {
+            videoRepository.deleteVideo(v);
         }
     }
 }

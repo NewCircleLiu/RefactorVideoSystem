@@ -17,20 +17,21 @@ namespace GoodVideoSystem.Controllers.Front
         private ICodeService codeService;
         private IProductService productService;
         private IVideoService videoService;
-
+        private ISuggestService suggestService;
 
         //通过构造方法注入服务层
-        public UserController(ICodeService codeService, IProductService productService, IUserService userService, IVideoService videoService)
+        public UserController(ICodeService codeService, IProductService productService, IUserService userService, IVideoService videoService, ISuggestService suggestService)
         {
             this.codeService = codeService;
             this.productService = productService;
             this.userService = userService;
             this.videoService = videoService;
+            this.suggestService = suggestService;
         }
 
         /*
         * @desc 欢迎首页
-        * @url /
+        * @url /user/index
         * @method GET
         */
         public ActionResult Index()
@@ -47,6 +48,8 @@ namespace GoodVideoSystem.Controllers.Front
         {
             string deviceUniqueCode = (string)Session["deviceUniqueCode"];
             Code[] codes = codeService.getCodes(deviceUniqueCode).ToArray();
+            User user = userService.GetCurrentUser(deviceUniqueCode);
+            Session["CurrentUser"] = user;
             return View(codes);
         }
 
@@ -123,7 +126,8 @@ namespace GoodVideoSystem.Controllers.Front
          */
         public ActionResult Product()
         {
-            return View(productService.getProducts().ToArray());
+            int record;
+            return View(productService.getProducts(out record).ToArray());
         }
 
         /*
@@ -132,11 +136,26 @@ namespace GoodVideoSystem.Controllers.Front
         * @method POST
         */
         [HttpPost]
-        public ActionResult Suggest()
+        public ActionResult Suggest(string suggestText, string phone, string UserBrowser)
         {
-            return Content("suggest");
+            Suggest suggest = new Suggest();
+            suggest.Text = suggestText;
+            suggest.CreateTime = DateTime.Now;
+            suggest.UserPhone = phone;
+            User user = (User)Session["CurrentUser"];
+            
+            if (user!=null)
+            {
+                suggest.user = user;
+                suggestService.addSuggest(suggest);
+                return Content("success");
+            }
+            else
+            {
+                return Content("error");
+            }
+            
         }
-
         /*
         * @desc 404
         * @url /user/Error

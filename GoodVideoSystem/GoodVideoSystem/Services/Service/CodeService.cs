@@ -28,6 +28,11 @@ namespace GoodVideoSystem.Services.Service
             return codeRepository.getCodes(deviceCode);
         }
 
+        public void addCode(Code code)
+        {
+            codeRepository.addCode(code);
+        }
+
         public string checkCode(string inviteCode, out Code code)
         {
             code = codeRepository.getCode(inviteCode);
@@ -56,6 +61,41 @@ namespace GoodVideoSystem.Services.Service
                     codeRepository.updateCode(inviteCode);
                 }
             }
+        }
+        public IEnumerable<Code> getCodesContainsCode(string inviteCode, int videoID, int pageIndex, int pageSize)
+        {
+            return codeRepository.getCodes(inviteCode, videoID, pageIndex, pageSize, false);
+        }
+        public IEnumerable<Code> getCodesContainsCode(string inviteCode, int videoID)
+        {
+            return codeRepository.getCodes(inviteCode, videoID, false);
+        }
+        public IEnumerable<Code> getCodesByStatus(int status, int videoID, int pageIndex, int pageSize)
+        {
+            return codeRepository.getCodes(status, videoID, pageIndex, pageSize, true);
+        }
+        public IEnumerable<Code> getCodesByStatus(int status, int videoID)
+        {
+            return codeRepository.getCodes(status, videoID, true);
+        }
+        public void getCounts(int videoID, out int codeCount, out int codeCountNotExport, out int codeCountNotUsed, out int codeCountUsed)
+        {
+            codeRepository.getCounts(videoID, out codeCount, out codeCountNotExport, out codeCountNotUsed, out codeCountUsed);
+        }
+
+        public Code getCodeById(int id)
+        {
+            return codeRepository.getCodeById(id);
+        }
+
+        public void updateCode(Code code)
+        {
+            codeRepository.updateCode(code);
+        }
+
+        public void deleteCode(Code code)
+        {
+            codeRepository.deleteCode(code);
         }
     }
 }
