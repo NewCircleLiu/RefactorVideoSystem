@@ -1,4 +1,31 @@
-﻿
+﻿<style>
+    a:hover {
+        text-decoration: none;
+    }
+    body{
+        background: #fff;
+        padding-top:0px;
+    }
+    .navbar {
+        min-height:50px;
+        margin-bottom: 0px;
+    }
+    #top_bar {
+        margin-top:50px;
+    }
+    .navbar-header {
+    float: left;
+    width:auto;
+    }
+    .navbar-default .navbar-toggle {
+        border-color:#f15f43;
+        background-color:#f15f43;
+
+    }
+        .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+            background-color:#f15f43;
+        }
+</style>
 
 
 <nav class="navbar navbar-default" role="navigation" id="top_bar">
@@ -36,6 +63,7 @@
 
 
 <script>
+
     jQuery(function () {
         var email = jQuery("#userEmail").val();
         if (email == "no")
@@ -43,6 +71,7 @@
             exportExcel();
         }
     })
+
 
     function exportExcel() {
         var html = "<div style='padding:10px;'>"

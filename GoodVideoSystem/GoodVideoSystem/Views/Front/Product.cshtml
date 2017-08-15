@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "产品展示-青海古驿平安串珠";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using RefactorVideoSystem.Models.Models
+@model RefactorVideoSystem.Models.Models.Product[]
+
+@Html.Partial("HomePartialView")
+
+<div class="list">
+			<h3 class="title1" style="font-size:30px; text-align:center">近期热销产品展示</h3>
+            <hr style="border-bottom: 1px solid #f15f43;" />
+			<div class="row">
+                @foreach(Product p in Model)
+                {
+                    <div class="products">
+						    <img class="product_img" src="@p.Img"/>
+						    <div class="mask" style="margin-top:5px; background-color:#f15f43; padding:5px" >
+							    <h4 style="font-family:'Microsoft Yahei'; font-style:normal;text-align:center; color:white">
+                                   <span style="text-align:left">@p.Name</span>
+                                    <br/>
+							    </h4>
+                                <h4 style="font-family:'Microsoft Yahei'; font-style:normal;text-align:center; color:white">
+                                    ¥@p.Price  元&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a href="@p.Url" style="text-decoration:none;color:yellow">点击购买</a>
+							    </h4>
+						    </div>
+                    </div>
+                }
+			</div>				
+		</div>
