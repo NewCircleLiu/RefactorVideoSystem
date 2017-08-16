@@ -561,6 +561,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Common\" />
+    <Folder Include="Views\Back\" />
     <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
@@ -654,43 +655,43 @@
     <Content Include="Views\User\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Back\Qhgypacz\Index.cshtml" />
+    <Content Include="Views\Qhgypacz\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Back\Qhgypacz\BackMain.cshtml" />
+    <Content Include="Views\Qhgypacz\BackMain.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Back\UserManager\Index.cshtml" />
+    <Content Include="Views\UserManager\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Back\Settings\Index.cshtml" />
+    <Content Include="Views\Settings\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Back\Settings\ModifyPassPage.cshtml" />
+    <Content Include="Views\Settings\ModifyPassPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Back\Product\AddProductPage.cshtml" />
+    <Content Include="Views\Product\AddProductPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Back\Product\EditProductPage.cshtml" />
+    <Content Include="Views\Product\EditProductPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Back\Product\Index.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Back\UserManager\GetUserVideo.cshtml" />
+    <Content Include="Views\UserManager\GetUserVideo.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Back\UserManager\UserSuggestsPage.cshtml" />
+    <Content Include="Views\UserManager\UserSuggestsPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Back\VideoManager\Index.cshtml" />
+    <Content Include="Views\VideoManager\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Back\VideoManager\getCode.cshtml" />
+    <Content Include="Views\VideoManager\getCode.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Back\VideoManager\UploadPage.cshtml" />
+    <Content Include="Views\VideoManager\UploadPage.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
