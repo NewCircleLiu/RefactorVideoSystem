@@ -9,7 +9,7 @@ namespace GoodVideoSystem.Repositories.IRepository
 {
     public interface ICodeRepository
     {
-        IEnumerable<Code> getCodes(string deviceCode);
+        IEnumerable<Code> getCodes(string deviceUniqueCode);
         Code getCode(string inviteCode);
         void addCode(Code code);
         Code getCodeById(int id);

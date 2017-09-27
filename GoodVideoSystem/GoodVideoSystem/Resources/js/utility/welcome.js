@@ -2,7 +2,7 @@
     jQuery.get(
     "/Login/SavedeviceUniqueCode",
     {
-        "deviceCode": getBrowserInfo()
+        "deviceUniqueCode": getBrowserInfo()
     },
     function (data) {
         showTime();
@@ -13,7 +13,7 @@
 //设定倒数时间（秒）
 var t = 3;
 
-//显示倒数秒数  
+//显示倒数秒数
 function showTime() {
     jQuery("#info").text("将在" + t + "秒后进入系统");
     if (t == 1) {

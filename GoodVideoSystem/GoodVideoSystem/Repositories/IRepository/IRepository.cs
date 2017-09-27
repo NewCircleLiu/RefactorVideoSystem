@@ -11,11 +11,10 @@ namespace GoodVideoSystem.Repository.IRepository
     {
         IEnumerable<T> Get();
         IEnumerable<T> Get(Expression<Func<T,bool>> filter);
-        IEnumerable<T> Get<TOrder>(
-            Expression<Func<T, bool>> filter,
-            int pageIndex, int pageSize, 
-            Expression<Func<T, TOrder>> sortExpression,
-            bool isAsc = true);
+        IEnumerable<T> Get<TOrder>( Expression<Func<T, bool>> filter,
+                                    int pageIndex, int pageSize, 
+                                    Expression<Func<T, TOrder>> sortExpression,
+                                    bool isAsc = true);
         int Count(Expression<Func<T, bool>> filter);
         void Add(T instance);
         void Update(T instance);

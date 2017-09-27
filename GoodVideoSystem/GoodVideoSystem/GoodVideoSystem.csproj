@@ -227,6 +227,10 @@
     <Compile Include="Services\Service\VideoService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\GoodVideoSystem.mdf" />
+    <Content Include="App_Data\GoodVideoSystem_log.ldf">
+      <DependentUpon>GoodVideoSystem.mdf</DependentUpon>
+    </Content>
     <Content Include="Global.asax" />
     <Content Include="Resources\css\app.css" />
     <Content Include="Resources\css\contact.css" />
@@ -559,16 +563,13 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Common\" />
-    <Folder Include="Views\Back\" />
-    <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Front\User\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_BackLayout.cshtml" />
@@ -637,14 +638,14 @@
     <Content Include="Resources\img\back.psd" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\User\Home.cshtml" />
+    <Content Include="Views\Front\User\Home.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\User\Product.cshtml" />
+    <Content Include="Views\Front\User\Product.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\User\About.cshtml" />
-    <Content Include="Views\User\Contact.cshtml" />
+    <Content Include="Views\Front\User\About.cshtml" />
+    <Content Include="Views\Front\User\Contact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201705290643215_Modify.resx">
@@ -652,46 +653,46 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\User\Error.cshtml" />
+    <Content Include="Views\Front\User\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Qhgypacz\Index.cshtml" />
+    <Content Include="Views\Back\Qhgypacz\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Qhgypacz\BackMain.cshtml" />
+    <Content Include="Views\Back\Qhgypacz\BackMain.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\UserManager\Index.cshtml" />
+    <Content Include="Views\Back\UserManager\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Settings\Index.cshtml" />
+    <Content Include="Views\Back\Settings\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Settings\ModifyPassPage.cshtml" />
+    <Content Include="Views\Back\Settings\ModifyPassPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Product\AddProductPage.cshtml" />
+    <Content Include="Views\Back\Product\AddProductPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Product\EditProductPage.cshtml" />
+    <Content Include="Views\Back\Product\EditProductPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Back\Product\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\UserManager\GetUserVideo.cshtml" />
+    <Content Include="Views\Back\UserManager\GetUserVideo.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\UserManager\UserSuggestsPage.cshtml" />
+    <Content Include="Views\Back\UserManager\UserSuggestsPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\VideoManager\Index.cshtml" />
+    <Content Include="Views\Back\VideoManager\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\VideoManager\getCode.cshtml" />
+    <Content Include="Views\Back\VideoManager\getCode.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\VideoManager\UploadPage.cshtml" />
+    <Content Include="Views\Back\VideoManager\UploadPage.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

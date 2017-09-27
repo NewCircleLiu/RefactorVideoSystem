@@ -15,8 +15,9 @@ namespace GoodVideoSystem.App_Start
             {
                 "~/Views/{1}/{0}.cshtml",
                 "~/Views/Shared/{0}.cshtml",
-                "~/Views/Front/{0}.cshtml", //前台页面搜索规则
-                "~/Views/Back/{1}/{0}.cshtml"  //后台页面搜索规则
+                "~/Views/Back/{1}/{0}.cshtml",  //后台页面搜索规则
+                "~/Views/Front/{1}/{0}.cshtml"  //前台页面搜索规则
+                
             };
         }
         public override ViewEngineResult FindView(ControllerContext controllerContext, string viewName, string masterName, bool useCache)

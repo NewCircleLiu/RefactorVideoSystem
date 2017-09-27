@@ -13,9 +13,9 @@ namespace GoodVideoSystem.Models.Repository
 
 
         //某设备的code
-        public IEnumerable<Code> getCodes(string deviceCode)
+        public IEnumerable<Code> getCodes(string deviceUniqueCode)
         {
-            return Get(item => item.DeviceUniqueCode.Contains(deviceCode));
+            return Get(item => item.DeviceUniqueCode.Contains(deviceUniqueCode));
         }
 
 

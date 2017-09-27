@@ -47,10 +47,10 @@ namespace GoodVideoSystem.Controllers.Front
         public ActionResult Home()
         {
             string deviceUniqueCode = (string)Session["deviceUniqueCode"];
-            Code[] codes = codeService.getCodes(deviceUniqueCode).ToArray();
+            Code[] inviteCodes = codeService.getCodes(deviceUniqueCode).ToArray();
             User user = userService.GetCurrentUser(deviceUniqueCode);
             Session["CurrentUser"] = user;
-            return View(codes);
+            return View(inviteCodes);
         }
 
         /*

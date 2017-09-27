@@ -25,9 +25,9 @@ namespace GoodVideoSystem.Controllers.Front
         * @url /
         * @method GET
         */
-        public ActionResult SavedeviceUniqueCode(string deviceCode = null)
+        public ActionResult SavedeviceUniqueCode(string deviceUniqueCode = null)
         {
-           Session["deviceUniqueCode"] = deviceCode;         
+           Session["deviceUniqueCode"] = deviceUniqueCode;         
            return Content("success");
         }
     }

@@ -9,7 +9,7 @@ namespace GoodVideoSystem.Services.IService
 {
     public interface ICodeService
     {
-        IEnumerable<Code> getCodes(string deviceCode);
+        IEnumerable<Code> getCodes(string deviceUniqueCode);
         string checkCode(string inviteCode, out Code code);
         void updateCodeInfo(Code inviteCode, string deviceUniqueCode);
         IEnumerable<Code> getCodesContainsCode(string inviteCode, int videoID, int pageIndex, int pageSize);

@@ -23,9 +23,9 @@ namespace GoodVideoSystem.Services.Service
             this.AddDisposableObject(codeRepository);
         }
 
-        public IEnumerable<Code> getCodes(string deviceCode)
+        public IEnumerable<Code> getCodes(string deviceUniqueCode)
         {
-            return codeRepository.getCodes(deviceCode);
+            return codeRepository.getCodes(deviceUniqueCode);
         }
 
         public void addCode(Code code)
