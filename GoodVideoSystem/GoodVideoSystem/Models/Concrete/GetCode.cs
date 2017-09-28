@@ -6,21 +6,21 @@ using RefactorVideoSystem.Models.Models;
 
 namespace VideoSystem.Concrete
 {
-    public class GetCode //因为查找的时候是contains
+    public class getInviteCode //因为查找的时候是contains
     {
-        public static List<Code> getCodeArray(Code[] codeArray, int userID)
+        public static List<Code> getInviteCodeArray(Code[] codeArray, int userID)
         {
-            List<Code> getCode = new List<Code>();
+            List<Code> getInviteCode = new List<Code>();
 
             foreach (Code code in codeArray)
             {
                     if (code.UserID==userID)
                     {
-                        getCode.Add(code);
+                        getInviteCode.Add(code);
                     }
             }
 
-            return getCode;
+            return getInviteCode;
         }
     }
 }

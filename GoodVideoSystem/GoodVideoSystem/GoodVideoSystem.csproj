@@ -156,11 +156,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201705290643215_Modify.cs" />
-    <Compile Include="Migrations\201705290643215_Modify.Designer.cs">
-      <DependentUpon>201705290643215_Modify.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Abstract\ICreateCode.cs" />
     <Compile Include="Models\Abstract\IEncryption.cs" />
     <Compile Include="Models\Abstract\IExportExcel.cs" />
@@ -564,6 +559,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\" />
+    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -648,11 +644,6 @@
     <Content Include="Views\Front\User\Contact.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705290643215_Modify.resx">
-      <DependentUpon>201705290643215_Modify.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Front\User\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -693,6 +684,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Back\VideoManager\UploadPage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Front\User\Play.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

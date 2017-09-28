@@ -47,7 +47,7 @@ namespace GoodVideoSystem.Controllers.Front
         public ActionResult Home()
         {
             string deviceUniqueCode = (string)Session["deviceUniqueCode"];
-            Code[] inviteCodes = codeService.getCodes(deviceUniqueCode).ToArray();
+            Code[] inviteCodes = codeService.getInviteCodes(deviceUniqueCode).ToArray();
             User user = userService.GetCurrentUser(deviceUniqueCode);
             Session["CurrentUser"] = user;
             return View(inviteCodes);
@@ -62,11 +62,11 @@ namespace GoodVideoSystem.Controllers.Front
         public ActionResult GetVideo(string videoInviteCode)
         {
             Code returnCode = null;
-            string returnInfo = codeService.checkCode(videoInviteCode, out returnCode);
+            string returnInfo = codeService.checkInviteCode(videoInviteCode, out returnCode);
             if (returnInfo.Equals("AVAILABLE"))
             {
                 userService.updateUserInfo(returnCode, (string)Session["deviceUniqueCode"]);
-                codeService.updateCodeInfo(returnCode, (string)Session["deviceUniqueCode"]);
+                codeService.updateInviteCodeInfo(returnCode, (string)Session["deviceUniqueCode"]);
             }
             return Content(returnInfo);
         }
@@ -76,9 +76,13 @@ namespace GoodVideoSystem.Controllers.Front
        * @url /user/play
        * @method GET
        */
-        [UserAuthorise]
-        public ActionResult Play(int videoID)
+        //[UserAuthorise]
+        public ActionResult Play(int videoID = 0)
         {
+            Video video1 = new Video();
+            video1.fileID = "9031868223282489802";
+            return View(video1);
+
             //1.视频是否存在
             Video video = videoService.getVideo(videoID);
             if (video == null)
@@ -94,7 +98,7 @@ namespace GoodVideoSystem.Controllers.Front
             for (int i = 0; i < codes.Count(); i++)
             {
                 if (currentUser.InviteCodes.Contains(codes[i].CodeValue))
-                    return Content("play");
+                    return View(video);
             }
             return RedirectToAction("Error");
         }

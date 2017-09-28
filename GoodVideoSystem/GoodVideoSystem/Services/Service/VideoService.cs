@@ -22,7 +22,7 @@ namespace GoodVideoSystem.Services.Service
         {
             return videoRepository.getVideo(videoID);
         }
-        public IEnumerable<Code> getCodes(int videoID) 
+        public IEnumerable<Code> getInviteCodes(int videoID) 
         {
             return videoRepository.getVideo(videoID).Code;
         }

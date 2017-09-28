@@ -13,9 +13,7 @@ namespace RefactorVideoSystem.Models.Models
         [Required]
         public string VideoImageLocal { get; set; } //视频封面图片
         [Required]
-        public int ls_video_id { get; set; } //乐视视频信息
-        [Required]
-        public string ls_video_uuid { get; set; }//乐视视频信息
+        public string fileID { get; set; } //乐视视频信息
         [Required]
         public string VideoName { get; set; } //视频名称
         [Required]

@@ -23,19 +23,19 @@ namespace GoodVideoSystem.Services.Service
             this.AddDisposableObject(codeRepository);
         }
 
-        public IEnumerable<Code> getCodes(string deviceUniqueCode)
+        public IEnumerable<Code> getInviteCodes(string deviceUniqueCode)
         {
-            return codeRepository.getCodes(deviceUniqueCode);
+            return codeRepository.getInviteCodes(deviceUniqueCode);
         }
 
-        public void addCode(Code code)
+        public void addInviteCode(Code code)
         {
-            codeRepository.addCode(code);
+            codeRepository.addInviteCode(code);
         }
 
-        public string checkCode(string inviteCode, out Code code)
+        public string checkInviteCode(string inviteCode, out Code code)
         {
-            code = codeRepository.getCode(inviteCode);
+            code = codeRepository.getInviteCode(inviteCode);
             if (code == null)
                 return INVALID;
             if (code.BindedDeviceCount >= MAX_DEVICE_COUNT)
@@ -43,14 +43,14 @@ namespace GoodVideoSystem.Services.Service
             return AVAILABLE;
         }
 
-        public void updateCodeInfo(Code inviteCode, string deviceUniqueCode)
+        public void updateInviteCodeInfo(Code inviteCode, string deviceUniqueCode)
         {
             deviceUniqueCode = deviceUniqueCode.Trim();
 
             if (string.IsNullOrEmpty(deviceUniqueCode))
                 return;
 
-            bool isNewDevice = (codeRepository.getCodes(deviceUniqueCode).FirstOrDefault() != null);
+            bool isNewDevice = (codeRepository.getInviteCodes(deviceUniqueCode).FirstOrDefault() != null);
 
             if (isNewDevice)  //但凡用户切换到新的设备播放，需要绑定邀请码的硬件信息
             {
@@ -58,44 +58,44 @@ namespace GoodVideoSystem.Services.Service
                 {
                     inviteCode.DeviceUniqueCode += ("," + deviceUniqueCode);
                     inviteCode.BindedDeviceCount = inviteCode.CodeValue.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Count();
-                    codeRepository.updateCode(inviteCode);
+                    codeRepository.updateInviteCode(inviteCode);
                 }
             }
         }
-        public IEnumerable<Code> getCodesContainsCode(string inviteCode, int videoID, int pageIndex, int pageSize)
+        public IEnumerable<Code> getInviteCodesContainsCode(string inviteCode, int videoID, int pageIndex, int pageSize)
         {
-            return codeRepository.getCodes(inviteCode, videoID, pageIndex, pageSize, false);
+            return codeRepository.getInviteCodes(inviteCode, videoID, pageIndex, pageSize, false);
         }
-        public IEnumerable<Code> getCodesContainsCode(string inviteCode, int videoID)
+        public IEnumerable<Code> getInviteCodesContainsCode(string inviteCode, int videoID)
         {
-            return codeRepository.getCodes(inviteCode, videoID, false);
+            return codeRepository.getInviteCodes(inviteCode, videoID, false);
         }
-        public IEnumerable<Code> getCodesByStatus(int status, int videoID, int pageIndex, int pageSize)
+        public IEnumerable<Code> getInviteCodesByStatus(int status, int videoID, int pageIndex, int pageSize)
         {
-            return codeRepository.getCodes(status, videoID, pageIndex, pageSize, true);
+            return codeRepository.getInviteCodes(status, videoID, pageIndex, pageSize, true);
         }
-        public IEnumerable<Code> getCodesByStatus(int status, int videoID)
+        public IEnumerable<Code> getInviteCodesByStatus(int status, int videoID)
         {
-            return codeRepository.getCodes(status, videoID, true);
+            return codeRepository.getInviteCodes(status, videoID, true);
         }
         public void getCounts(int videoID, out int codeCount, out int codeCountNotExport, out int codeCountNotUsed, out int codeCountUsed)
         {
             codeRepository.getCounts(videoID, out codeCount, out codeCountNotExport, out codeCountNotUsed, out codeCountUsed);
         }
 
-        public Code getCodeById(int id)
+        public Code getInviteCodeById(int id)
         {
-            return codeRepository.getCodeById(id);
+            return codeRepository.getInviteCodeById(id);
         }
 
-        public void updateCode(Code code)
+        public void updateInviteCode(Code code)
         {
-            codeRepository.updateCode(code);
+            codeRepository.updateInviteCode(code);
         }
 
-        public void deleteCode(Code code)
+        public void deleteInviteCode(Code code)
         {
-            codeRepository.deleteCode(code);
+            codeRepository.deleteInviteCode(code);
         }
     }
 }

@@ -34,24 +34,24 @@ namespace GoodVideoSystem.Controllers.Back
         //设置邀请码状态为已打印
         public ActionResult setCodeStatus(int codeID)
         {
-            Code code = codeService.getCodeById(codeID);
+            Code code = codeService.getInviteCodeById(codeID);
             code.CodeStatus = 1;
 
             if (ModelState.IsValid)
             {
-                codeService.updateCode(code);
+                codeService.updateInviteCode(code);
             }
 
             return Content("error");
         }
 
         //删除邀请码
-        public ActionResult deleteCode(int codeID)
+        public ActionResult deleteInviteCode(int codeID)
         {
-            Code code = codeService.getCodeById(codeID);
+            Code code = codeService.getInviteCodeById(codeID);
             if (ModelState.IsValid)
             {
-                codeService.deleteCode(code);
+                codeService.deleteInviteCode(code);
 
                 //修改视频邀请码数量
                 Video video = videoService.getVideo(code.VideoID);
@@ -89,7 +89,7 @@ namespace GoodVideoSystem.Controllers.Back
                     Code c = new Code() { CodeStatus = 0, CodeValue = code, VideoID = video.VideoID, UserID = -1 };
                     if (ModelState.IsValid)
                     {
-                        codeService.addCode(c);
+                        codeService.addInviteCode(c);
                     }
                 }
 
@@ -131,7 +131,7 @@ namespace GoodVideoSystem.Controllers.Back
                 {
                     if (num == 0) //表示导出改视频的所有邀请码
                     {
-                        codeArray = videoService.getCodes(videoID).ToArray();
+                        codeArray = videoService.getInviteCodes(videoID).ToArray();
                         //codeArray = vsc.Codes.Where(c => c.VideoID == videoID && c.CodeStatus == 0).ToArray();
                     }
                     else
@@ -146,7 +146,7 @@ namespace GoodVideoSystem.Controllers.Back
                             return RedirectToAction("", "VideoManager");
                         }
 
-                        codeArray = videoService.getCodes(videoID).ToArray();
+                        codeArray = videoService.getInviteCodes(videoID).ToArray();
 
                     }
                     fileName = codeArray[0].Video.VideoName;
@@ -155,14 +155,14 @@ namespace GoodVideoSystem.Controllers.Back
                 else
                 {
 
-                    int count = codeService.getCodesByStatus(0,-1).Count();
+                    int count = codeService.getInviteCodesByStatus(0,-1).Count();
                     //没有可用的邀请码
                     if (count <= 0)
                     {
                         return RedirectToAction("", "VideoManager");
                     }
 
-                    codeArray = codeService.getCodesByStatus(0, -1).ToArray();
+                    codeArray = codeService.getInviteCodesByStatus(0, -1).ToArray();
                     fileName = "全部视频";
                 }
 
@@ -172,7 +172,7 @@ namespace GoodVideoSystem.Controllers.Back
                     c.CodeStatus = 1;
                     if (ModelState.IsValid)
                     {
-                        codeService.updateCode(c);
+                        codeService.updateInviteCode(c);
                     }
                 }
 

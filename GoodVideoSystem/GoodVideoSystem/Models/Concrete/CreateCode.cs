@@ -28,14 +28,14 @@ namespace GoodVideoSystem.Models.Concrete
             {
                 video.CodeCounts++;
                 str = video.VideoName + video.VideoID + video.CodeCounts;
-                codeList.Add(getCode(str));
+                codeList.Add(getInviteCode(str));
             }
             return codeList;
         }
 
 
         //获取邀请码
-        public string getCode(string str)
+        public string getInviteCode(string str)
         {
             //md5加密
             string data = encryption.SHA1(str);

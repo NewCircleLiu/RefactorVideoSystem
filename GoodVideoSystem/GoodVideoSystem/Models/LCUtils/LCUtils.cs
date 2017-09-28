@@ -86,8 +86,8 @@ namespace GoodVideoSystem.Models.LCUtils
             return json;
         }
 
-        //删除视频
-        public jsonout deleteVideo(int video_id)
+        //删除视频 video_id fileID
+        public jsonout deleteVideo(string video_id)
         {
             Dictionary<string, string> args = new Dictionary<string, string>();
             args.Add("api", "video.del");

@@ -82,7 +82,7 @@
                                     <td>@c.Video.VideoName</td>
                                     <td>
                                         <nobr>
-                                            <a href="#" onclick="deleteCode(@c.CodeID);">[删除]</a>
+                                            <a href="#" onclick="deleteInviteCode(@c.CodeID);">[删除]</a>
                                             @if (c.CodeStatus == 0)
                                             {
                                                 <a href="#" onclick="setStatus(@c.CodeID);">[激活]</a>
@@ -155,13 +155,13 @@
     }
 
     //删除邀请码
-    function deleteCode(codeID)
+    function deleteInviteCode(codeID)
     {
         var ok = confirm("删除此邀请码将使用户无法通过此邀请码获取视频，并且用户通过此邀请码获取过的视频将无法再观看，请再次确定");
         if(ok)
         {
             jQuery.get(
-                "/VideoCode/deleteCode",
+                "/VideoCode/deleteInviteCode",
                 {
                     "codeID": codeID
                 },

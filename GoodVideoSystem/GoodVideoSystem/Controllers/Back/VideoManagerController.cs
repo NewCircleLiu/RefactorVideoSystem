@@ -75,8 +75,7 @@ namespace GoodVideoSystem.Controllers.Back
                 v.CodeCounts = 0;
                 v.CodeNotUsed = 0;
                 v.CodeUsed = 0;
-                v.ls_video_id = int.Parse(video_id);
-                v.ls_video_uuid = video_uuid;
+                v.fileID = "001";
                 v.VideoName = video_name;
                 v.VideoImageLocal = "null";
                 v.CreateTime = DateTime.Now;
@@ -106,7 +105,7 @@ namespace GoodVideoSystem.Controllers.Back
                 }
 
                 LCUtils lc = new LCUtils();
-                jsonout result = lc.deleteVideo(v.ls_video_id);
+                jsonout result = lc.deleteVideo(v.fileID);
 
                 if (result.code == "0")
                 {
@@ -121,7 +120,7 @@ namespace GoodVideoSystem.Controllers.Back
             return Content("erro");
         }
 
-        public ActionResult getCode(int VideoID = -1, int page_id = 1)
+        public ActionResult getInviteCode(int VideoID = -1, int page_id = 1)
         {
             if (VideoID != -1)
             {
@@ -133,7 +132,7 @@ namespace GoodVideoSystem.Controllers.Back
             }
 
             IEnumerable<Code> codeList = null;
-            codeList = videoService.getCodes(VideoID);
+            codeList = videoService.getInviteCodes(VideoID);
 
             ip.GetCurrentPageData(codeList, page_id);
 
@@ -145,7 +144,7 @@ namespace GoodVideoSystem.Controllers.Back
 
             TempData["codeCountUsed"] = codeCountUsed;
             Manager manager = (Manager)Session["Manager"];
-            ViewBag.searchAction = "/VideoManager/getCode/Page";
+            ViewBag.searchAction = "/VideoManager/getInviteCode/Page";
             ViewBag.account = manager.Account;
             return View(ip);
         }

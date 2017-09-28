@@ -61,11 +61,11 @@ namespace GoodVideoSystem.Controllers.Back
             //List<Code> temp = new List<Code>();
             foreach(string inviteCode in codes)
             {
-                //temp=codeService.getCodesContainsCode(inviteCode, -1).ToList();
-                codeList.AddRange(codeService.getCodesContainsCode(inviteCode, -1).ToList());
+                //temp=codeService.getInviteCodesContainsCode(inviteCode, -1).ToList();
+                codeList.AddRange(codeService.getInviteCodesContainsCode(inviteCode, -1).ToList());
             }
             
-            //codeArray = GetCode.getCodeArray(codeArray, userid).ToArray();
+            //codeArray = getInviteCode.getInviteCodeArray(codeArray, userid).ToArray();
 
             return View(codeList.ToArray());
         }

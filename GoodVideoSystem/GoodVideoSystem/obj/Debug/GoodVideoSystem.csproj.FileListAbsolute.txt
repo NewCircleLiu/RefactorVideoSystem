@@ -302,7 +302,6 @@ E:\我的项目\平安串珠视频系统\ReConstuctByLXY\RefactorVideoSystem\Goo
 E:\我的项目\平安串珠视频系统\ReConstuctByLXY\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\zh-Hans\System.Web.WebPages.resources.dll
 E:\我的项目\平安串珠视频系统\ReConstuctByLXY\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\zh-Hans\System.Web.WebPages.Deployment.resources.dll
 E:\我的项目\平安串珠视频系统\ReConstuctByLXY\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
-E:\我的项目\平安串珠视频系统\ReConstuctByLXY\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\obj\Debug\GoodVideoSystem.Migrations.Modify.resources
-E:\我的项目\平安串珠视频系统\ReConstuctByLXY\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\obj\Debug\GoodVideoSystem.csproj.GenerateResource.Cache
 E:\我的项目\平安串珠视频系统\ReConstuctByLXY\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\obj\Debug\GoodVideoSystem.dll
 E:\我的项目\平安串珠视频系统\ReConstuctByLXY\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\obj\Debug\GoodVideoSystem.pdb
+E:\我的项目\平安串珠视频系统\ReConstuctByLXY\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\obj\Debug\GoodVideoSystem.csprojResolveAssemblyReference.cache

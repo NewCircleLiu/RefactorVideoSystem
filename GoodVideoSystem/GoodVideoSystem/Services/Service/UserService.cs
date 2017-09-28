@@ -29,7 +29,7 @@ namespace GoodVideoSystem.Services.Service
             if (string.IsNullOrEmpty(deviceUniqueCode))
                 return;
 
-            bool isNewDevice = (codeRepository.getCodes(deviceUniqueCode).FirstOrDefault() != null);
+            bool isNewDevice = (codeRepository.getInviteCodes(deviceUniqueCode).FirstOrDefault() != null);
             bool isNewInviteCode = (inviteCode.BindedDeviceCount != 0);
            
             if (isNewInviteCode) //但凡用户输入新的有效的邀请码，必须更新用户的邀请码
@@ -42,7 +42,7 @@ namespace GoodVideoSystem.Services.Service
 
                 else // 2.如果在一台旧的设备上播放，用户的邀请码更新，寻找用户得通过设备信息-》邀请码-》用户
                 {
-                    Code existingCode = codeRepository.getCodes(deviceUniqueCode).FirstOrDefault();
+                    Code existingCode = codeRepository.getInviteCodes(deviceUniqueCode).FirstOrDefault();
                     User user = userRepository.getUserByInviteCode(existingCode.CodeValue);
                     user.InviteCodes += ("," + inviteCode.CodeValue);
                     updateUser(user);
@@ -70,18 +70,22 @@ namespace GoodVideoSystem.Services.Service
         {
             return userRepository.getUsers(p => true, out recordCount);
         }
+
         public IEnumerable<User> getUsersByPhone(string phone, out int recordCount)
         {
             return userRepository.getUsers(p => p.Phone.Contains(phone), out recordCount);
         }
+
         public User getUserById(int userid)
         {
             return userRepository.getUserById(userid)
 ;
         }
+
+        //根据设备标识获取邀请码，进而获取用户
         public User GetCurrentUser(string deviceUniqueCode)
         {
-            Code existingCode = codeRepository.getCodes(deviceUniqueCode).FirstOrDefault();
+            Code existingCode = codeRepository.getInviteCodes(deviceUniqueCode).FirstOrDefault();
             if (existingCode == null)
             {
                 return null;

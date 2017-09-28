@@ -57,13 +57,13 @@ namespace GoodVideoSystem.Controllers.Back
                 //按邀请码查询
                 if (searchType == "code")
                 {
-                    codeList = codeService.getCodesContainsCode(searchValue, VideoID);
+                    codeList = codeService.getInviteCodesContainsCode(searchValue, VideoID);
                 }
                 //按状态查询
                 if (searchType == "status")
                 {
                     int statusInt = Convert.ToInt32(searchValue);
-                    codeList = codeService.getCodesByStatus(statusInt, VideoID);
+                    codeList = codeService.getInviteCodesByStatus(statusInt, VideoID);
                 }
                 int codeCount, codeCountNotExport, codeCountUsed, codeNotUsed;
                 codeService.getCounts(VideoID, out codeCount, out codeCountNotExport, out codeNotUsed, out codeCountUsed);
@@ -75,7 +75,7 @@ namespace GoodVideoSystem.Controllers.Back
                 TempData["codeCountUsed"] = codeCountUsed;
 
                 ViewBag.searchAction = "/Search/Index/Page";
-                return View("/Views/Back/VideoManager/getCode.cshtml", ip);
+                return View("/Views/Back/VideoManager/getInviteCode.cshtml", ip);
             }
             //查询视频
             if (model == "Video")

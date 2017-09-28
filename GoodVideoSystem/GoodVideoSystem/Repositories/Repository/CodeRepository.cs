@@ -13,31 +13,31 @@ namespace GoodVideoSystem.Models.Repository
 
 
         //某设备的code
-        public IEnumerable<Code> getCodes(string deviceUniqueCode)
+        public IEnumerable<Code> getInviteCodes(string deviceUniqueCode)
         {
             return Get(item => item.DeviceUniqueCode.Contains(deviceUniqueCode));
         }
 
 
-        public void addCode(Code code)
+        public void addInviteCode(Code code)
         {
             Add(code);
         }
 
         // 按照邀请码查找
-        public Code getCode(string inviteCode)
+        public Code getInviteCode(string inviteCode)
         {
             return  Get(item => item.CodeValue.Contains(inviteCode)).FirstOrDefault();
         }
 
         //按照ID查找
-        public Code getCodeById(int id)
+        public Code getInviteCodeById(int id)
         {
             return Get(item => item.CodeID == id).FirstOrDefault();
         }
 
         //分页版本
-        public IEnumerable<Code> getCodes(Object tar, int videoID, int pageIndex, int pageSize, bool isStatus)
+        public IEnumerable<Code> getInviteCodes(Object tar, int videoID, int pageIndex, int pageSize, bool isStatus)
         {
             if (!isStatus) 
             {
@@ -51,7 +51,7 @@ namespace GoodVideoSystem.Models.Repository
 
 
         //不分页版本
-        public IEnumerable<Code> getCodes(Object tar, int videoID, bool isStatus)
+        public IEnumerable<Code> getInviteCodes(Object tar, int videoID, bool isStatus)
         {
             if (!isStatus)
             {
@@ -83,11 +83,11 @@ namespace GoodVideoSystem.Models.Repository
             codeCountNotUsed = Get(item => item.VideoID == videoID && item.CodeStatus == 1).Count();
             codeCountUsed = Get(item => item.VideoID == videoID && item.CodeStatus == 2).Count();
         }
-        public void updateCode(Code code)
+        public void updateInviteCode(Code code)
         {
             Update(code);
         }
-        public void deleteCode(Code code)
+        public void deleteInviteCode(Code code)
         {
             Delete(code);
         }

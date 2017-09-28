@@ -9,15 +9,15 @@ namespace GoodVideoSystem.Repositories.IRepository
 {
     public interface ICodeRepository
     {
-        IEnumerable<Code> getCodes(string deviceUniqueCode);
-        Code getCode(string inviteCode);
-        void addCode(Code code);
-        Code getCodeById(int id);
-        IEnumerable<Code> getCodes(Object tar, int videoID, int pageIndex, int pageSize, bool isStatus);
-        IEnumerable<Code> getCodes(Object tar, int videoID, bool isStatus);
+        IEnumerable<Code> getInviteCodes(string deviceUniqueCode);
+        Code getInviteCode(string inviteCode);
+        void addInviteCode(Code code);
+        Code getInviteCodeById(int id);
+        IEnumerable<Code> getInviteCodes(Object tar, int videoID, int pageIndex, int pageSize, bool isStatus);
+        IEnumerable<Code> getInviteCodes(Object tar, int videoID, bool isStatus);
         void getCounts(int videoID, out int codeCount, out int codeCountNotExport, out int codeCountNotUsed, out int codeCountUsed);
-        void updateCode(Code code);
-        void deleteCode(Code code);
+        void updateInviteCode(Code code);
+        void deleteInviteCode(Code code);
 
     }
 }
