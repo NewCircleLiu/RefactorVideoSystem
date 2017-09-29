@@ -4,6 +4,15 @@
 }
 @model RefactorVideoSystem.Models.Models.Manager
 
+<style>
+    #editInfo {
+       width:100px;
+       background-color: #373B3E;
+       border-color: #2C343A;
+       color: white;
+    }
+</style>
+
 <div class="main" style="margin-left:290px;width:80%">
     <div class="row">
         <ol class="breadcrumb">
@@ -38,7 +47,7 @@
                             </tr>
                         </table>
                         <div style="text-align:center;margin-top:20px;">
-                            <button type="submit" class="btn btn-default" onclick="editInfo();">编辑</button>
+                            <button type="submit" class="btn btn-default" id="editInfo" onclick="editInfo();">编辑</button>
                         </div>
                     </form>
                     

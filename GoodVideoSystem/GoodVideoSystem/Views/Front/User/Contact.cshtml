@@ -5,13 +5,11 @@
 
 @Html.Partial("HomePartialView")
 
-
 <link href="@Url.Content("~/resouces/css/main.css")" rel="stylesheet" type="text/css">
 <link href="@Url.Content("~/resources/css/contact.css")" rel="stylesheet" media="all"/>
 <script src="~/resources/js/custom/userLogin.js"></script>
 <script src="~/resources/js/common/fingerprint.js"></script>
 <script src="~/resources/js/custom/usersuggest.js"></script>
-
 
 <div class="contact">
     <div class="container" style="margin-bottom: 20px">
@@ -19,8 +17,9 @@
             <div class="contact-main">
                 <div class="contact-top">
 
-                    <div class="col-md-7">
-                        <p style="margin-bottom: 15px">
+                    <div class="col-md-12" style="margin-bottom:20px;" >
+                        <div class="col-md-6" style="padding-left:0; margin-bottom:10px">
+                        <p>
                             <span style="font-size: 20px; color: black">联 系 人：边东山</span>
                         </p>
                         <p style="margin-top: 15px">
@@ -29,14 +28,17 @@
                         <p style="margin-top: 15px">
                             <span style="font-size: 20px; color: black">邮箱地址：2143244980@qq.com，2919209998@qq.com </span>
                         </p>
-                        <p style="margin-top: 15px">
-                            <span style="font-size: 20px; color: black">公司网址：<a href="https://shop1452562718351.1688.com/?spm=0.0.0.0.3iJti3" target="_blank">进入商城</a></span>
+                            </div>
+                         <div class="col-md-6" style="margin-top:0; padding-left:0;margin-bottom:10px">
+                        <p>
+                            <span style="font-size: 20px; color: black">公司网址：<a href="http://www.qhgypa.com/">http://www.qhgypa.com/</a>,<a href="https://shop1452562718351.1688.com/?spm=0.0.0.0.3iJti3" target="_blank">进入商城</a></span>
                         </p>
-                        <p style="margin-top: 15px"><span style="font-size: 20px; color: black">公司总部地址：青海省平安县平安镇东村  </span></p>
+                        <p style="margin-top: 15px"><span style="font-size: 20px; color: black">公司总部地址：青海省海东市平安县平安镇东村  </span></p>
                         <p style="margin: 15px auto"><span style="font-size: 20px; color: black">义乌销售部地址：浙江省义乌市稠城街道江北下朱9栋</span></p>
                     </div>
+                        </div>
 
-                    <div class="col-md-5">
+                    <div class="col-md-11">
                         <div class="contact-textarea">
                             <textarea name="suggestText" id="suggestText" placeholder="您的建议.." onfocus="clearInfo();"></textarea>
                             <br />

@@ -5,6 +5,32 @@
 @using RefactorVideoSystem.Models.Models;
 @model GoodVideoSystem.Models.Concrete.Paging
 
+<style>
+    #searchType {
+        height: 42px;
+        margin-left: 5px;
+    }
+
+    #searchButton {
+        margin-left: 5px;
+        background-color: #373B3E;
+        border-color: #2C343A;
+        color: white;
+    }
+
+    #headTitle th {
+        font-family:'Microsoft YaHei';
+        font-size:14px;
+        color:black;
+        font-weight:500;
+    }
+
+    .pagination li a {
+        color:black;
+    }
+
+</style>
+
 <div class="col-lg-9 col-lg-offset-2 main" style="margin-left: 290px;">
     <div class="row">
         <ol class="breadcrumb">
@@ -19,7 +45,7 @@
                 <div class="panel-heading">用户反馈</div>
                 <div class="panel-body">
                     <form role="form" action="@Url.Content("~/Search")" method="get">
-                        <input type="hidden" name="model" value="Suggest"/>
+                        <input type="hidden" name="model" value="Suggest" />
                         <table>
                             <tr>
                                 <td id="searchValue">
@@ -32,14 +58,14 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <button type="submit" class="btn btn-default">搜索</button>
+                                    <button type="submit" class="btn btn-default" id="searchButton">搜索</button>
                                 </td>
                             </tr>
                         </table>
                     </form>
-                    <table class="table table-bordered table-hover class" style="margin-top:10px;">
+                    <table class="table table-bordered table-hover class" style="margin-top: 10px;">
                         <thead>
-                            <tr>
+                            <tr id="headTitle">
                                 <th>编号</th>
                                 <th>时间</th>
                                 <th>反馈内容</th>
@@ -47,25 +73,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (Suggest s in Model.returnData) { 
+                            @foreach (Suggest s in Model.returnData)
+                            { 
                                 <tr>
                                     <td>@s.SuggestId</td>
                                     <td>@s.CreateTime</td>
                                     @{
-                                        string suggestTextAbstract = s.Text;
-                                        if (suggestTextAbstract.Length >= 10)
-                                        {
-                                            suggestTextAbstract = suggestTextAbstract.Substring(0, 10);
-                                            suggestTextAbstract += "......";
-                                            <td>@suggestTextAbstract
-                                                <a id="@s.Text" onclick="getAllSuggest(this.id);">[查看全部]</a>
-                                            </td>
-                                        }
-                                        else{
-                                            <td>@suggestTextAbstract</td>
-                                        }
-                                     }
-                                    
+                                string suggestTextAbstract = s.Text;
+                                if (suggestTextAbstract.Length >= 10)
+                                {
+                                    suggestTextAbstract = suggestTextAbstract.Substring(0, 10);
+                                    suggestTextAbstract += "......";
+                                        <td>@suggestTextAbstract
+                                            <a id="@s.Text" onclick="getAllSuggest(this.id);">[查看全部]</a>
+                                        </td>
+                                }
+                                else
+                                {
+                                        <td>@suggestTextAbstract</td>
+                                }
+                                    }
+
                                     <td>@s.UserPhone</td>
                                 </tr>
                             }
@@ -89,7 +117,6 @@
                             <li><a href="@ViewBag.searchAction@Model.total_pages">末页</a></li>
                         </ul>
                     </div>
-                    
                 </div>
             </div>
         </div>
@@ -100,7 +127,7 @@
         var searchType = this.value;
         var searchValue = jQuery("#searchValue");
         var placeholder = "";
-        
+
         if (searchType == "phone") {
             placeholder = "请输入用户电话";
         }
@@ -111,8 +138,7 @@
     });
 
     //查看全部信息
-    function getAllSuggest(suggestText)
-    {
-        $.jBox.info( suggestText, '用户反馈');
+    function getAllSuggest(suggestText) {
+        $.jBox.info(suggestText, '用户反馈');
     }
 </script>
