@@ -9,9 +9,9 @@ namespace GoodVideoSystem.Services.IService
 {
     public interface IVideoService
     {
-        Video getVideo(int videoID);
-        IEnumerable<Code> getInviteCodes(int videoID); //获得这个视频的所有code
-        IEnumerable<Video> getVideosById(int videoID);
+        Video getVideo(int vid);
+        IEnumerable<Code> getInviteCodes(int vid); //获得这个视频的所有code
+        IEnumerable<Video> getVideosById(int vid);
         IEnumerable<Video> getVideosByName(string name);
         IEnumerable<Video> getVideos();
         int getVideoCount();

@@ -37,27 +37,27 @@ namespace GoodVideoSystem.Models.Repository
         }
 
         //分页版本
-        public IEnumerable<Code> getInviteCodes(Object tar, int videoID, int pageIndex, int pageSize, bool isStatus)
+        public IEnumerable<Code> getInviteCodes(Object tar, int vid, int pageIndex, int pageSize, bool isStatus)
         {
             if (!isStatus) 
             {
-                return Get(item => item.CodeValue.Contains((String)tar) && item.VideoID == videoID, pageIndex, pageSize, p => p.ModifyTime, true);
+                return Get(item => item.CodeValue.Contains((String)tar) && item.vid == vid, pageIndex, pageSize, p => p.ModifyTime, true);
             }
             else
             {
-                return Get(item => item.CodeStatus == (int)tar && item.VideoID == videoID, pageIndex, pageSize, p => p.ModifyTime, true);
+                return Get(item => item.CodeStatus == (int)tar && item.vid == vid, pageIndex, pageSize, p => p.ModifyTime, true);
             }
         }
 
 
         //不分页版本
-        public IEnumerable<Code> getInviteCodes(Object tar, int videoID, bool isStatus)
+        public IEnumerable<Code> getInviteCodes(Object tar, int vid, bool isStatus)
         {
             if (!isStatus)
             {
-                if (videoID != -1)
+                if (vid != -1)
                 {
-                    return Get(item => item.CodeValue.Contains((String)tar) && item.VideoID == videoID);
+                    return Get(item => item.CodeValue.Contains((String)tar) && item.vid == vid);
                 }
                 else
                 {
@@ -66,9 +66,9 @@ namespace GoodVideoSystem.Models.Repository
             }
             else
             {
-                if (videoID != -1)
+                if (vid != -1)
                 {
-                    return Get(item => item.CodeStatus == (int)tar && item.VideoID == videoID);
+                    return Get(item => item.CodeStatus == (int)tar && item.vid == vid);
                 }
                 else
                 {
@@ -76,12 +76,12 @@ namespace GoodVideoSystem.Models.Repository
                 }
             }
         }
-        public void getCounts(int videoID, out int codeCount, out int codeCountNotExport, out int codeCountNotUsed, out int codeCountUsed)
+        public void getCounts(int vid, out int codeCount, out int codeCountNotExport, out int codeCountNotUsed, out int codeCountUsed)
         {
-            codeCount = Get(item => item.VideoID == videoID).Count();
-            codeCountNotExport = Get(item => item.VideoID == videoID && item.CodeStatus == 0).Count();
-            codeCountNotUsed = Get(item => item.VideoID == videoID && item.CodeStatus == 1).Count();
-            codeCountUsed = Get(item => item.VideoID == videoID && item.CodeStatus == 2).Count();
+            codeCount = Get(item => item.vid == vid).Count();
+            codeCountNotExport = Get(item => item.vid == vid && item.CodeStatus == 0).Count();
+            codeCountNotUsed = Get(item => item.vid == vid && item.CodeStatus == 1).Count();
+            codeCountUsed = Get(item => item.vid == vid && item.CodeStatus == 2).Count();
         }
         public void updateInviteCode(Code code)
         {

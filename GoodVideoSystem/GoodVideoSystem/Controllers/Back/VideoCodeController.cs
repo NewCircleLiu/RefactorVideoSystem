@@ -54,12 +54,12 @@ namespace GoodVideoSystem.Controllers.Back
                 codeService.deleteInviteCode(code);
 
                 //修改视频邀请码数量
-                Video video = videoService.getVideo(code.VideoID);
+                Video video = videoService.getVideo(code.vid);
                 int codeCounts;
                 int codesNotUsed;
                 int codesNotExport;
                 int codesUsed;
-                codeService.getCounts(video.VideoID, out codeCounts, out codesNotExport, out codesNotUsed, out codesUsed);
+                codeService.getCounts(video.vid, out codeCounts, out codesNotExport, out codesNotUsed, out codesUsed);
                 video.CodeNotUsed = codesNotUsed;
                 video.CodeUsed = codesUsed;
                 video.CodeCounts = codeCounts;
@@ -76,17 +76,17 @@ namespace GoodVideoSystem.Controllers.Back
 
         //生成邀请码
         [HttpPost]
-        public ActionResult CreateCode(int codeCounts, int videoID)
+        public ActionResult CreateCode(int codeCounts, int vid)
         {
-            if (videoID != -1)
+            if (vid != -1)
             {
-                Video video = videoService.getVideo(videoID);
+                Video video = videoService.getVideo(vid);
 
                 List<string> codeList = createCode.createCode(codeCounts, video);
 
                 foreach (string code in codeList)
                 {
-                    Code c = new Code() { CodeStatus = 0, CodeValue = code, VideoID = video.VideoID, UserID = -1 };
+                    Code c = new Code() { CodeStatus = 0, CodeValue = code, vid = video.vid, UserID = -1 };
                     if (ModelState.IsValid)
                     {
                         codeService.addInviteCode(c);
@@ -107,7 +107,7 @@ namespace GoodVideoSystem.Controllers.Back
 
         // GET: /VideoCode/ExportExcel
         //导出邀请码
-        public ActionResult ExportExcel(int num = 0, int videoID = -1)
+        public ActionResult ExportExcel(int num = 0, int vid = -1)
         {
             Code[] codeArray = null;
             string fileName = null;
@@ -116,7 +116,7 @@ namespace GoodVideoSystem.Controllers.Back
             {
                 int count;
                 int t1, t2, t3;
-                codeService.getCounts(videoID, out t1, out count, out t2, out t3);
+                codeService.getCounts(vid, out t1, out count, out t2, out t3);
                 //请求的数量大于已有的数量
                 if (num > count)
                 {
@@ -127,18 +127,18 @@ namespace GoodVideoSystem.Controllers.Back
             else
             {
                 //导出单个视频的邀请码
-                if (videoID != -1)
+                if (vid != -1)
                 {
                     if (num == 0) //表示导出改视频的所有邀请码
                     {
-                        codeArray = videoService.getInviteCodes(videoID).ToArray();
-                        //codeArray = vsc.Codes.Where(c => c.VideoID == videoID && c.CodeStatus == 0).ToArray();
+                        codeArray = videoService.getInviteCodes(vid).ToArray();
+                        //codeArray = vsc.Codes.Where(c => c.vid == vid && c.CodeStatus == 0).ToArray();
                     }
                     else
                     {
                         int count;
                         int t1, t2, t3;
-                        codeService.getCounts(videoID, out t1, out count, out t2, out t3);
+                        codeService.getCounts(vid, out t1, out count, out t2, out t3);
 
                         //请求的数量大于已有的数量
                         if (num > count)
@@ -146,7 +146,7 @@ namespace GoodVideoSystem.Controllers.Back
                             return RedirectToAction("", "VideoManager");
                         }
 
-                        codeArray = videoService.getInviteCodes(videoID).ToArray();
+                        codeArray = videoService.getInviteCodes(vid).ToArray();
 
                     }
                     fileName = codeArray[0].Video.VideoName;
@@ -188,7 +188,7 @@ namespace GoodVideoSystem.Controllers.Back
                     int codesNotExport;
 
                     int codesCount;
-                    codeService.getCounts(v.VideoID,out codesCount,out codesNotExport,out codesNotUsed,out codesUsed);
+                    codeService.getCounts(v.vid,out codesCount,out codesNotExport,out codesNotUsed,out codesUsed);
                     //该视频种用了的数量
 
                     v.CodeNotUsed = codesNotUsed;

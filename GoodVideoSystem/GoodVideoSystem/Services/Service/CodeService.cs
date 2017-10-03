@@ -62,25 +62,25 @@ namespace GoodVideoSystem.Services.Service
                 }
             }
         }
-        public IEnumerable<Code> getInviteCodesContainsCode(string inviteCode, int videoID, int pageIndex, int pageSize)
+        public IEnumerable<Code> getInviteCodesContainsCode(string inviteCode, int vid, int pageIndex, int pageSize)
         {
-            return codeRepository.getInviteCodes(inviteCode, videoID, pageIndex, pageSize, false);
+            return codeRepository.getInviteCodes(inviteCode, vid, pageIndex, pageSize, false);
         }
-        public IEnumerable<Code> getInviteCodesContainsCode(string inviteCode, int videoID)
+        public IEnumerable<Code> getInviteCodesContainsCode(string inviteCode, int vid)
         {
-            return codeRepository.getInviteCodes(inviteCode, videoID, false);
+            return codeRepository.getInviteCodes(inviteCode, vid, false);
         }
-        public IEnumerable<Code> getInviteCodesByStatus(int status, int videoID, int pageIndex, int pageSize)
+        public IEnumerable<Code> getInviteCodesByStatus(int status, int vid, int pageIndex, int pageSize)
         {
-            return codeRepository.getInviteCodes(status, videoID, pageIndex, pageSize, true);
+            return codeRepository.getInviteCodes(status, vid, pageIndex, pageSize, true);
         }
-        public IEnumerable<Code> getInviteCodesByStatus(int status, int videoID)
+        public IEnumerable<Code> getInviteCodesByStatus(int status, int vid)
         {
-            return codeRepository.getInviteCodes(status, videoID, true);
+            return codeRepository.getInviteCodes(status, vid, true);
         }
-        public void getCounts(int videoID, out int codeCount, out int codeCountNotExport, out int codeCountNotUsed, out int codeCountUsed)
+        public void getCounts(int vid, out int codeCount, out int codeCountNotExport, out int codeCountNotUsed, out int codeCountUsed)
         {
-            codeRepository.getCounts(videoID, out codeCount, out codeCountNotExport, out codeCountNotUsed, out codeCountUsed);
+            codeRepository.getCounts(vid, out codeCount, out codeCountNotExport, out codeCountNotUsed, out codeCountUsed);
         }
 
         public Code getInviteCodeById(int id)

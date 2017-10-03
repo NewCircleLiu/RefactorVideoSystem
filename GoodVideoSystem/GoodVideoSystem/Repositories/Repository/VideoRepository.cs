@@ -15,19 +15,19 @@ namespace GoodVideoSystem.Models.Repository
         {
             CodeRepository codes = new CodeRepository(new BaseDbContext());
             Code code = codes.Get(item => item.CodeValue == inviteCode).FirstOrDefault();
-            return code != null ? Get(item => item.VideoID == code.VideoID).FirstOrDefault() : null;
+            return code != null ? Get(item => item.vid == code.vid).FirstOrDefault() : null;
         }
 
-        public Video getVideo(int videoID)
+        public Video getVideo(int vid)
         {
-           return  this.Get(item => item.VideoID == videoID).FirstOrDefault();
+           return  this.Get(item => item.vid == vid).FirstOrDefault();
         }
 
         public IEnumerable<Video> getVideos(object tar, bool isID)
         {
             if (isID)
             {
-                return this.Get(item => item.VideoID == (int)tar);
+                return this.Get(item => item.vid == (int)tar);
             }
             else
             {

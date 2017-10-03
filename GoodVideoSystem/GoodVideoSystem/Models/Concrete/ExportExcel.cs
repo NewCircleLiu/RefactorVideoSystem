@@ -24,7 +24,7 @@ namespace GoodVideoSystem.Models.Concrete
 
             foreach (Code c in codeArray)
             {
-                dt.Rows.Add(c.Video.VideoID, c.Video.VideoName, c.CodeID, c.CodeValue);
+                dt.Rows.Add(c.Video.vid, c.Video.VideoName, c.CodeID, c.CodeValue);
             }
 
             return dt;

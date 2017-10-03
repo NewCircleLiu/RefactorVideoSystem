@@ -20,7 +20,7 @@ namespace RefactorVideoSystem.Models.Models
 
         public int UserID { get; set; } //暂时不用
         [Required]
-        public int VideoID { get; set; } //视频邀请码对应的唯一视频
+        public int vid { get; set; } //视频邀请码对应的唯一视频
 
 
         public virtual Video Video { get; set; }

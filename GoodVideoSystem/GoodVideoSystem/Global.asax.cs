@@ -7,6 +7,7 @@ using GoodVideoSystem.Services.Service;
 using RefactorVideoSystem.Models.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -23,6 +24,8 @@ namespace GoodVideoSystem
     {
         protected void Application_Start()
         {
+            //Database.SetInitializer<BaseDbContext>(new DropCreateDatabaseIfModelChanges<BaseDbContext>()); 
+
             registerService();
             AreaRegistration.RegisterAllAreas();
 

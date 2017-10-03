@@ -18,19 +18,19 @@ namespace GoodVideoSystem.Services.Service
             this.AddDisposableObject(videoRepository);
         }
 
-        public Video getVideo(int videoID)
+        public Video getVideo(int vid)
         {
-            return videoRepository.getVideo(videoID);
+            return videoRepository.getVideo(vid);
         }
-        public IEnumerable<Code> getInviteCodes(int videoID) 
+        public IEnumerable<Code> getInviteCodes(int vid) 
         {
-            return videoRepository.getVideo(videoID).Code;
+            return videoRepository.getVideo(vid).Code;
         }
-        public IEnumerable<Video> getVideosById(int videoID)
+        public IEnumerable<Video> getVideosById(int vid)
         {
-            if (videoID != -1)
+            if (vid != -1)
             {
-                return videoRepository.getVideos(videoID, true);
+                return videoRepository.getVideos(vid, true);
             }
             else
             {

@@ -40,10 +40,10 @@ namespace GoodVideoSystem.Controllers.Back
             ip.GetCurrentPageData(videoList, page_id);
             return View(ip);
         }
-        public ActionResult UploadImg(int videoID, string VideoImageLocal)
+        public ActionResult UploadImg(int vid, string coverImage)
         {
-            Video v = videoService.getVideo(videoID);
-            v.VideoImageLocal = VideoImageLocal;
+            Video v = videoService.getVideo(vid);
+            v.coverImage = coverImage;
             if (ModelState.IsValid)
             {
                 videoService.updateVideo(v);
@@ -51,9 +51,9 @@ namespace GoodVideoSystem.Controllers.Back
             return RedirectToAction("Index", "VideoManager");
         }
         //跳转上传视频页面
-        public ActionResult UploadPage(int VideoID)
+        public ActionResult UploadPage(int vid)
         {
-            Video v = videoService.getVideo(VideoID);
+            Video v = videoService.getVideo(vid);
             Manager manager = (Manager)Session["Manager"];
             ViewBag.account = manager.Account;
 
@@ -75,9 +75,8 @@ namespace GoodVideoSystem.Controllers.Back
                 v.CodeCounts = 0;
                 v.CodeNotUsed = 0;
                 v.CodeUsed = 0;
-                v.fileID = "001";
                 v.VideoName = video_name;
-                v.VideoImageLocal = "null";
+                v.coverImage = "null";
                 v.CreateTime = DateTime.Now;
 
                 if (ModelState.IsValid)
@@ -90,22 +89,22 @@ namespace GoodVideoSystem.Controllers.Back
         }
 
         //删除视频
-        public ActionResult DeleteVideo(int VideoID)
+        public ActionResult DeleteVideo(int vid)
         {
-            Video v = videoService.getVideo(VideoID);
+            Video v = videoService.getVideo(vid);
             if (ModelState.IsValid)
             {
                 videoService.deleteVideo(v);
                 //删除视频文件和视频首图
-                if (v.VideoImageLocal != "null")
+                if (v.coverImage != "null")
                 {
-                    string imgUrl = Server.MapPath(v.VideoImageLocal);
+                    string imgUrl = Server.MapPath(v.coverImage);
                     FileInfo img = new FileInfo(imgUrl);
                     img.Delete();
                 }
 
                 LCUtils lc = new LCUtils();
-                jsonout result = lc.deleteVideo(v.fileID);
+                jsonout result = lc.deleteVideo(v.vid);
 
                 if (result.code == "0")
                 {
@@ -120,24 +119,24 @@ namespace GoodVideoSystem.Controllers.Back
             return Content("erro");
         }
 
-        public ActionResult getInviteCode(int VideoID = -1, int page_id = 1)
+        public ActionResult getInviteCode(int vid = -1, int page_id = 1)
         {
-            if (VideoID != -1)
+            if (vid != -1)
             {
-                Session["VideoID"] = VideoID;
+                Session["vid"] = vid;
             }
             else
             {
-                VideoID = (int)Session["VideoID"];
+                vid = (int)Session["vid"];
             }
 
             IEnumerable<Code> codeList = null;
-            codeList = videoService.getInviteCodes(VideoID);
+            codeList = videoService.getInviteCodes(vid);
 
             ip.GetCurrentPageData(codeList, page_id);
 
             int codeCount, codeCountNotExport, codeCountNotUsed,codeCountUsed;
-            codeService.getCounts(VideoID, out codeCount, out codeCountNotExport, out codeCountNotUsed, out codeCountUsed);
+            codeService.getCounts(vid, out codeCount, out codeCountNotExport, out codeCountNotUsed, out codeCountUsed);
             TempData["codeCount"] = codeCount;
 
             TempData["codeCountNotExport"] = codeCountNotExport;

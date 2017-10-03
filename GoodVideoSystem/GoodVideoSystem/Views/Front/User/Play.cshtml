@@ -6,19 +6,14 @@
 
 @Html.Partial("HomePartialView")
 
-<div id="video_container" style="width: 100%; height: 360px; margin-top:20px"></div>
-<script src="https://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js" charset="utf-8"></script>
-<script type="text/javascript"> (function () {
-     var option = {
-         "auto_play": "0",
-         "file_id": "@Model.fileID",
-         "app_id": "1254423290",
-         "width": 640,
-         "height": 360,
-         "https": 1
-     }; /*调用播放器进行播放*/
-     new qcVideo.Player( /*代码中的id_video_container将会作为播放器放置的容器使用,可自行替换*/
-         "video_container",
-         option);
- })()
-</script>
+<script src='//player.polyv.net/script/polyvplayer.min.js'></script>
+<div style="margin-top: 10px; text-align: center">
+    <span style="font-family: 'Microsoft YaHei'; font-size: 16px">@Model.VideoName</span>
+    <div id='plv_@Model.polyVid'" style="margin-top:10px"></div>
+    <script>
+        var player = polyvObject('#plv_@Model.polyVid').videoPlayer({
+            'width': '960',
+            'vid': '@Model.polyVid',
+    });
+    </script>
+</div>

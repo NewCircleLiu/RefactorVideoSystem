@@ -50,23 +50,23 @@ namespace GoodVideoSystem.Controllers.Back
             //如果是查找某视频的所有邀请码
             if (model == "VideoCode")
             {
-                int VideoID = (int)Session["VideoID"];
+                int vid = (int)Session["vid"];
 
                 IEnumerable<Code> codeList = null;
 
                 //按邀请码查询
                 if (searchType == "code")
                 {
-                    codeList = codeService.getInviteCodesContainsCode(searchValue, VideoID);
+                    codeList = codeService.getInviteCodesContainsCode(searchValue, vid);
                 }
                 //按状态查询
                 if (searchType == "status")
                 {
                     int statusInt = Convert.ToInt32(searchValue);
-                    codeList = codeService.getInviteCodesByStatus(statusInt, VideoID);
+                    codeList = codeService.getInviteCodesByStatus(statusInt, vid);
                 }
                 int codeCount, codeCountNotExport, codeCountUsed, codeNotUsed;
-                codeService.getCounts(VideoID, out codeCount, out codeCountNotExport, out codeNotUsed, out codeCountUsed);
+                codeService.getCounts(vid, out codeCount, out codeCountNotExport, out codeNotUsed, out codeCountUsed);
                 ip.GetCurrentPageData(codeList, page_id);
                 TempData["codeCount"] = codeCount;
 
@@ -83,10 +83,10 @@ namespace GoodVideoSystem.Controllers.Back
                 IEnumerable<Video> videoList = null;
 
                 //按编号
-                if (searchType == "videoID")
+                if (searchType == "vid")
                 {
-                    int videoID = Convert.ToInt32(searchValue);
-                    videoList = videoService.getVideosById(videoID);
+                    int vid = Convert.ToInt32(searchValue);
+                    videoList = videoService.getVideosById(vid);
                 }
                 //按名称
                 if (searchType == "videoName")

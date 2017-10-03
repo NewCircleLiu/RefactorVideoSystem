@@ -142,6 +142,7 @@
     <Compile Include="App_Start\MyViewEngine.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Back\PolyProcessController.cs" />
     <Compile Include="Controllers\Back\ProductController.cs" />
     <Compile Include="Controllers\Back\QhgypaczController.cs" />
     <Compile Include="Controllers\Back\SearchController.cs" />
@@ -179,6 +180,8 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Suggest.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Utility\Encypt.cs" />
+    <Compile Include="Models\Utility\RequestUrl.cs" />
     <Compile Include="Models\Video.cs" />
     <Compile Include="Models\VO\ErrorInfo.cs" />
     <Compile Include="Models\VO\MyViewData.cs" />

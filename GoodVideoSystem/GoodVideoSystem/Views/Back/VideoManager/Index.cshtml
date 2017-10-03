@@ -29,15 +29,14 @@
     }
 
     #headTitle th {
-        font-family:'Microsoft YaHei';
-        font-size:14px;
-        color:black;
+        font-family: 'Microsoft YaHei';
+        font-size: 14px;
+        color: black;
     }
 
     .pagination li a {
-        color:black;
+        color: black;
     }
-
 </style>
 
 <div class="main" style="margin-left: 290px; width: 80%">
@@ -47,7 +46,6 @@
             <li class="active">视频列表</li>
         </ol>
     </div>
-    <!--/.row-->
 
     <div class="row">
         <div class="col-lg-12">
@@ -64,7 +62,7 @@
                                 <td>
                                     <select class="form-control" style="width: 100px;" id="searchType" name="searchType">
                                         <option value="videoName" selected>按名称</option>
-                                        <option value="videoID">按编号</option>
+                                        <option value="vid">按编号</option>
                                     </select>
                                 </td>
                                 <td>
@@ -73,9 +71,6 @@
                                 <td style="padding-left: 30px;">
                                     <button type="button" class="btn btn-primary" onclick="exportAll();">导出全部邀请码</button>
                                 </td>
-                                @*<td style="padding-left:10px;">
-                                    <a href="@Url.Content("~/VideoManager/UploadPage")" class="btn btn-primary" >上传视频</a>
-                                </td>*@
                                 <td style="padding-left: 30px;">
                                     <button type="button" class="btn btn-primary">视频总数：<span class="badge">@TempData["videoCount"]</span></button>
                                 </td>
@@ -90,7 +85,7 @@
                             <tr id="headTitle">
                                 <th>编号</th>
                                 <th>名称</th>
-                                <th>首图</th>
+                                <th>封面</th>
                                 <th>上传时间</th>
                                 <th>邀请码数量</th>
                                 <th>已使用</th>
@@ -102,44 +97,29 @@
                             @foreach (Video v in Model.returnData)
                             { 
                                 <tr>
-                                    <td>@v.VideoID</td>
+                                    <td>@v.vid</td>
                                     <td>
-                                        @{
-                                string name = v.VideoName.Split('.')[0];
-                                        }
+                                        @{ string name = v.VideoName.Split('.')[0];}
                                         @name
                                     </td>
                                     <td>
-                                        @if (@v.VideoImageLocal == "null")
-                                        {
-                                            <nobr>
-                                                <a href="/VideoManager/UploadPage?VideoID=@v.VideoID">[上传首图]</a>
-                                            </nobr>
-                                        }
-                                        else
-                                        { 
-                                            <img style="width:100px;height:70px;" src="@v.VideoImageLocal"/>
-                                            <br />
-                                            <nobr>
-                                                <a href="/VideoManager/UploadPage?VideoID=@v.VideoID">[更换首图]</a>
-                                            </nobr>
-                                        }
+                                        <img src="@v.coverImage" width="120" />
                                     </td>
-                                    <td>@v.CreateTime.ToString("yyyy-MM-dd HH:mm")</td>
+                                    <td>@v.CreateTime.ToString("yyyy-MM-dd")</td>
                                     <td>@v.CodeCounts</td>
                                     <td>@v.CodeUsed</td>
                                     <td>@v.CodeNotUsed</td>
                                     <td>
                                         <nobr>
-                                            <a onclick="createCode(@v.VideoID);">[生成邀请码]</a>
+                                            <a onclick="createCode(@v.vid);">[生成邀请码]</a>
                                             <br />
-                                            <a onclick="deleteVideo(@v.VideoID);">[删除]</a>
+                                            <a onclick="deleteVideo(@v.vid);">[删除]</a>
                                             <br />
                                             @if (@v.CodeCounts != 0)
                                             { 
-                                                <a onclick="exportExcel(@v.VideoID);">[导出邀请码]</a>
+                                                <a onclick="exportExcel(@v.vid);">[导出邀请码]</a>
                                                 <br />
-                                                <a href="@Url.Content("~/VideoManager/getInviteCode?VideoID=" + v.VideoID)">[查看邀请码]</a>
+                                                <a href="@Url.Content("~/VideoManager/getInviteCode?vid=" + v.vid)">[查看邀请码]</a>
                                             }
                                         </nobr>
                                     </td>
@@ -147,7 +127,6 @@
                             }
                         </tbody>
                     </table>
-
 
                     @{
                         int prePageId = (Model.request_page > 1) ? Model.request_page - 1 : 1;

@@ -77,14 +77,19 @@ namespace GoodVideoSystem.Controllers.Front
        * @method GET
        */
         //[UserAuthorise]
-        public ActionResult Play(int videoID = 0)
+        public ActionResult Play(int vid = 0)
         {
-            Video video1 = new Video();
-            video1.fileID = "9031868223282489802";
-            return View(video1);
+            Video video = new Video();
+            video.polyVid = "212b30914a781362c4d6230566cb587f_2";
+            video.VideoName = "DSA-无序列表";
+            video.coverImage = "http://img.videocc.net/uimage/2/212b30914a/f/212b30914a781362c4d6230566cb587f_0.jpg";
 
+            return View(video);
+
+            /*
+             * 
             //1.视频是否存在
-            Video video = videoService.getVideo(videoID);
+            Video video = videoService.getVideo(vid);
             if (video == null)
                 return RedirectToAction("Error");
 
@@ -101,6 +106,7 @@ namespace GoodVideoSystem.Controllers.Front
                     return View(video);
             }
             return RedirectToAction("Error");
+            */
         }
 
         /*

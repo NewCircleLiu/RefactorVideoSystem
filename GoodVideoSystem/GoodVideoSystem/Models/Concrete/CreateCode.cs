@@ -27,7 +27,7 @@ namespace GoodVideoSystem.Models.Concrete
             for (int i = 0; i < count; i++)
             {
                 video.CodeCounts++;
-                str = video.VideoName + video.VideoID + video.CodeCounts;
+                str = video.VideoName + video.vid + video.CodeCounts;
                 codeList.Add(getInviteCode(str));
             }
             return codeList;
