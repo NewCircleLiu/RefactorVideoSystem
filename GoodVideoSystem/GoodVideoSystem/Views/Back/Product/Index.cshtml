@@ -3,33 +3,34 @@
     Layout = "~/Views/Shared/_BackLayout.cshtml";
 }
 
-
-
 @using RefactorVideoSystem.Models.Models;
 @model GoodVideoSystem.Models.Concrete.Paging
 <style>
     th {
-        font-weight:normal;
+        font-weight: normal;
         vertical-align: middle;
     }
 
-    a:hover {
-        text-decoration:none;
+   a{
+        text-decoration: none;
     }
 
-     #headTitle th {
-        font-family:'Microsoft YaHei';
-        font-size:14px;
-        color:black;
+    #headTitle th {
+        font-family: 'Microsoft YaHei';
+        font-size: 14px;
+        color: black;
     }
 
     .pagination li a {
-        color:black;
+        color: black;
     }
 
+    #jbox-content {
+        overflow-y:hidden !important;
+    }
 </style>
 
-<div class="main" style="margin-left:290px;width:80%">
+<div class="main" style="margin-left: 290px; width: 80%">
     <div class="row">
         <ol class="breadcrumb">
             <li><a href="@Url.Content("~/Qhgypacz/BackMain/")"><span class="glyphicon glyphicon-home"></span></a></li>
@@ -38,29 +39,29 @@
     </div>
     <!--/.row-->
     <div class="row">
-        <div >
+        <div>
             <div class="panel panel-default">
                 <div class="panel-heading">产品列表</div>
                 <div class="panel-body">
                     <table>
-                            <tr>
-                                <td style="padding-left:10px;">
-                                    <a href="@Url.Content("~/Product/AddProductPage")" class="btn btn-primary" >添加产品</a>
-                                </td>
-                                <td style="padding-left:30px;">
-                                    <button type="button" class="btn btn-primary">产品总数：<span class="badge">@TempData["productCount"]</span></button>
-                                </td>
-                                <td style="padding-left:10px;">
-                                    <a href="@Url.Content("~/Product")" class="btn btn-primary" >刷新</a>
-                                </td>
-                            </tr>
-                        </table>
+                        <tr>
+                            <td style="padding-left: 10px;">
+                                <a href="@Url.Content("~/Product/AddProductPage")" class="btn btn-primary" >添加产品</a>
+                            </td>
+                            <td style="padding-left: 30px;">
+                                <button type="button" class="btn btn-primary">产品总数：<span class="badge" style="color: red">@TempData["productCount"]</span></button>
+                            </td>
+                            <td style="padding-left: 10px;">
+                                <a href="@Url.Content("~/Product")" class="btn btn-primary" >刷新</a>
+                            </td>
+                        </tr>
+                    </table>
 
-                    <table class="table table-bordered table-hover class" style="margin-top:10px;">
+                    <table class="table table-bordered table-hover class" style="margin-top: 10px;">
                         <thead>
                             <tr id="headTitle">
-                                <th>编号</th>
-                                <th>图片</th>
+                                <th>序号</th>
+                                <th style="width:170px">图片</th>
                                 <th>名称</th>
                                 <th>价格</th>
                                 <th>链接</th>
@@ -68,23 +69,23 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @{int productSeq = 1;}
                             @foreach (Product p in Model.returnData)
                             {
                                 <tr>
-                                    <th>@p.ProductId</th>
+                                    <th>@productSeq</th>
                                     <th>
                                         <img style="width:100px;height:70px;" src="@p.Img"/>
                                     </th>
                                     <th>@p.Name</th>
-                                    <th>@p.Price</th>
+                                    <th>@string.Format("{0:C}",p.Price)</th>
                                     <th><a href="@p.Url">链接到淘宝商城</a></th>
                                     <th>
-                                        <nobr>
-                                            <a onclick="editProduct(@p.ProductId);">[编辑]</a>
-                                            <a onclick="deleteProduct(@p.ProductId);">[删除]</a>
-                                        </nobr>
+                                        <a href="#" onclick="editProduct(@p.ProductId);">[ 编辑产品 ]</a><br /><br />
+                                        <a href="#" onclick="deleteProduct(@p.ProductId);">[ 删除产品 ]</a>
                                     </th>
                                 </tr>
+                                productSeq++;
                             }
                         </tbody>
                     </table>
@@ -106,18 +107,16 @@
                             <li><a href="@ViewBag.searchAction@Model.total_pages">末页</a></li>
                         </ul>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
     </div>
 </div>
 <script>
-    function deleteProduct(productID)
-    {
+    function deleteProduct(productID) {
         var isconfirm = confirm("删除产品将删除产品所对应的图片，请再次确定!");
-        if (!isconfirm)
-        {
+        if (!isconfirm) {
             $.jBox.tip("取消删除", '提示');
             return;
         }
@@ -134,10 +133,9 @@
             },
             "text"
          );
-    }
+        }
 
-    function editProduct(productID)
-    {
-        jQuery.jBox.open("iframe:/Product/EditProductPage?productID=" + productID, "编辑产品", 700, 550, { buttons: { "关闭": true } });
-    }
+        function editProduct(productID) {
+            jQuery.jBox.open("iframe:/Product/EditProductPage?productID=" + productID, "编辑产品", 700, 550, { buttons: { "关闭": true } });
+        }
 </script>

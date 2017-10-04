@@ -49,7 +49,9 @@ namespace GoodVideoSystem.Controllers.Back
             }
             */
 
-            string vid = "212b30914a781362c4d6230566cb587f_2";
+            //string vid = "212b30914a68aad541142ef9215ddb03_2";
+            //string vid = "212b30914a781362c4d6230566cb587f_2";
+            string vid = "212b30914ad7f00138158897c941f5dc_2";
             Video video = GetSingleVideo(vid);
             videoService.addVideo(video);
 

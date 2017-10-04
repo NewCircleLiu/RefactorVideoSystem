@@ -26,23 +26,23 @@
                 <div class="panel-body">
                     <p id="erro_info" style="color: red; text-align: center">@TempData["erroInfo"]</p>
                     <form role="form" action="@Url.Content("~/Settings/ModifyPass")" method="post" id="modifyPassForm">
-                        <table style="width: 350px; margin: auto; font-size: 1.5em;" class="table table-bordered">
+                        <table style="width: 90%; margin: auto; font-size: 1.5em;" class="table table-bordered">
                             <tr>
                                 <td>原始密码：</td>
                                 <td>
-                                    <input type="password" class="form-control" id="password" name="oldPass" required>
+                                    <input type="text" class="form-control" id="password" name="oldPass" required>
                                 </td>
                             </tr>
                             <tr>
-                                <td>新密码：</td>
+                                <td>输入新密码：</td>
                                 <td>
-                                    <input type="password" class="form-control" id="newPass" name="newPass" required>
+                                    <input type="text" class="form-control" id="newPass" name="newPass" required>
                                 </td>
                             </tr>
                             <tr>
-                                <td>确认密码：</td>
+                                <td>确认新密码：</td>
                                 <td>
-                                    <input type="password" class="form-control" id="passConfirm" name="newPassConfirm" required>
+                                    <input type="text" class="form-control" id="passConfirm" name="newPassConfirm" required>
                                 </td>
                             </tr>
                         </table>

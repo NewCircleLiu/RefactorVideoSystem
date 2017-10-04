@@ -1,6 +1,6 @@
-@charset "utf-8";
+ï»¿@charset "utf-8";
 /*
-  ÌáÊ¾£ºCSS ÑùÊ½Ö»ÔÊÐíÐÞ¸ÄÑÕÉ«ÊôÐÔ£¬»òÍ¼Æ¬µÄµØÖ·£¨Í¼Æ¬´óÐ¡ÒªºÍÄ¬ÈÏµÄÒ»ÖÂ£©¡£border:dotted solid double dashed
+  ï¿½ï¿½Ê¾ï¿½ï¿½CSS ï¿½ï¿½Ê½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸ï¿½ï¿½ï¿½É«ï¿½ï¿½ï¿½Ô£ï¿½ï¿½ï¿½Í¼Æ¬ï¿½Äµï¿½Ö·ï¿½ï¿½Í¼Æ¬ï¿½ï¿½Ð¡Òªï¿½ï¿½Ä¬ï¿½Ïµï¿½Ò»ï¿½Â£ï¿½ï¿½ï¿½border:dotted solid double dashed
 */
 *:focus {outline: none;}
 /* fade */
@@ -24,12 +24,12 @@ div.jbox .jbox-content{min-height:24px;line-height:18px;color:#444444;}
 div.jbox .jbox-content-loading{background-color:#E6E6E6;}
 div.jbox .jbox-content-loading-image{background:url(images/jbox-content-loading.gif) no-repeat bottom center;}
 /* button-panel */
-div.jbox .jbox-button-panel{border-top:1px solid #CCCCCC;background-color: #EEEEEE;}
+div.jbox .jbox-button-panel{border-top:1px solid #CCCCCC;background-color: #EEEEEE; height:30px}
 div.jbox .jbox-bottom-text{text-indent:10px;color:#444444;}
 div.jbox .jbox-button{background:url(images/jbox-button2.png) repeat-x transparent;border:#AAAAAA 1px solid;color:#888888;border-radius:3px 3px 3px 3px;margin:1px 7px 0px 0px;height:22px;cursor:default;}
 div.jbox .jbox-button-hover,div.jbox .jbox-button-focus{background-position:0px -20px;color:#666666;}
 div.jbox .jbox-button-active{background-position:0px -40px;}
-div.jbox-warning .jbox .jbox-button-panel{background-color: #FFFFFF;}
+div.jbox-warning .jbox .jbox-button-panel{background-color: #FFFFFF;height:30px}
 /* tip-color */
 div.jbox .jbox-tip-color{background-color:#376EA5;border-color:#376EA5;border-radius:3px 3px 3px 3px;color:#ffffff;}
 /* icons */

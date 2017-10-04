@@ -683,7 +683,7 @@
     <Content Include="Views\Back\VideoManager\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Back\VideoManager\getCode.cshtml" />
+    <Content Include="Views\Back\VideoManager\getInviteCode.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Back\VideoManager\UploadPage.cshtml" />

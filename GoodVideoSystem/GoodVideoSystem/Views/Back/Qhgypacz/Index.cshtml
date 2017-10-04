@@ -21,6 +21,11 @@
         #account, #password, #code {
             border-color: #52585F;
         }
+        input:focus
+        {
+            border:none !important;
+            border-color:black !important;
+        }
     </style>
 
 </head>
@@ -38,7 +43,7 @@
                     <td>
                         <div class="loginForm" style="margin-top: 20px; margin-right: 20px">
                             <div class="login-panel panel panel-default">
-                                <div class="panel-heading" style="font-size: 16px; text-align: center">管理员登录</div>
+                                <div class="panel-heading" style="font-size: 18px; font-family:'Microsoft YaHei'; text-align: center">管理员登录</div>
                                 <div class="panel-body">
                                      <p id="erro_info" style="color:red;text-align:center">&nbsp;</p>
                                   
@@ -56,8 +61,7 @@
                                                         <input class="form-control" placeholder="验证码" name="code" id="code" type="text" required onblur="verifyCode();" style="width: 200px;">
                                                     </td>
                                                     <td>
-                                                        <a onclick="refreshCode()">
-                                                         
+                                                        <a onclick="refreshCode()"> 
                                                         <img id="codeImg" src="@Url.Content("~/VerifyCode")" style="border:solid 1px;width:110px;height:33px;margin-left:20px;"/>
                                                         </a>
                                                     </td>

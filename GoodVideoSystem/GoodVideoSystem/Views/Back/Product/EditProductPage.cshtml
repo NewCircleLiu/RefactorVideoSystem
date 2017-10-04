@@ -7,6 +7,12 @@
 <script type="text/javascript" src="~/Resources/Plugin/WebUploader/webuploader.js"></script>
 <script type="text/javascript" src="~/Resources/Plugin/WebUploader/MyUpload.js"></script>
 
+<style>
+    a:hover {
+        text-decoration: none;
+    }
+</style>
+
 @using RefactorVideoSystem.Models.Models;
 @model RefactorVideoSystem.Models.Models.Product
 
@@ -27,7 +33,7 @@
                                         <label class=" control-label">产品价格</label>
                                     </td>
                                     <td>
-                                        <input type="number" class="form-control" id="ProductPrice" name="Price" value="@Model.Price" required>
+                                        <input type="text" style="font-family:'Microsoft YaHei'" class="form-control" id="ProductPrice" name="Price" value="@string.Format("{0:C}",Model.Price)" required>
                                     </td>
                                 </tr>
                                 <tr>

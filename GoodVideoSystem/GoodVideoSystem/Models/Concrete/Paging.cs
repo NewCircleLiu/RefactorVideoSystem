@@ -15,7 +15,7 @@ namespace GoodVideoSystem.Models.Concrete
         //单页显示的页码链接数目
         private int page_code_num = 5;
         //每页显示数据条数
-        private int every_page_items = 15;
+        public int every_page_items = 15;
         //数据总条数
         private int total_itenms;
         //总页数

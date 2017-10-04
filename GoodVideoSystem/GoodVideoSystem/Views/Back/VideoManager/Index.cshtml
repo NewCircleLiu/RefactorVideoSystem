@@ -12,6 +12,10 @@
         vertical-align: middle;
     }
 
+    a:hover {
+        cursor: pointer;
+    }
+
     #searchType {
         height: 42px;
         margin-left: 5px;
@@ -32,6 +36,10 @@
         font-family: 'Microsoft YaHei';
         font-size: 14px;
         color: black;
+    }
+
+    .jbox-button-panel {
+        height: 30px !important;
     }
 
     .pagination li a {
@@ -72,7 +80,7 @@
                                     <button type="button" class="btn btn-primary" onclick="exportAll();">导出全部邀请码</button>
                                 </td>
                                 <td style="padding-left: 30px;">
-                                    <button type="button" class="btn btn-primary">视频总数：<span class="badge">@TempData["videoCount"]</span></button>
+                                    <button type="button" class="btn btn-primary">视频总数：<span class="badge" style="color: red">@TempData["videoCount"]</span></button>
                                 </td>
                                 <td style="padding-left: 10px;">
                                     <a href="@Url.Content("~/VideoManager")" class="btn btn-primary" >刷新</a>
@@ -83,9 +91,9 @@
                     <table class="table table-bordered table-hover class" style="margin-top: 10px;">
                         <thead>
                             <tr id="headTitle">
-                                <th>编号</th>
+                                <th>序号</th>
                                 <th>名称</th>
-                                <th>封面</th>
+                                <th style="width: 140px;">封面</th>
                                 <th>上传时间</th>
                                 <th>邀请码数量</th>
                                 <th>已使用</th>
@@ -93,14 +101,14 @@
                                 <th>操作</th>
                             </tr>
                         </thead>
+                        @{int videoSeq = Model.every_page_items * (Model.request_page - 1) + 1;}
                         <tbody>
                             @foreach (Video v in Model.returnData)
                             { 
                                 <tr>
-                                    <td>@v.vid</td>
+                                    <td>@videoSeq</td>
                                     <td>
-                                        @{ string name = v.VideoName.Split('.')[0];}
-                                        @name
+                                        @v.VideoName.Split('.')[0]
                                     </td>
                                     <td>
                                         <img src="@v.coverImage" width="120" />
@@ -110,20 +118,21 @@
                                     <td>@v.CodeUsed</td>
                                     <td>@v.CodeNotUsed</td>
                                     <td>
-                                        <nobr>
-                                            <a onclick="createCode(@v.vid);">[生成邀请码]</a>
+                                        <a onclick="createCode(@v.vid);">[ 生成邀请码 ]</a>
+                                        <br />
+                                        @if (@v.CodeCounts != 0)
+                                        { 
+                                            <a href="@Url.Content("~/VideoManager/getInviteCode?vid=" + v.vid)">[ 查看邀请码 ]</a> <br />
+                                            <a onclick="exportExcel(@v.vid);">[ 导出邀请码 ]</a>
                                             <br />
-                                            <a onclick="deleteVideo(@v.vid);">[删除]</a>
-                                            <br />
-                                            @if (@v.CodeCounts != 0)
-                                            { 
-                                                <a onclick="exportExcel(@v.vid);">[导出邀请码]</a>
-                                                <br />
-                                                <a href="@Url.Content("~/VideoManager/getInviteCode?vid=" + v.vid)">[查看邀请码]</a>
-                                            }
-                                        </nobr>
+                                               
+                                        }
+                                        <a onclick="deleteVideo(@v.vid);">[ 删除该视频 ]</a>
+                                        <br />
+
                                     </td>
                                 </tr>
+                                        videoSeq++;
                             }
                         </tbody>
                     </table>
