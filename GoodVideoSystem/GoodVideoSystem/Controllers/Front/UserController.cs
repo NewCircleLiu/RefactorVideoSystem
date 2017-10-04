@@ -65,8 +65,11 @@ namespace GoodVideoSystem.Controllers.Front
             string returnInfo = codeService.checkInviteCode(videoInviteCode, out returnCode);
             if (returnInfo.Equals("AVAILABLE"))
             {
-                userService.updateUserInfo(returnCode, (string)Session["deviceUniqueCode"]);
-                codeService.updateInviteCodeInfo(returnCode, (string)Session["deviceUniqueCode"]);
+                if (returnCode.DeviceUniqueCode == null || (returnCode.DeviceUniqueCode != null && !returnCode.DeviceUniqueCode.Contains(videoInviteCode.Trim()))) //若是视频已经存在，则不用那个更新用户和邀请码信息
+                {
+                    userService.updateUserInfo(returnCode, (string)Session["deviceUniqueCode"]);
+                    codeService.updateInviteCodeInfo(returnCode, (string)Session["deviceUniqueCode"]);
+                }
             }
             return Content(returnInfo);
         }
@@ -79,15 +82,6 @@ namespace GoodVideoSystem.Controllers.Front
         //[UserAuthorise]
         public ActionResult Play(int vid = 0)
         {
-            Video video = new Video();
-            video.polyVid = "212b30914a781362c4d6230566cb587f_2";
-            video.VideoName = "DSA-无序列表";
-            video.coverImage = "http://img.videocc.net/uimage/2/212b30914a/f/212b30914a781362c4d6230566cb587f_0.jpg";
-
-            return View(video);
-
-            /*
-             * 
             //1.视频是否存在
             Video video = videoService.getVideo(vid);
             if (video == null)
@@ -106,7 +100,6 @@ namespace GoodVideoSystem.Controllers.Front
                     return View(video);
             }
             return RedirectToAction("Error");
-            */
         }
 
         /*

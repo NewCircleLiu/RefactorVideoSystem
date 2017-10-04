@@ -7,23 +7,24 @@
 
 <link href="~/Resources/Plugin/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
-<table class="table table-bordered table-hover class" style="margin-top:10px;">
+<table class="table table-bordered table-hover class" style="margin-top: 10px;">
     <thead>
         <tr>
-            <th>邀请码编号</th>
+            <th>序号</th>
             <th>邀请码</th>
             <th>视频编号</th>
-            <th>视频</th>
+            <th>视频名称</th>
         </tr>
     </thead>
     <tbody>
-    @foreach(Code c in Model){
-        <tr>
-            <td>@c.CodeID</td>
-            <td>@c.CodeValue</td>
-            <td>@c.vid</td>
-            <td>@c.Video.VideoName</td>
-        </tr>
-     }
+        @foreach (Code c in Model)
+        {
+            <tr>
+                <td>@c.CodeID</td>
+                <td>@c.CodeValue</td>
+                <td>@c.vid</td>
+                <td>@c.Video.VideoName</td>
+            </tr>
+        }
     </tbody>
 </table>

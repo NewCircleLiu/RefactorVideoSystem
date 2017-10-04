@@ -239,10 +239,9 @@
     <Content Include="Resources\css\registe.css" />
     <Content Include="Resources\css\styles.css" />
     <Content Include="Resources\css\video.css" />
-    <Content Include="Resources\img\appimg.png" />
+    <Content Include="Resources\img\404.jpg" />
     <Content Include="Resources\img\backlogin.JPG" />
-    <Content Include="Resources\img\back_index.jpg" />
-    <Content Include="Resources\img\bg.jpg" />
+    <Content Include="Resources\img\back_welcome.jpg" />
     <Content Include="Resources\img\company\1.jpg" />
     <Content Include="Resources\img\company\2.jpg" />
     <Content Include="Resources\img\company\3.jpg" />
@@ -253,13 +252,11 @@
     <Content Include="Resources\img\company\8.jpg" />
     <Content Include="Resources\img\company\ghpa.png" />
     <Content Include="Resources\img\company\未标题-1.png" />
-    <Content Include="Resources\img\logo.gif" />
     <Content Include="Resources\img\logo.ico" />
     <Content Include="Resources\img\logo.png" />
-    <Content Include="Resources\img\logo1.jpg" />
-    <Content Include="Resources\img\logo2.png" />
     <Content Include="Resources\img\logo_white.png" />
-    <Content Include="Resources\img\manager.png" />
+    <Content Include="Resources\img\manager1.png" />
+    <Content Include="Resources\img\manager2.png" />
     <Content Include="Resources\img\products\0.jpg" />
     <Content Include="Resources\img\products\1.jpg" />
     <Content Include="Resources\img\products\2.jpg" />
@@ -270,7 +267,6 @@
     <Content Include="Resources\img\products\7.jpg" />
     <Content Include="Resources\img\products\8.jpg" />
     <Content Include="Resources\img\qhpa.jpg" />
-    <Content Include="Resources\img\qq.png" />
     <Content Include="Resources\img\tip.png" />
     <Content Include="Resources\img\video_image\1.png" />
     <Content Include="Resources\img\video_image\2.png" />
@@ -283,15 +279,12 @@
     <Content Include="Resources\img\video_image\play1.png" />
     <Content Include="Resources\img\video_image\play2.png" />
     <Content Include="Resources\img\video_image\play_icon.png" />
-    <Content Include="Resources\img\video_img.jpeg" />
-    <Content Include="Resources\img\weixin.png" />
     <Content Include="Resources\img\welcome - 副本.JPG" />
     <Content Include="Resources\img\welcome.jpg" />
     <Content Include="Resources\img\welcome2.JPG" />
     <Content Include="Resources\img\welcome_ph1.jpg" />
     <Content Include="Resources\img\welcome_ph3.png" />
     <Content Include="Resources\img\welcome_ph_source.png" />
-    <Content Include="Resources\img\zfb.png" />
     <Content Include="Resources\js\common\fingerprint.js" />
     <Content Include="Resources\js\common\jquery-1.8.2.js" />
     <Content Include="Resources\js\common\JQuery.md5.js" />
@@ -557,7 +550,6 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -647,7 +639,7 @@
     <Content Include="Views\Front\User\Contact.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Front\User\Error.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Back\Qhgypacz\Index.cshtml" />
@@ -684,9 +676,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Back\VideoManager\getInviteCode.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Back\VideoManager\UploadPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Front\User\Play.cshtml" />

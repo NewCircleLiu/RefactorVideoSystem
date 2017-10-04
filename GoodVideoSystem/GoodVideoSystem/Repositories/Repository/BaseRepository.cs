@@ -9,6 +9,7 @@ using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.Practices.ObjectBuilder2;
+using System.Data.Entity.Validation;
 
 namespace GoodVideoSystem.Models.Repository
 {
@@ -63,10 +64,17 @@ namespace GoodVideoSystem.Models.Repository
 
         public void Add(T instance)
         {
-            Guard.ArgumentNotNull(instance, "instance");
-            this.DbSet.Attach(instance);
-            this.DbContext.Entry(instance).State = EntityState.Added;
-            this.DbContext.SaveChanges();
+            try
+            {
+                Guard.ArgumentNotNull(instance, "instance");
+                this.DbSet.Attach(instance);
+                this.DbContext.Entry(instance).State = EntityState.Added;
+                this.DbContext.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                int m = 5;
+            }
         }
 
         public void Update(T instance)

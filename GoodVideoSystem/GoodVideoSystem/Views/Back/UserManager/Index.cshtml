@@ -30,9 +30,8 @@
     }
 
     .pagination li a {
-        color:black;
+        color: black;
     }
-
 </style>
 
 <div class="main" style="margin-left: 290px; width: 80%">
@@ -53,10 +52,10 @@
                         <table>
                             <tr>
                                 <td id="searchValue">
-                                    <input type="text" class="form-control" name="searchValue" placeholder="请输入用户手机号" style="width: 200px;" />
+                                    <input type="text" class="form-control" name="searchValue" placeholder="请输入用户手机号" style="width: 200px; padding: 4px" />
                                 </td>
                                 <td>
-                                    <select class="form-control" style="width: 120px;" id="searchType" name="searchType">
+                                    <select class="form-control" style="width: 120px; margin-left: 10px" id="searchType" name="searchType">
                                         <option value="phone">按电话</option>
                                     </select>
                                 </td>
@@ -75,7 +74,7 @@
                                 <th>操作</th>
                             </tr>
                         </thead>
-                         @{int userSeq = Model.every_page_items * (Model.request_page - 1) + 1;}
+                        @{int userSeq = Model.every_page_items * (Model.request_page - 1) + 1;}
                         <tbody>
                             @foreach (User u in Model.returnData)
                             {
@@ -94,7 +93,7 @@
                                     </td>
                                     <td></td>
                                 </tr>
-                                userSeq++;
+                                    userSeq++;
                             }
                         </tbody>
                     </table>
@@ -120,7 +119,6 @@
             </div>
         </div>
     </div>
-
 </div>
 <script>
     jQuery("#searchType").on("change", function () {

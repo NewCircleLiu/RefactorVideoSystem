@@ -27,13 +27,13 @@
 
         <div class="gallery-main" style="padding-left: 0; padding-right: 0">
             <div class="gallery-bottom">
-                @if(Model != null && Model.Length > 0)
+                @if (Model != null && Model.Length > 0)
                 {
                     foreach (Code c in Model)
                     {
                         <div class="col-md-3"> 
                             <div class="view view-third" style="padding-left: 10px; padding-right: 10px; margin: 20px 0">
-                                <a href="~/Home/PlayVideo?vid=@c.vid" class="b-link-stripe b-animate-go  swipebox">
+                                <a href="~/User/Play?vid=@c.vid" class="b-link-stripe b-animate-go  swipebox">
                                     @if (c.Video.coverImage == "null")
                                     {
                                         <img src="@Url.Content("~/Resources/img/qhpa.jpg")" alt="" class="img-responsive">

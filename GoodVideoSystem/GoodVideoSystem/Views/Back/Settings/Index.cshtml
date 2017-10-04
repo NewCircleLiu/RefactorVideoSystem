@@ -6,14 +6,14 @@
 
 <style>
     #editInfo {
-       width:100px;
-       background-color: #373B3E;
-       border-color: #2C343A;
-       color: white;
+        width: 100px;
+        background-color: #373B3E;
+        border-color: #2C343A;
+        color: white;
     }
 </style>
 
-<div class="main" style="margin-left:290px;width:80%">
+<div class="main" style="margin-left: 290px; width: 80%">
     <div class="row">
         <ol class="breadcrumb">
             <li><a href="@Url.Content("~/Qhgypacz/BackMain/")"><span class="glyphicon glyphicon-home"></span></a></li>
@@ -27,12 +27,11 @@
                 <div class="panel-heading">信息</div>
                 <div class="panel-body">
                     <form role="form" action="@Url.Content("~/Settings/EditInfo")" method="post">
-                        <table style="width:90%;margin:auto;font-size:1.5em;" class="table table-bordered">
+                        <table style="width: 90%; margin: auto; font-size: 1.5em;" class="table table-bordered">
                             <tr>
                                 <td>账号：</td>
                                 <td>@Model.Account</td>
                             </tr>
-                            
                             <tr>
                                 <td>邮箱：</td>
                                 <td>
@@ -46,11 +45,10 @@
                                 </td>
                             </tr>
                         </table>
-                        <div style="text-align:center;margin-top:20px;">
+                        <div style="text-align: center; margin-top: 20px;">
                             <button type="submit" class="btn btn-default" id="editInfo" onclick="editInfo();">编辑</button>
                         </div>
                     </form>
-                    
                 </div>
             </div>
         </div>

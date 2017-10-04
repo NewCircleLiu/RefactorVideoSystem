@@ -29,14 +29,14 @@ namespace GoodVideoSystem.Services.Service
             if (string.IsNullOrEmpty(deviceUniqueCode))
                 return;
 
-            bool isNewDevice = (codeRepository.getInviteCodes(deviceUniqueCode).FirstOrDefault() != null);
-            bool isNewInviteCode = (inviteCode.BindedDeviceCount != 0);
+            bool isNewDevice = (codeRepository.getInviteCodes(deviceUniqueCode).FirstOrDefault() == null);
+            bool isNewInviteCode = (inviteCode.BindedDeviceCount == 0);
            
             if (isNewInviteCode) //但凡用户输入新的有效的邀请码，必须更新用户的邀请码
             { 
                 if (isNewDevice) // 1.如果在一台新的设备上播放，需要新建用户（无法确定设备属于哪个用户）
                 {
-                    User user = new User() { InviteCodes = inviteCode.CodeValue };
+                    User user = new User() { InviteCodes = inviteCode.CodeValue, Phone = "无",Username = "无" };
                     registeUser(user);
                 }
 

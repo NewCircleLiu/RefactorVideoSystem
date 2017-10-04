@@ -50,34 +50,35 @@ namespace GoodVideoSystem.Services.Service
             if (string.IsNullOrEmpty(deviceUniqueCode))
                 return;
 
-            bool isNewDevice = (codeRepository.getInviteCodes(deviceUniqueCode).FirstOrDefault() != null);
-
-            if (isNewDevice)  //但凡用户切换到新的设备播放，需要绑定邀请码的硬件信息
+            //但凡请求信的视频，需要绑定邀请码的硬件信息
+            if (inviteCode.BindedDeviceCount < MAX_DEVICE_COUNT)
             {
-                if (inviteCode.BindedDeviceCount < MAX_DEVICE_COUNT)
-                {
-                    inviteCode.DeviceUniqueCode += ("," + deviceUniqueCode);
-                    inviteCode.BindedDeviceCount = inviteCode.CodeValue.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Count();
-                    codeRepository.updateInviteCode(inviteCode);
-                }
+                inviteCode.DeviceUniqueCode += ("," + deviceUniqueCode);
+                inviteCode.BindedDeviceCount = inviteCode.CodeValue.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Count();
+                codeRepository.updateInviteCode(inviteCode);
             }
         }
+
         public IEnumerable<Code> getInviteCodesContainsCode(string inviteCode, int vid, int pageIndex, int pageSize)
         {
             return codeRepository.getInviteCodes(inviteCode, vid, pageIndex, pageSize, false);
         }
+
         public IEnumerable<Code> getInviteCodesContainsCode(string inviteCode, int vid)
         {
             return codeRepository.getInviteCodes(inviteCode, vid, false);
         }
+
         public IEnumerable<Code> getInviteCodesByStatus(int status, int vid, int pageIndex, int pageSize)
         {
             return codeRepository.getInviteCodes(status, vid, pageIndex, pageSize, true);
         }
+
         public IEnumerable<Code> getInviteCodesByStatus(int status, int vid)
         {
             return codeRepository.getInviteCodes(status, vid, true);
         }
+
         public void getCounts(int vid, out int codeCount, out int codeCountNotExport, out int codeCountNotUsed, out int codeCountUsed)
         {
             codeRepository.getCounts(vid, out codeCount, out codeCountNotExport, out codeCountNotUsed, out codeCountUsed);

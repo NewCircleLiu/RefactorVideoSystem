@@ -3,7 +3,6 @@
 }
 
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -21,18 +20,18 @@
         #account, #password, #code {
             border-color: #52585F;
         }
-        input:focus
-        {
-            border:none !important;
-            border-color:black !important;
+
+        input:focus {
+            border: none !important;
+            border-color: black !important;
         }
     </style>
 
 </head>
-<body >
+<body>
     <div style="width: 1250px; margin: auto; margin-top: 60px">
         <h1 style="font-family: 隶书;">古驿平安串珠视频系统后台管理登录</h1>
-        <div class="login" style="background-color: #D34346; width: 1250px; padding-bottom:50px; padding-top:50px">
+        <div class="login" style="background-color: #D34346; width: 1250px; padding-bottom: 50px; padding-top: 50px">
             <table>
                 <tr>
                     <td>
@@ -43,13 +42,13 @@
                     <td>
                         <div class="loginForm" style="margin-top: 20px; margin-right: 20px">
                             <div class="login-panel panel panel-default">
-                                <div class="panel-heading" style="font-size: 18px; font-family:'Microsoft YaHei'; text-align: center">管理员登录</div>
+                                <div class="panel-heading" style="font-size: 18px; font-family: 'Microsoft YaHei'; text-align: center">管理员登录</div>
                                 <div class="panel-body">
-                                     <p id="erro_info" style="color:red;text-align:center">&nbsp;</p>
-                                  
-                                        <form role="form" method="post">
+                                    <p id="erro_info" style="color: red; text-align: center">&nbsp;</p>
+
+                                    <form role="form" method="post">
                                         <div class="form-group" style="margin-bottom: 20px">
-                                            <input class="form-control" placeholder="用户名"  name="account" id="account" type="text" autofocus="" required >
+                                            <input class="form-control" placeholder="用户名" name="account" id="account" type="text" autofocus="" required>
                                         </div>
                                         <div class="form-group">
                                             <input class="form-control" placeholder="密   码" name="password" id="password" type="password" required>
@@ -61,16 +60,15 @@
                                                         <input class="form-control" placeholder="验证码" name="code" id="code" type="text" required onblur="verifyCode();" style="width: 200px;">
                                                     </td>
                                                     <td>
-                                                        <a onclick="refreshCode()"> 
-                                                        <img id="codeImg" src="@Url.Content("~/VerifyCode")" style="border:solid 1px;width:110px;height:33px;margin-left:20px;"/>
+                                                        <a onclick="refreshCode()">
+                                                            <img id="codeImg" src="@Url.Content("~/VerifyCode")" style="border:solid 1px;width:110px;height:33px;margin-left:20px;"/>
                                                         </a>
                                                     </td>
                                                 </tr>
                                             </table>
                                         </div>
-                                        <div class="form-group" style="text-align: center">
-                                            <input type="button" class="btn btn-primary" style="width: 30%" onclick="login()" value="登录" />
-                                            <input type="reset"  class="btn btn-primary" style="width: 30%" value="重置" />
+                                        <div class="form-group" style="text-align: left">
+                                            <input type="button" class="btn btn-primary" style="width: 100%" onclick="login()" value="登录" />
                                         </div>
                                     </form>
                                 </div>
@@ -83,26 +81,26 @@
         </div>
     </div>
 </body>
-    <script>
-        function login() {
-            var password = jQuery("#password").val();
-            strmd5 = $.md5(password).toLocaleUpperCase();
-            var accou
-            if (jQuery("#account").val().length <= 0) {
-                jQuery("#erro_info").text("请输入账号");
-                return;
-            }
-            if (jQuery("#password").val().length <= 0) {
-                jQuery("#erro_info").text("请输入密码");
-                return;
-            }
-            if (jQuery("#code").val().length <= 0) {
-                jQuery("#erro_info").text("请输入验证码");
-                return;
-            }
+<script>
+    function login() {
+        var password = jQuery("#password").val();
+        strmd5 = $.md5(password).toLocaleUpperCase();
+        var accou
+        if (jQuery("#account").val().length <= 0) {
+            jQuery("#erro_info").text("请输入账号");
+            return;
+        }
+        if (jQuery("#password").val().length <= 0) {
+            jQuery("#erro_info").text("请输入密码");
+            return;
+        }
+        if (jQuery("#code").val().length <= 0) {
+            jQuery("#erro_info").text("请输入验证码");
+            return;
+        }
 
-            jQuery.post(
-                "@Url.Content("~/Qhgypacz/BackLogin/")",
+        jQuery.post(
+            "@Url.Content("~/Qhgypacz/BackLogin/")",
                 {
                     "account": jQuery("#account").val(),
                     "password": strmd5
@@ -116,5 +114,5 @@
                 }
             );
             }
-    </script>
+</script>
 </html>

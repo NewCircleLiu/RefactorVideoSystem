@@ -11,7 +11,7 @@
         vertical-align: middle;
     }
 
-   a{
+    a {
         text-decoration: none;
     }
 
@@ -26,7 +26,7 @@
     }
 
     #jbox-content {
-        overflow-y:hidden !important;
+        overflow-y: hidden !important;
     }
 </style>
 
@@ -61,7 +61,7 @@
                         <thead>
                             <tr id="headTitle">
                                 <th>序号</th>
-                                <th style="width:170px">图片</th>
+                                <th style="width: 170px">图片</th>
                                 <th>名称</th>
                                 <th>价格</th>
                                 <th>链接</th>
@@ -78,10 +78,11 @@
                                         <img style="width:100px;height:70px;" src="@p.Img"/>
                                     </th>
                                     <th>@p.Name</th>
-                                    <th>@string.Format("{0:C}",p.Price)</th>
+                                    <th>@string.Format("{0:C}", p.Price)</th>
                                     <th><a href="@p.Url">链接到淘宝商城</a></th>
                                     <th>
-                                        <a href="#" onclick="editProduct(@p.ProductId);">[ 编辑产品 ]</a><br /><br />
+                                        <a href="#" onclick="editProduct(@p.ProductId);">[ 编辑产品 ]</a><br />
+                                        <br />
                                         <a href="#" onclick="deleteProduct(@p.ProductId);">[ 删除产品 ]</a>
                                     </th>
                                 </tr>

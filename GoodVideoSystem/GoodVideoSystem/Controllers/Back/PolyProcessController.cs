@@ -27,7 +27,7 @@ namespace GoodVideoSystem.Controllers.Back
             this.videoService = videoService;
         }
 
-        public EmptyResult callback()
+        public EmptyResult Callback()
         {     
             /*
             string sign         =   Request.QueryString["sign"];
