@@ -66,32 +66,24 @@ namespace GoodVideoSystem.Controllers.Front
         public ActionResult GetVideo(string videoInviteCode)
         {
             string deviceUniqueCode = (string)Session["deviceUniqueCode"];
-            Session["inviteCode"] = videoInviteCode.Trim();
+            Session["inviteCode"] = videoInviteCode;
 
             Code returnCode = null;
             string returnInfo = codeService.checkInviteCode(videoInviteCode, out returnCode);
+    
 
-            if (!returnInfo.Equals("INVALID")) //如果输入合法的邀请码（数据库中存在）
+            //第一次登录时创建用户
+            if (!userService.IsCurrentUserExist(deviceUniqueCode, returnCode))
             {
-                //如果是新的邀请码输入新的设备，那么新建用户并且绑定当前邀请码
-                if (!userService.IsCurrentUserExist(deviceUniqueCode, returnCode))
-                {
-                    return Content("ADDUSERPAGE");
-                }
+                return Content("ADDUSERPAGE");
+            }
 
-                if (returnInfo.Equals("AVAILABLE"))
-                {                 
-                    //若当前设备已经请求了当前邀请码所指示的视频则直接返回（避免重复请求）
-                    if (returnCode.DeviceUniqueCode != null && returnCode.DeviceUniqueCode.Contains(deviceUniqueCode))
-                    {
-                        return Content("AVAILABLE");
-                    }
-                    //若当前邀请码所指示的视频没有在当前设备请求过
-                    else
-                    {
-                        userService.updateUserInfo(returnCode, deviceUniqueCode);
-                        codeService.updateInviteCodeInfo(returnCode, deviceUniqueCode);
-                    }
+            if (returnInfo.Equals("AVAILABLE"))
+            {
+                if (returnCode.DeviceUniqueCode == null || (returnCode.DeviceUniqueCode != null && !returnCode.DeviceUniqueCode.Contains(videoInviteCode.Trim()))) //若是视频已经存在，则不用那个更新用户和邀请码信息
+                {
+                    userService.updateUserInfo(returnCode, deviceUniqueCode);
+                    codeService.updateInviteCodeInfo(returnCode, deviceUniqueCode);
                 }
             }
             return Content(returnInfo);
@@ -136,38 +128,19 @@ namespace GoodVideoSystem.Controllers.Front
             User user = new User() { Username = username, Phone = phone, InviteCodes = (string)Session["inviteCode"] };
             userService.registeUser(user);
 
-            //======================================================================================================
-
-            string deviceUniqueCode = (string)Session["deviceUniqueCode"];
-            string videoInviteCode  = Session["inviteCode"].ToString();
-
+            string videoInviteCode =  Session["inviteCode"].ToString();
             Code returnCode = null;
             string returnInfo = codeService.checkInviteCode(videoInviteCode, out returnCode);
-
-            if (!returnInfo.Equals("INVALID")) //如果输入合法的邀请码（数据库中存在）
+            string deviceUniqueCode = (string)Session["deviceUniqueCode"];
+            if (returnInfo.Equals("AVAILABLE"))
             {
-                //如果是新的邀请码输入新的设备，那么新建用户并且绑定当前邀请码
-                if (!userService.IsCurrentUserExist(deviceUniqueCode, returnCode))
+                if (returnCode.DeviceUniqueCode == null || (returnCode.DeviceUniqueCode != null && !returnCode.DeviceUniqueCode.Contains(videoInviteCode.Trim()))) //若是视频已经存在，则不用那个更新用户和邀请码信息
                 {
-                    return Content("ADDUSERPAGE");
-                }
-
-                if (returnInfo.Equals("AVAILABLE"))
-                {
-                    //若当前设备已经请求了当前邀请码所指示的视频则直接返回（避免重复请求）
-                    if (returnCode.DeviceUniqueCode != null)
-                    {
-                        if (!returnCode.DeviceUniqueCode.Contains(deviceUniqueCode))
-                            return Content("AVAILABLE");
-                    }
-                    //若当前邀请码所指示的视频没有在当前设备请求过
-                    else
-                    {
-                        userService.updateUserInfo(returnCode, deviceUniqueCode);
-                        codeService.updateInviteCodeInfo(returnCode, deviceUniqueCode);
-                    }
+                    userService.updateUserInfo(returnCode, deviceUniqueCode);
+                    codeService.updateInviteCodeInfo(returnCode, deviceUniqueCode);
                 }
             }
+
             return RedirectToAction("Home");
         }
 

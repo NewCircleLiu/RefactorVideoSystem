@@ -29,14 +29,11 @@ namespace GoodVideoSystem.Controllers.Back
 
         public EmptyResult Callback()
         {     
-            /*
             string sign         =   Request.QueryString["sign"];
             string vid          =   Request.QueryString["vid"];
             string type         =   Request.QueryString["type"];
-            string df           =   Request.QueryString["df"];
-           
+            string df           =   Request.QueryString["df"];        
             string type_vid_sec =   type + vid + secretkey;
-            
 
             if (type == "pass")
             {
@@ -47,15 +44,20 @@ namespace GoodVideoSystem.Controllers.Back
                     videoService.addVideo(video);
                 }
             }
-            */
-
-            //string vid = "212b30914a68aad541142ef9215ddb03_2";
-            //string vid = "212b30914a781362c4d6230566cb587f_2";
+           
+            /*
             string vid = "212b30914ad7f00138158897c941f5dc_2";
             Video video = GetSingleVideo(vid);
             videoService.addVideo(video);
+            */
 
             return null;
+        }
+
+        public ActionResult DeleteVideo(string vid)
+        {
+            //待补充，删除代码
+            return Content("success");
         }
 
         

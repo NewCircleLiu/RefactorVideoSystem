@@ -15,7 +15,6 @@ namespace GoodVideoSystem.Controllers.Back
     [ManagerAuthorize]
     public class VideoManagerController : Controller
     {
-        //
         // GET: /VideoManager/
         private IVideoService videoService;
         private IPaging ip;

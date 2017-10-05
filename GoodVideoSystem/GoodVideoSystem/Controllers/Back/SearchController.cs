@@ -41,9 +41,9 @@ namespace GoodVideoSystem.Controllers.Back
             }
             else
             {
-                Session["search_model"] = model;
-                Session["searchType"] = searchType;
-                Session["searchValue"] = searchValue;
+                Session["search_model"] = model.Trim();
+                Session["searchType"] = searchType.Trim();
+                Session["searchValue"] = searchValue.Trim();
             }
 
 

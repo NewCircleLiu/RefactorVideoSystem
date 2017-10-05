@@ -75,7 +75,7 @@
             return;
         }
 
-        jQuery.post(
+        jQuery.get(
             "/User/GetVideo",
             {
                 "videoInviteCode": trimedVideoCode
@@ -84,11 +84,17 @@
                 if (data == "INVALID") {
                     jQuery("#info").text("邀请码无效");
                 }
+                else if (data == "UNACTIVE") {
+                    jQuery("#info").text("邀请码未激活");
+                }
                 else if (data == "OUTOFTIMES") {
                     jQuery("#info").text("邀请码使用次数超过3次");
                 }
                 else if (data == "AVAILABLE") {
-                    location.reload();
+                    window.location.href = "/User/Home";
+                }
+                else if (data == "ADDUSERPAGE") {
+                    window.location.href = "/User/AddUserInfo";
                 }
             }
         );

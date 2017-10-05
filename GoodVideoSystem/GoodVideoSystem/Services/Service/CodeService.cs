@@ -11,6 +11,7 @@ namespace GoodVideoSystem.Services.Service
     public class CodeService : BaseService, ICodeService
     {
         public readonly string INVALID = "INVALID";
+        public readonly string UNACTIVE = "UNACTIVE";
         public readonly string AVAILABLE = "AVAILABLE";
         public readonly string OUTOFTIMES = "OUTOFTIMES";
         public readonly int MAX_DEVICE_COUNT = 3;
@@ -36,9 +37,11 @@ namespace GoodVideoSystem.Services.Service
         public string checkInviteCode(string inviteCode, out Code code)
         {
             code = codeRepository.getInviteCode(inviteCode);
-            if (code == null)
+            if (code == null)  //邀请码不存在
                 return INVALID;
-            if (code.BindedDeviceCount >= MAX_DEVICE_COUNT)
+            if(code.CodeStatus == 0) //邀请码未激活
+                return UNACTIVE;
+            if (code.BindedDeviceCount >= MAX_DEVICE_COUNT) //邀请码登录设备超过3次
                 return OUTOFTIMES;
             return AVAILABLE;
         }

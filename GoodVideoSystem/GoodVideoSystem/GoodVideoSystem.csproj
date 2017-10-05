@@ -680,6 +680,9 @@
   <ItemGroup>
     <Content Include="Views\Front\User\Play.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Front\User\AddUserInfo.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -69,6 +69,7 @@
                         <thead>
                             <tr id="headTitle">
                                 <th>序号</th>
+                                <th>用户名</th>
                                 <th>电话</th>
                                 <th>视频</th>
                                 <th>操作</th>
@@ -80,16 +81,10 @@
                             {
                                 <tr>
                                     <td>@userSeq</td>
-                                    @if (u.Phone == "no")
-                                    {
-                                        <td>未登记号码</td>
-                                    }
-                                    else
-                                    { 
-                                        <td>@u.Phone</td>
-                                    }
+                                    <td>@u.Username</td>
+                                    <td>@u.Phone</td>
                                     <td>
-                                        <a onclick="getVideo(@u.UserId);">查看</a>
+                                        <a href="~/UserManager/GetUserVideo?userID=@u.UserId">查看</a>
                                     </td>
                                     <td></td>
                                 </tr>
@@ -131,9 +126,4 @@
         }
         searchValue.html("<input type='text' class='form-control' name='searchValue' style='width: 200px;' placeholder=" + placeholder + " required/>");
     });
-
-    //获取视频
-    function getVideo(userID) {
-        jQuery.jBox.open("iframe:/UserManager/GetUserVideo?userID=" + userID, "用户视频", 600, 350, { buttons: { "关闭": true } });
-    }
 </script>

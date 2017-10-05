@@ -25,6 +25,7 @@ namespace GoodVideoSystem.Services.Service
         //根据设备信息获取用户
         public void updateUserInfo(Code inviteCode, string deviceUniqueCode)
         {
+            /*
             deviceUniqueCode = deviceUniqueCode.Trim();
             if (string.IsNullOrEmpty(deviceUniqueCode))
                 return;
@@ -47,7 +48,29 @@ namespace GoodVideoSystem.Services.Service
                     user.InviteCodes += ("," + inviteCode.CodeValue);
                     updateUser(user);
                 }
+            }*/
+
+
+            deviceUniqueCode = deviceUniqueCode.Trim();
+            if (string.IsNullOrEmpty(deviceUniqueCode)) return;
+
+            bool isNewDevice = (codeRepository.getInviteCodes(deviceUniqueCode).FirstOrDefault() == null);
+            bool isNewInviteCode = (inviteCode.BindedDeviceCount == 0);
+
+            User currentUser = getUserByInviteCode(inviteCode);
+            if(currentUser == null)
+                currentUser = getUserByDevice(deviceUniqueCode);
+
+            if (currentUser != null && !currentUser.InviteCodes.Contains(inviteCode.CodeValue))
+            {
+                if (isNewInviteCode)
+                    currentUser.InviteCodes = inviteCode.CodeValue;
+                else
+                    currentUser.InviteCodes += ("," + inviteCode.CodeValue);
+
+                updateUser(currentUser);
             }
+
         }
 
         //用户注册
@@ -61,11 +84,12 @@ namespace GoodVideoSystem.Services.Service
         {
             userRepository.updateUser(user);
         }
-/*        public IEnumerable<User> getUsers(int page_id,int pageSize,out int recordCount)
+        /*       
+        public IEnumerable<User> getUsers(int page_id,int pageSize,out int recordCount)
         {
             return userRepository.getUsers(p=>true,page_id,pageSize,out recordCount);
         }
- */
+        */
         public IEnumerable<User> getUsers(out int recordCount)
         {
             return userRepository.getUsers(p => true, out recordCount);
@@ -78,23 +102,31 @@ namespace GoodVideoSystem.Services.Service
 
         public User getUserById(int userid)
         {
-            return userRepository.getUserById(userid)
-;
+            return userRepository.getUserById(userid);
+        }
+
+        public User getUserByInviteCode(Code inviteCode)
+        {
+            if (inviteCode == null)  return null;
+            return userRepository.getUserByInviteCode(inviteCode.CodeValue);
         }
 
         //根据设备标识获取邀请码，进而获取用户
-        public User GetCurrentUser(string deviceUniqueCode)
+        public User getUserByDevice(string deviceUniqueCode)
         {
             Code existingCode = codeRepository.getInviteCodes(deviceUniqueCode).FirstOrDefault();
-            if (existingCode == null)
-            {
+            if (existingCode == null) 
                 return null;
-            }
-            else
-            {
-                User user = userRepository.getUserByInviteCode(existingCode.CodeValue);
-                return user;
-            }
+            User user = userRepository.getUserByInviteCode(existingCode.CodeValue);
+            return user;
+        }
+
+        //根据设备信息和邀请码判断用户是否存在
+        public bool IsCurrentUserExist(string deviceUniqueCode, Code inputCode)
+        {
+            User user_1 = getUserByDevice(deviceUniqueCode);
+            User user_2 = getUserByInviteCode(inputCode);
+            return (user_1 != null || user_2 != null);
         }
     }
 }

@@ -81,7 +81,7 @@
                                     <th>@string.Format("{0:C}", p.Price)</th>
                                     <th><a href="@p.Url">链接到淘宝商城</a></th>
                                     <th>
-                                        <a href="#" onclick="editProduct(@p.ProductId);">[ 编辑产品 ]</a><br />
+                                        <a href="~/Product/EditProductPage?productID=@p.ProductId">[ 编辑产品 ]</a><br />
                                         <br />
                                         <a href="#" onclick="deleteProduct(@p.ProductId);">[ 删除产品 ]</a>
                                     </th>
@@ -134,9 +134,5 @@
             },
             "text"
          );
-        }
-
-        function editProduct(productID) {
-            jQuery.jBox.open("iframe:/Product/EditProductPage?productID=" + productID, "编辑产品", 700, 550, { buttons: { "关闭": true } });
         }
 </script>

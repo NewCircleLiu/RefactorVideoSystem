@@ -96,9 +96,7 @@
                                 <th style="width: 140px;">封面</th>
                                 <th>上传时间</th>
                                 <th>邀请码数量</th>
-                                <th>已使用</th>
-                                <th>未使用</th>
-                                <th>操作</th>
+                                <th colspan="2">操作</th>
                             </tr>
                         </thead>
                         @{int videoSeq = Model.every_page_items * (Model.request_page - 1) + 1;}
@@ -115,24 +113,34 @@
                                     </td>
                                     <td>@v.CreateTime.ToString("yyyy-MM-dd")</td>
                                     <td>@v.CodeCounts</td>
-                                    <td>@v.CodeUsed</td>
-                                    <td>@v.CodeNotUsed</td>
-                                    <td>
-                                        <a onclick="createCode(@v.vid);">[ 生成邀请码 ]</a>
-                                        <br />
-                                        @if (@v.CodeCounts != 0)
-                                        { 
-                                            <a href="@Url.Content("~/VideoManager/getInviteCode?vid=" + v.vid)">[ 查看邀请码 ]</a> <br />
-                                            <a onclick="exportExcel(@v.vid);">[ 导出邀请码 ]</a>
-                                            <br />
-                                               
-                                        }
-                                        <a onclick="deleteVideo(@v.vid);">[ 删除该视频 ]</a>
-                                        <br />
 
-                                    </td>
+
+                                    @if (@v.CodeCounts != 0)
+                                    { 
+                                        <td style="border-right: none; width: 110px">
+                                            <a onclick="createCode(@v.vid);">[ 生成邀请码 ]</a>
+                                            <br />
+                                            <br />
+                                            <a href="@Url.Content("~/VideoManager/getInviteCode?vid=" + v.vid)" target="_blank">[ 查看邀请码 ]</a>
+                                            <br />
+                                        </td>
+                                        <td style="border-left: none; width: 110px">
+                                            <a onclick="exportExcel(@v.vid);">[ 导出邀请码 ]</a><br />
+                                            <br />
+                                            <a onclick="deleteVideo(@v.vid);">[ 删除该视频 ]</a>
+                                        </td>
+                                    }
+
+                                    else{
+                                        <td colspan="2">
+                                            <a onclick="createCode(@v.vid);">[ 生成邀请码 ]</a>
+                                            <br />
+                                            <br />
+                                            <a onclick="deleteVideo(@v.vid);">[ 删除该视频 ]</a>
+                                        </td>
+                                    }
                                 </tr>
-                                        videoSeq++;
+                                    videoSeq++;
                             }
                         </tbody>
                     </table>
