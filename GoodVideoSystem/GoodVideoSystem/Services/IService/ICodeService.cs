@@ -21,5 +21,6 @@ namespace GoodVideoSystem.Services.IService
         void updateInviteCode(Code code);
         void deleteInviteCode(Code code);
         void addInviteCode(Code code);
+        IEnumerable<Code> getAllInviteCodes();
     }
 }

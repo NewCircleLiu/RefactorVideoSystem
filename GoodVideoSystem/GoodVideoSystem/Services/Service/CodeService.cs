@@ -15,6 +15,10 @@ namespace GoodVideoSystem.Services.Service
         public readonly string AVAILABLE = "AVAILABLE";
         public readonly string OUTOFTIMES = "OUTOFTIMES";
         public readonly int MAX_DEVICE_COUNT = 3;
+        public readonly int UNACTIVE_ = 0;
+        public readonly int ACTIVE_ = 1;
+        public readonly int USED_ = 2;
+
 
         private ICodeRepository codeRepository { get; set; }
 
@@ -39,7 +43,7 @@ namespace GoodVideoSystem.Services.Service
             code = codeRepository.getInviteCode(inviteCode);
             if (code == null)  //邀请码不存在
                 return INVALID;
-            if(code.CodeStatus == 0) //邀请码未激活
+            if (code.CodeStatus == UNACTIVE_) //邀请码未激活
                 return UNACTIVE;
             if (code.BindedDeviceCount >= MAX_DEVICE_COUNT) //邀请码登录设备超过3次
                 return OUTOFTIMES;
@@ -56,6 +60,7 @@ namespace GoodVideoSystem.Services.Service
             //但凡请求信的视频，需要绑定邀请码的硬件信息
             if (inviteCode.BindedDeviceCount < MAX_DEVICE_COUNT)
             {
+                inviteCode.CodeStatus = USED_;
                 inviteCode.DeviceUniqueCode += ("," + deviceUniqueCode);
                 inviteCode.BindedDeviceCount = inviteCode.CodeValue.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Count();
                 codeRepository.updateInviteCode(inviteCode);
@@ -100,6 +105,11 @@ namespace GoodVideoSystem.Services.Service
         public void deleteInviteCode(Code code)
         {
             codeRepository.deleteInviteCode(code);
+        }
+
+        public IEnumerable<Code> getAllInviteCodes()
+        {
+            return codeRepository.getAllInviteCodes();
         }
     }
 }

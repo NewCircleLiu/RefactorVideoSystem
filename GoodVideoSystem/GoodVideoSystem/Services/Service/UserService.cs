@@ -22,55 +22,31 @@ namespace GoodVideoSystem.Services.Service
             this.AddDisposableObject(codeRepository);
         }
 
-        //根据设备信息获取用户
         public void updateUserInfo(Code inviteCode, string deviceUniqueCode)
         {
-            /*
+            //保证当前用户已经创建，在User/RegisterUser接口中已经
             deviceUniqueCode = deviceUniqueCode.Trim();
-            if (string.IsNullOrEmpty(deviceUniqueCode))
-                return;
-
-            bool isNewDevice = (codeRepository.getInviteCodes(deviceUniqueCode).FirstOrDefault() == null);
-            bool isNewInviteCode = (inviteCode.BindedDeviceCount == 0);
-           
-            if (isNewInviteCode) //但凡用户输入新的有效的邀请码，必须更新用户的邀请码
-            { 
-                if (isNewDevice) // 1.如果在一台新的设备上播放，需要新建用户（无法确定设备属于哪个用户）
-                {
-                    User user = new User() { InviteCodes = inviteCode.CodeValue, Phone = "无",Username = "无" };
-                    registeUser(user);
-                }
-
-                else // 2.如果在一台旧的设备上播放，用户的邀请码更新，寻找用户得通过设备信息-》邀请码-》用户
-                {
-                    Code existingCode = codeRepository.getInviteCodes(deviceUniqueCode).FirstOrDefault();
-                    User user = userRepository.getUserByInviteCode(existingCode.CodeValue);
-                    user.InviteCodes += ("," + inviteCode.CodeValue);
-                    updateUser(user);
-                }
-            }*/
-
-
-            deviceUniqueCode = deviceUniqueCode.Trim();
-            if (string.IsNullOrEmpty(deviceUniqueCode)) return;
-
-            bool isNewDevice = (codeRepository.getInviteCodes(deviceUniqueCode).FirstOrDefault() == null);
-            bool isNewInviteCode = (inviteCode.BindedDeviceCount == 0);
-
-            User currentUser = getUserByInviteCode(inviteCode);
-            if(currentUser == null)
-                currentUser = getUserByDevice(deviceUniqueCode);
-
-            if (currentUser != null && !currentUser.InviteCodes.Contains(inviteCode.CodeValue))
+            if (!string.IsNullOrEmpty(deviceUniqueCode))
             {
-                if (isNewInviteCode)
-                    currentUser.InviteCodes = inviteCode.CodeValue;
-                else
+                //1.获取当前用户（从邀请码和设备信息获取）
+                User currentUser = getUserByInviteCode(inviteCode);
+                if (currentUser == null)
+                    currentUser = getUserByDevice(deviceUniqueCode);
+
+                //2.1 如果获取到用户，则将当前邀请码添加到当前用户
+                if (currentUser != null && !currentUser.InviteCodes.Contains(inviteCode.CodeValue))
+                {
                     currentUser.InviteCodes += ("," + inviteCode.CodeValue);
+                    updateUser(currentUser);
+                }
 
-                updateUser(currentUser);
+                //2.2 如果没有获取到邀请码，则创建用户（其实没必要，因此AddUserInfo页面已经创建了用户）
+                else
+                {
+                    currentUser = new User() { InviteCodes = inviteCode.CodeValue, Phone = "无", Username = "无" };
+                    registeUser(currentUser);
+                }
             }
-
         }
 
         //用户注册
@@ -107,7 +83,7 @@ namespace GoodVideoSystem.Services.Service
 
         public User getUserByInviteCode(Code inviteCode)
         {
-            if (inviteCode == null)  return null;
+            if (inviteCode == null) return null;
             return userRepository.getUserByInviteCode(inviteCode.CodeValue);
         }
 
@@ -115,7 +91,7 @@ namespace GoodVideoSystem.Services.Service
         public User getUserByDevice(string deviceUniqueCode)
         {
             Code existingCode = codeRepository.getInviteCodes(deviceUniqueCode).FirstOrDefault();
-            if (existingCode == null) 
+            if (existingCode == null)
                 return null;
             User user = userRepository.getUserByInviteCode(existingCode.CodeValue);
             return user;

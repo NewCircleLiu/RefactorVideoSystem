@@ -23,6 +23,11 @@ namespace GoodVideoSystem.Services.Service
             return videoRepository.getVideo(vid);
         }
 
+        public Video getVideoByPolyvid(string polyvid)
+        {
+            return videoRepository.getVideoByPolyvid(polyvid);
+        }
+
         public IEnumerable<Code> getInviteCodes(int vid) 
         {
             return videoRepository.getVideo(vid).Code;

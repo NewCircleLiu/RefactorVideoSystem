@@ -18,6 +18,7 @@ namespace GoodVideoSystem.Repositories.IRepository
         void getCounts(int vid, out int codeCount, out int codeCountNotExport, out int codeCountNotUsed, out int codeCountUsed);
         void updateInviteCode(Code code);
         void deleteInviteCode(Code code);
+        IEnumerable<Code> getAllInviteCodes();
 
     }
 }

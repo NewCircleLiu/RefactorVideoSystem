@@ -9,6 +9,7 @@ namespace GoodVideoSystem.Repositories.Repository
     public interface IVideoRepository
     {
         Video getVideo(string inviteCode);
+        Video getVideoByPolyvid(string polyvid);
         Video getVideo(int vid);
         IEnumerable<Video> getVideos(object tar, bool isID);
         void updateVideo(Video video);

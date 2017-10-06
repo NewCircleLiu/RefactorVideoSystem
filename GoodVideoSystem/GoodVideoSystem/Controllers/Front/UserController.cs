@@ -75,17 +75,14 @@ namespace GoodVideoSystem.Controllers.Front
             {
                 //如果是新的邀请码输入新的设备，那么新建用户并且绑定当前邀请码
                 if (!userService.IsCurrentUserExist(deviceUniqueCode, returnCode))
-                {
                     return Content("ADDUSERPAGE");
-                }
 
                 if (returnInfo.Equals("AVAILABLE"))
-                {                 
+                {
                     //若当前设备已经请求了当前邀请码所指示的视频则直接返回（避免重复请求）
                     if (returnCode.DeviceUniqueCode != null && returnCode.DeviceUniqueCode.Contains(deviceUniqueCode))
-                    {
                         return Content("AVAILABLE");
-                    }
+
                     //若当前邀请码所指示的视频没有在当前设备请求过
                     else
                     {
@@ -131,43 +128,20 @@ namespace GoodVideoSystem.Controllers.Front
         }
 
         [HttpPost]
-        public  ActionResult RegisterUser(string username, string phone)
+        public ActionResult RegisterUser(string username, string phone)
         {
             User user = new User() { Username = username, Phone = phone, InviteCodes = (string)Session["inviteCode"] };
             userService.registeUser(user);
 
-            //======================================================================================================
-
             string deviceUniqueCode = (string)Session["deviceUniqueCode"];
-            string videoInviteCode  = Session["inviteCode"].ToString();
+            string videoInviteCode = Session["inviteCode"].ToString();
 
             Code returnCode = null;
             string returnInfo = codeService.checkInviteCode(videoInviteCode, out returnCode);
 
-            if (!returnInfo.Equals("INVALID")) //如果输入合法的邀请码（数据库中存在）
-            {
-                //如果是新的邀请码输入新的设备，那么新建用户并且绑定当前邀请码
-                if (!userService.IsCurrentUserExist(deviceUniqueCode, returnCode))
-                {
-                    return Content("ADDUSERPAGE");
-                }
+            if (returnInfo.Equals("AVAILABLE")) //如果输入合法的邀请码（数据库中存在）
+                codeService.updateInviteCodeInfo(returnCode, deviceUniqueCode);
 
-                if (returnInfo.Equals("AVAILABLE"))
-                {
-                    //若当前设备已经请求了当前邀请码所指示的视频则直接返回（避免重复请求）
-                    if (returnCode.DeviceUniqueCode != null)
-                    {
-                        if (!returnCode.DeviceUniqueCode.Contains(deviceUniqueCode))
-                            return Content("AVAILABLE");
-                    }
-                    //若当前邀请码所指示的视频没有在当前设备请求过
-                    else
-                    {
-                        userService.updateUserInfo(returnCode, deviceUniqueCode);
-                        codeService.updateInviteCodeInfo(returnCode, deviceUniqueCode);
-                    }
-                }
-            }
             return RedirectToAction("Home");
         }
 

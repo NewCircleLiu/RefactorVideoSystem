@@ -10,6 +10,7 @@ namespace GoodVideoSystem.Services.IService
     public interface IVideoService
     {
         Video getVideo(int vid);
+        Video getVideoByPolyvid(string polyvid);
         IEnumerable<Code> getInviteCodes(int vid); //获得这个视频的所有code
         IEnumerable<Video> getVideosById(int vid);
         IEnumerable<Video> getVideosByName(string name);

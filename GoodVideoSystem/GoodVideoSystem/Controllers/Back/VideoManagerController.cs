@@ -90,6 +90,7 @@ namespace GoodVideoSystem.Controllers.Back
         //删除视频
         public ActionResult DeleteVideo(int vid)
         {
+            /*
             Video v = videoService.getVideo(vid);
             if (ModelState.IsValid)
             {
@@ -113,7 +114,7 @@ namespace GoodVideoSystem.Controllers.Back
                 {
                     return Content("erro");
                 }
-            }
+            }*/
 
             return Content("erro");
         }

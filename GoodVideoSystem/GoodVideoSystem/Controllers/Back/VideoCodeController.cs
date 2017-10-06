@@ -16,7 +16,10 @@ namespace GoodVideoSystem.Controllers.Back
     [ManagerAuthorize]
     public class VideoCodeController : Controller
     {
-        //
+        public readonly int UNACTIVE_ = 0;
+        public readonly int ACTIVE_ = 1;
+        public readonly int USED_ = 2;
+
         // GET: /VideoCode/
         private ICodeService codeService;
         private ICreateCode createCode;
@@ -35,7 +38,7 @@ namespace GoodVideoSystem.Controllers.Back
         public ActionResult setCodeStatus(int codeID)
         {
             Code code = codeService.getInviteCodeById(codeID);
-            code.CodeStatus = 1;
+            code.CodeStatus = ACTIVE_;
 
             if (ModelState.IsValid)
             {
@@ -86,7 +89,7 @@ namespace GoodVideoSystem.Controllers.Back
 
                 foreach (string code in codeList)
                 {
-                    Code c = new Code() { CodeStatus = 0, CodeValue = code, vid = video.vid, UserID = -1 };
+                    Code c = new Code() { CodeStatus = UNACTIVE_, CodeValue = code, vid = video.vid, UserID = -1 };
                     if (ModelState.IsValid)
                     {
                         codeService.addInviteCode(c);
@@ -103,105 +106,24 @@ namespace GoodVideoSystem.Controllers.Back
             return Content("生成失败");
         }
 
-
-
-        // GET: /VideoCode/ExportExcel
-        //导出邀请码
-        public ActionResult ExportExcel(int num = 0, int vid = -1)
+        public ActionResult ExportExcel(int vid = -1)
         {
+            string fileName = "全部视频-邀请码";
             Code[] codeArray = null;
-            string fileName = null;
-
-            if (Request.IsAjaxRequest())
-            {
-                int count;
-                int t1, t2, t3;
-                codeService.getCounts(vid, out t1, out count, out t2, out t3);
-                //请求的数量大于已有的数量
-                if (num > count)
-                {
-                    return Content("error");
-                }
-                return Content("success");
-            }
+            if (vid == -1)
+                codeArray = codeService.getAllInviteCodes().ToArray();
             else
             {
-                //导出单个视频的邀请码
-                if (vid != -1)
-                {
-                    if (num == 0) //表示导出改视频的所有邀请码
-                    {
-                        codeArray = videoService.getInviteCodes(vid).ToArray();
-                        //codeArray = vsc.Codes.Where(c => c.vid == vid && c.CodeStatus == 0).ToArray();
-                    }
-                    else
-                    {
-                        int count;
-                        int t1, t2, t3;
-                        codeService.getCounts(vid, out t1, out count, out t2, out t3);
-
-                        //请求的数量大于已有的数量
-                        if (num > count)
-                        {
-                            return RedirectToAction("", "VideoManager");
-                        }
-
-                        codeArray = videoService.getInviteCodes(vid).ToArray();
-
-                    }
-                    fileName = codeArray[0].Video.VideoName;
-                }
-                //导出全部视频的邀请码
-                else
-                {
-
-                    int count = codeService.getInviteCodesByStatus(0,-1).Count();
-                    //没有可用的邀请码
-                    if (count <= 0)
-                    {
-                        return RedirectToAction("", "VideoManager");
-                    }
-
-                    codeArray = codeService.getInviteCodesByStatus(0, -1).ToArray();
-                    fileName = "全部视频";
-                }
-
-                //修改邀请码状态
-                foreach (Code c in codeArray)
-                {
-                    c.CodeStatus = 1;
-                    if (ModelState.IsValid)
-                    {
-                        codeService.updateInviteCode(c);
-                    }
-                }
-
-                //修改视频邀请码数量
-                //Video[] videoArray = vsc.Videos.ToArray();
-                Video[] videoArray = videoService.getVideos().ToArray();
-                foreach (Video v in videoArray)
-                {
-                    int codesNotUsed;
-                    //该视频中没用的数量
-                    int codesUsed;
-
-                    int codesNotExport;
-
-                    int codesCount;
-                    codeService.getCounts(v.vid,out codesCount,out codesNotExport,out codesNotUsed,out codesUsed);
-                    //该视频种用了的数量
-
-                    v.CodeNotUsed = codesNotUsed;
-                    v.CodeUsed = codesUsed;
-
-                    if (ModelState.IsValid)
-                    {
-                        videoService.updateVideo(v);
-                    }
-                }
-                byte[] bytes = exportExcel.WriteExcel(codeArray);
-                return File(bytes, "application/vnd.ms-excel", fileName + ".xls");
+                codeArray = videoService.getInviteCodes(vid).ToArray();
+                Video video = videoService.getVideo(vid);
+                fileName = video.VideoName + "-邀请码";
             }
+
+            if (codeArray.Count() <= 0)
+                return RedirectToAction("", "VideoManager");
+
+            byte[] bytes = exportExcel.WriteExcel(codeArray);
+            return File(bytes, "application/vnd.ms-excel", fileName + ".xls");
         }
     }
 }

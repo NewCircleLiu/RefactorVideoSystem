@@ -17,14 +17,15 @@ namespace GoodVideoSystem.Models.Concrete
         public DataTable MakeDataTable(Code[] codeArray)
         {
             DataTable dt = new DataTable("邀请码列表");
-            dt.Columns.Add("视频编号");
-            dt.Columns.Add("视频名称");
             dt.Columns.Add("邀请码编号");
             dt.Columns.Add("邀请码");
+            dt.Columns.Add("邀请码状态(0:未激活， 1：激活，2：已使用)");
+            dt.Columns.Add("视频编号");
+            dt.Columns.Add("视频名称");
 
             foreach (Code c in codeArray)
             {
-                dt.Rows.Add(c.Video.vid, c.Video.VideoName, c.CodeID, c.CodeValue);
+                dt.Rows.Add(c.CodeID, c.CodeValue,c.CodeStatus, c.Video.vid, c.Video.VideoName);
             }
 
             return dt;
@@ -41,9 +42,9 @@ namespace GoodVideoSystem.Models.Concrete
                 ISheet sheet = book.CreateSheet(dt.TableName);
 
                 sheet.SetColumnWidth(0, 10 * 256);
-                sheet.SetColumnWidth(1, 80 * 256);
+                sheet.SetColumnWidth(1, 20 * 256);
                 sheet.SetColumnWidth(2, 10 * 256);
-                sheet.SetColumnWidth(3, 20 * 256);
+                sheet.SetColumnWidth(3, 40 * 256);
 
                 IRow row = sheet.CreateRow(0);
 

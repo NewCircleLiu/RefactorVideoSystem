@@ -23,6 +23,11 @@ namespace GoodVideoSystem.Models.Repository
            return  this.Get(item => item.vid == vid).FirstOrDefault();
         }
 
+        public Video getVideoByPolyvid(string polyvid)
+        {
+           return this.Get(item => item.polyVid.Equals(polyvid)).FirstOrDefault();
+        }
+
         public IEnumerable<Video> getVideos(object tar, bool isID)
         {
             if (isID)

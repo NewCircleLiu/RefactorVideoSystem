@@ -87,9 +87,15 @@ namespace GoodVideoSystem.Models.Repository
         {
             Update(code);
         }
+
         public void deleteInviteCode(Code code)
         {
             Delete(code);
+        }
+
+        public IEnumerable<Code> getAllInviteCodes()
+        {
+            return Get();
         }
     }
 }
