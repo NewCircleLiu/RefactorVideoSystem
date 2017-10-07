@@ -65,10 +65,10 @@
                     <table class="table table-bordered table-hover class" style="margin-top: 10px;">
                         <thead>
                             <tr id="headTitle">
-                                <th>编号</th>
-                                <th>时间</th>
+                                <th style="width:100px">编号</th>
+                                <th style="width:120px">用户电话</th>
                                 <th>反馈内容</th>
-                                <th>用户电话</th>
+                                <th style="width:150px">留言时间</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -76,24 +76,9 @@
                             { 
                                 <tr>
                                     <td>@s.SuggestId</td>
-                                    <td>@s.CreateTime</td>
-                                    @{
-                                string suggestTextAbstract = s.Text;
-                                if (suggestTextAbstract.Length >= 10)
-                                {
-                                    suggestTextAbstract = suggestTextAbstract.Substring(0, 10);
-                                    suggestTextAbstract += "......";
-                                        <td>@suggestTextAbstract
-                                            <a id="@s.Text" onclick="getAllSuggest(this.id);">[查看全部]</a>
-                                        </td>
-                                }
-                                else
-                                {
-                                        <td>@suggestTextAbstract</td>
-                                }
-                                    }
-
                                     <td>@s.UserPhone</td>
+                                    <td>@s.Text</td>
+                                    <td>@s.CreateTime</td>
                                 </tr>
                             }
                         </tbody>

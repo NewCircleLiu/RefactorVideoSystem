@@ -17,6 +17,5 @@ namespace RefactorVideoSystem.Models.Models
         public string InviteCodes { get; set; } //用户所有的邀请码，格式："code1,code2...coden"
 
         public ICollection<ActionLog> ActionLogs { get; set; } //用户相关的LOG
-        public ICollection<Suggest> Suggests { get; set; } //用户建议
     }
 }

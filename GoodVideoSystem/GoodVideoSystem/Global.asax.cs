@@ -24,7 +24,7 @@ namespace GoodVideoSystem
     {
         protected void Application_Start()
         {
-            //Database.SetInitializer<BaseDbContext>(new DropCreateDatabaseIfModelChanges<BaseDbContext>()); 
+            Database.SetInitializer<BaseDbContext>(new DropCreateDatabaseIfModelChanges<BaseDbContext>()); 
 
             registerService();
             AreaRegistration.RegisterAllAreas();

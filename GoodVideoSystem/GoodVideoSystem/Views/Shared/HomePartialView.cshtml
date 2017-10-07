@@ -1,6 +1,7 @@
 ﻿<style>
-    a:hover {
+    .homeTitle:hover {
         text-decoration: none;
+        color:white !important;
     }
     body{
         background: #fff;
@@ -18,12 +19,12 @@
     width:auto;
     }
     .navbar-default .navbar-toggle {
-        border-color:#F14343;
-        background-color:#F14343;
+        border-color:#31708f;
+        background-color:#31708f;
 
     }
         .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
-            background-color:#F14343;
+            background-color:#31708f;
         }
 </style>
 
@@ -43,17 +44,17 @@
         <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height: 1px; padding-bottom: 10px">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="@Url.Content("~/User/Home/")">我的视频</a>
+                    <a class="homeTitle" href="@Url.Content("~/User/Home/")">我的视频</a>
                 </li>
                 <li>
-                    <a href="@Url.Content("~/User/About/")">公司简介</a>
+                    <a class="homeTitle" href="@Url.Content("~/User/About/")">公司简介</a>
                 </li>
                 <li>
-                    <a href="@Url.Content("~/User/Product/")">产品展示</a>
+                    <a class="homeTitle" href="@Url.Content("~/User/Product/")">产品展示</a>
                 </li>
 
                 <li>
-                    <a href="@Url.Content("~/User/Contact")">联系我们</a>
+                    <a class="homeTitle" href="@Url.Content("~/User/Contact")">联系我们</a>
                 </li>
             </ul>
         </div>

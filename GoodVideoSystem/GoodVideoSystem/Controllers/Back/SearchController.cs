@@ -105,20 +105,23 @@ namespace GoodVideoSystem.Controllers.Back
             {
                 IEnumerable<Suggest> suggestList = null;
                 int recordcount;
+                
                 //内容
                 if (searchType == "suggestValue")
                 {
-                    suggestList = suggestService.getSuggestsbByPhone(searchValue, out recordcount);
+                    suggestList = suggestService.getSuggestsByText(searchValue, out recordcount);
                 }
 
                 //电话
                 if (searchType == "phone")
                 {
-                    suggestList = suggestService.getSuggestsByText(searchValue, out recordcount);
+                    suggestList = suggestService.getSuggestsbByPhone(searchValue, out recordcount);
                 }
+
+
                 ip.GetCurrentPageData(suggestList, page_id);
                 ViewBag.searchAction = "/Search/Index/Page";
-                return View("/Views/Back/UserManager/UserSuggestPage.cshtml", ip);
+                return View("/Views/Back/UserManager/UserSuggestsPage.cshtml", ip);
             }
             //查询用户
             if (model == "User")

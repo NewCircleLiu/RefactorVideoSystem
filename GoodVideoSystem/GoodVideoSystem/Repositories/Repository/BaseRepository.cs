@@ -73,7 +73,7 @@ namespace GoodVideoSystem.Models.Repository
             }
             catch (DbEntityValidationException e)
             {
-                int m = 5;
+                return;
             }
         }
 

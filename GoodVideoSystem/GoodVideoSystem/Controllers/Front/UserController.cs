@@ -182,25 +182,15 @@ namespace GoodVideoSystem.Controllers.Front
         * @method POST
         */
         [HttpPost]
-        public ActionResult Suggest(string suggestText, string phone, string UserBrowser)
+        public ActionResult Suggest(string suggestText, string phone)
         {
             Suggest suggest = new Suggest();
             suggest.Text = suggestText;
             suggest.CreateTime = DateTime.Now;
             suggest.UserPhone = phone;
-            User user = (User)Session["CurrentUser"];
 
-            if (user != null)
-            {
-                suggest.user = user;
-                suggestService.addSuggest(suggest);
-                return Content("success");
-            }
-            else
-            {
-                return Content("error");
-            }
-
+            suggestService.addSuggest(suggest);
+            return Content("success");
         }
         /*
         * @desc 404

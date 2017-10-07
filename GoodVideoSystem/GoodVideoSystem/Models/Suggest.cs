@@ -14,9 +14,5 @@ namespace RefactorVideoSystem.Models.Models
         public string Text { get; set; }
         [Required]
         public string UserPhone { get; set; }
-
-        public int UserId { get; set; }
-        [Required]
-        public virtual User user { get; set; }
     }
 }
