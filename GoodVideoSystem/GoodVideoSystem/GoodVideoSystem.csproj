@@ -225,9 +225,9 @@
     <Compile Include="Services\Service\VideoService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\GoodVideoSystem.mdf" />
-    <Content Include="App_Data\GoodVideoSystem_log.ldf">
-      <DependentUpon>GoodVideoSystem.mdf</DependentUpon>
+    <Content Include="App_Data\PingAnVIdeoSystemDataBase.mdf" />
+    <Content Include="App_Data\PingAnVIdeoSystemDataBase_log.ldf">
+      <DependentUpon>PingAnVIdeoSystemDataBase.mdf</DependentUpon>
     </Content>
     <Content Include="Global.asax" />
     <Content Include="Resources\css\app.css" />

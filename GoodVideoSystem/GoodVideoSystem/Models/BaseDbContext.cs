@@ -11,7 +11,7 @@ namespace RefactorVideoSystem.Models.Models
     public class BaseDbContext : DbContext
     {
         public BaseDbContext()
-            : base("name=VIdeoSystem")
+            : base("name=PingAnVIdeoSystemDataBase")
         {
 
         }

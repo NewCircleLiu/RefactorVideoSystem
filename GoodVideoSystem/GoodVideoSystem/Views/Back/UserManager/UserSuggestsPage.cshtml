@@ -72,14 +72,16 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @{int suggestSeq = Model.every_page_items * (Model.request_page - 1) + 1;}
                             @foreach (Suggest s in Model.returnData)
                             { 
                                 <tr>
-                                    <td>@s.SuggestId</td>
+                                    <td>@suggestSeq</td>
                                     <td>@s.UserPhone</td>
                                     <td>@s.Text</td>
                                     <td>@s.CreateTime</td>
                                 </tr>
+                                suggestSeq++;
                             }
                         </tbody>
                     </table>

@@ -44,6 +44,8 @@ namespace GoodVideoSystem.Controllers.Back
         {
             int recordcount;
             IEnumerable<Suggest> suggestList = suggestService.getSuggests(out recordcount);
+            suggestList = suggestList.OrderByDescending(s => s.CreateTime);
+
             ip.GetCurrentPageData(suggestList, page_id);
             Manager manager = (Manager)Session["Manager"];
             ViewBag.account = manager.Account;
