@@ -57,6 +57,11 @@ namespace GoodVideoSystem.Controllers.Front
             return View(inviteCodes);
         }
 
+        public ActionResult TestPhone()
+        {
+            return View();
+        }
+
         /*
         * @desc 获取视频
         * @url /user/GetVideo

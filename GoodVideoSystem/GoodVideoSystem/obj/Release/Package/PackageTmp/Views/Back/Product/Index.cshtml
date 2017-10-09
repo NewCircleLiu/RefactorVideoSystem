@@ -1,0 +1,138 @@
+﻿@{
+    ViewBag.Title = "古驿平安-产品管理";
+    Layout = "~/Views/Shared/_BackLayout.cshtml";
+}
+
+@using RefactorVideoSystem.Models.Models;
+@model GoodVideoSystem.Models.Concrete.Paging
+<style>
+    th {
+        font-weight: normal;
+        vertical-align: middle;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    #headTitle th {
+        font-family: 'Microsoft YaHei';
+        font-size: 14px;
+        color: black;
+    }
+
+    .pagination li a {
+        color: black;
+    }
+
+    #jbox-content {
+        overflow-y: hidden !important;
+    }
+</style>
+
+<div class="main" style="margin-left: 290px; width: 80%">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="@Url.Content("~/Qhgypacz/BackMain/")"><span class="glyphicon glyphicon-home"></span></a></li>
+            <li class="active">产品列表</li>
+        </ol>
+    </div>
+    <!--/.row-->
+    <div class="row">
+        <div>
+            <div class="panel panel-default">
+                <div class="panel-heading">产品列表</div>
+                <div class="panel-body">
+                    <table>
+                        <tr>
+                            <td style="padding-left: 10px;">
+                                <a href="@Url.Content("~/Product/AddProductPage")" class="btn btn-primary" >添加产品</a>
+                            </td>
+                            <td style="padding-left: 30px;">
+                                <button type="button" class="btn btn-primary">产品总数：<span class="badge" style="color: red">@TempData["productCount"]</span></button>
+                            </td>
+                            <td style="padding-left: 10px;">
+                                <a href="@Url.Content("~/Product")" class="btn btn-primary" >刷新</a>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table class="table table-bordered table-hover class" style="margin-top: 10px;">
+                        <thead>
+                            <tr id="headTitle">
+                                <th>序号</th>
+                                <th style="width: 170px">图片</th>
+                                <th>名称</th>
+                                <th>价格</th>
+                                <th>链接</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{int productSeq = 1;}
+                            @foreach (Product p in Model.returnData)
+                            {
+                                <tr>
+                                    <th>@productSeq</th>
+                                    <th>
+                                        <img style="width:100px;height:70px;" src="@p.Img"/>
+                                    </th>
+                                    <th>@p.Name</th>
+                                    <th>@string.Format("{0:C}", p.Price)</th>
+                                    <th><a href="@p.Url">链接到淘宝商城</a></th>
+                                    <th>
+                                        <a href="~/Product/EditProductPage?productID=@p.ProductId">[ 编辑产品 ]</a><br />
+                                        <br />
+                                        <a href="#" onclick="deleteProduct(@p.ProductId);">[ 删除产品 ]</a>
+                                    </th>
+                                </tr>
+                                productSeq++;
+                            }
+                        </tbody>
+                    </table>
+
+                    @{
+                        int prePageId = (Model.request_page > 1) ? Model.request_page - 1 : 1;
+                        int nextPageId = (Model.request_page < Model.total_pages) ? Model.request_page + 1 : Model.total_pages;
+                    }
+
+                    <div style="text-align: center">
+                        <ul class="pagination">
+                            <li><a href="@ViewBag.searchAction">首页</a></li>
+                            <li><a href="@ViewBag.searchAction@prePageId">&laquo;</a></li>
+                            @for (int i = Model.start_page_num; i <= Model.end_page_num; i++)
+                            {
+                                <li><a id="@i" href="@ViewBag.searchAction@i">@i</a></li>
+                            }
+                            <li><a href="@ViewBag.searchAction@nextPageId">&raquo;</a></li>
+                            <li><a href="@ViewBag.searchAction@Model.total_pages">末页</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function deleteProduct(productID) {
+        var isconfirm = confirm("删除产品将删除产品所对应的图片，请再次确定!");
+        if (!isconfirm) {
+            $.jBox.tip("取消删除", '提示');
+            return;
+        }
+        jQuery.get(
+            "/Product/DeleteProduct",
+            { "productID": productID },
+            function (data) {
+                if (data == "scuuecc") {
+                    $.jBox.tip("删除成功", '提示');
+                    location.href = "@Url.Content("~/Product")";
+                }
+                else
+                    $.jBox.tip("删除失败", '提示');
+            },
+            "text"
+         );
+        }
+</script>

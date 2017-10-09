@@ -15,8 +15,12 @@ namespace GoodVideoSystem.Controllers.Back
 {
     public class PolyProcessController : Controller
     {
-        private string secretkey = "QH8IHKX6JR";
-        private string userid = "212b30914a";
+        //private string secretkey = "QH8IHKX6JR";
+        //private string userid = "212b30914a";
+
+        private string secretkey = "H4EkSWnQAd";
+        private string userid = "3bac3e52d4";
+
         private DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1, 0, 0, 0, 0));
 
         private IVideoService videoService;
@@ -33,7 +37,7 @@ namespace GoodVideoSystem.Controllers.Back
             string vid = Request.QueryString["vid"];
             string type = Request.QueryString["type"];
             string df = Request.QueryString["df"];
-            string type_vid_sec = type + vid + secretkey;
+            string type_vid_sec = "manage"+type + vid + secretkey;
 
             if (type == "pass")
             {
@@ -44,13 +48,6 @@ namespace GoodVideoSystem.Controllers.Back
                     videoService.addVideo(video);
                 }
             }
-
-            /*
-            string vid = "212b30914ad7f00138158897c941f5dc_2";
-            Video video = GetSingleVideo(vid);
-            videoService.addVideo(video);
-            */
-
             return null;
         }
 
@@ -107,7 +104,7 @@ namespace GoodVideoSystem.Controllers.Back
             string s = json_["status"].ToString();
             video_.polyVid = vid;
             video_.VideoName = json_["data"][0]["title"].ToString();
-            video_.coverImage = "http://img.videocc.net/uimage/2/" + json_["data"][0]["images"][0].ToString();
+            video_.coverImage = "http://img.videocc.net/uimage/3/" + json_["data"][0]["images"][0].ToString();
 
             return video_;
         }

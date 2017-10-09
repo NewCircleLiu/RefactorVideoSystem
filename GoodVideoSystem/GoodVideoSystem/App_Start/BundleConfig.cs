@@ -15,6 +15,8 @@ namespace GoodVideoSystem
 
             bundles.Add(new StyleBundle("~/Resources/css").Include("~/Resources/Plugin/bootstrap/css/bootstrap.css",
                 "~/Resources/css/*.css"));
+
+            BundleTable.EnableOptimizations = false;
         }
     }
 }

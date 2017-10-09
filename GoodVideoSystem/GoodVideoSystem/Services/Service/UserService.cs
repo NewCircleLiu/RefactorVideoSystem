@@ -34,18 +34,22 @@ namespace GoodVideoSystem.Services.Service
                     currentUser = getUserByDevice(deviceUniqueCode);
 
                 //2.1 如果获取到用户，则将当前邀请码添加到当前用户
-                if (currentUser != null && !currentUser.InviteCodes.Contains(inviteCode.CodeValue))
+                if (currentUser != null)
                 {
-                    currentUser.InviteCodes += ("," + inviteCode.CodeValue);
-                    updateUser(currentUser);
+                    if (!currentUser.InviteCodes.Contains(inviteCode.CodeValue))
+                    {
+                        currentUser.InviteCodes += ("," + inviteCode.CodeValue);
+                        updateUser(currentUser);
+                    }
                 }
 
                 //2.2 如果没有获取到邀请码，则创建用户（其实没必要，因此AddUserInfo页面已经创建了用户）
+                /*
                 else
                 {
                     currentUser = new User() { InviteCodes = inviteCode.CodeValue, Phone = "无", Username = "无" };
                     registeUser(currentUser);
-                }
+                }*/
             }
         }
 

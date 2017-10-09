@@ -13,13 +13,14 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GoodVideoSystem</RootNamespace>
     <AssemblyName>GoodVideoSystem</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -60,17 +61,15 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -126,6 +125,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.1.0\lib\WebGrease.dll</HintPath>
@@ -239,19 +239,10 @@
     <Content Include="Resources\css\registe.css" />
     <Content Include="Resources\css\styles.css" />
     <Content Include="Resources\css\video.css" />
+    <Content Include="Resources\css\player.css" />
     <Content Include="Resources\img\404.jpg" />
     <Content Include="Resources\img\backlogin.JPG" />
     <Content Include="Resources\img\back_welcome.jpg" />
-    <Content Include="Resources\img\company\1.jpg" />
-    <Content Include="Resources\img\company\2.jpg" />
-    <Content Include="Resources\img\company\3.jpg" />
-    <Content Include="Resources\img\company\4.jpg" />
-    <Content Include="Resources\img\company\5.jpg" />
-    <Content Include="Resources\img\company\6.jpg" />
-    <Content Include="Resources\img\company\7.jpg" />
-    <Content Include="Resources\img\company\8.jpg" />
-    <Content Include="Resources\img\company\ghpa.png" />
-    <Content Include="Resources\img\company\未标题-1.png" />
     <Content Include="Resources\img\logo.ico" />
     <Content Include="Resources\img\logo.png" />
     <Content Include="Resources\img\logo_white.png" />
@@ -268,17 +259,6 @@
     <Content Include="Resources\img\products\8.jpg" />
     <Content Include="Resources\img\qhpa.jpg" />
     <Content Include="Resources\img\tip.png" />
-    <Content Include="Resources\img\video_image\1.png" />
-    <Content Include="Resources\img\video_image\2.png" />
-    <Content Include="Resources\img\video_image\3.png" />
-    <Content Include="Resources\img\video_image\4.png" />
-    <Content Include="Resources\img\video_image\5.png" />
-    <Content Include="Resources\img\video_image\6.png" />
-    <Content Include="Resources\img\video_image\play.jpg" />
-    <Content Include="Resources\img\video_image\play.png" />
-    <Content Include="Resources\img\video_image\play1.png" />
-    <Content Include="Resources\img\video_image\play2.png" />
-    <Content Include="Resources\img\video_image\play_icon.png" />
     <Content Include="Resources\img\welcome - 副本.JPG" />
     <Content Include="Resources\img\welcome.jpg" />
     <Content Include="Resources\img\welcome2.JPG" />
@@ -286,7 +266,7 @@
     <Content Include="Resources\img\welcome_ph3.png" />
     <Content Include="Resources\img\welcome_ph_source.png" />
     <Content Include="Resources\js\common\fingerprint.js" />
-    <Content Include="Resources\js\common\jquery-1.8.2.js" />
+    <Content Include="Resources\js\common\jquery.js" />
     <Content Include="Resources\js\common\JQuery.md5.js" />
     <Content Include="Resources\js\custom\Utils.js" />
     <Content Include="Resources\js\custom\getVideo.js" />
@@ -541,7 +521,9 @@
     <Content Include="Resources\Plugin\WebUploader\Uploader.swf" />
     <Content Include="Resources\Plugin\WebUploader\webuploader.css" />
     <Content Include="Resources\Plugin\WebUploader\webuploader.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -552,10 +534,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Common\" />
-    <Folder Include="Views\User\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
@@ -682,6 +661,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Front\User\AddUserInfo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
+    <Content Include="Views\Error.cshtml" />
+    <Content Include="Views\Front\User\TestPhone.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
