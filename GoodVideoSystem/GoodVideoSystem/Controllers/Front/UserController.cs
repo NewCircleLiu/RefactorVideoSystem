@@ -70,7 +70,15 @@ namespace GoodVideoSystem.Controllers.Front
 
         public ActionResult GetVideo(string videoInviteCode)
         {
+            //0.1.异常处理，如果没有获取到地址，则跳转到欢迎页面获取设备标识
             string deviceUniqueCode = (string)Session["deviceUniqueCode"];
+            if (string.IsNullOrEmpty(deviceUniqueCode))
+                return RedirectToAction("Index", "User");
+
+            //0.2.异常处理，如果传过来的邀请码为空，则跳转到获取视频页面
+            if (string.IsNullOrEmpty(videoInviteCode))
+                return RedirectToAction("Home", "User");
+
             Session["inviteCode"] = videoInviteCode.Trim();
 
             Code returnCode = null;
@@ -135,6 +143,10 @@ namespace GoodVideoSystem.Controllers.Front
         [HttpPost]
         public ActionResult RegisterUser(string username, string phone)
         {
+            //如果用户名和手机号是空则跳转到AddUserInfo页面重新录入（客户端也有判断）
+            if(string.IsNullOrEmpty(username) || string.IsNullOrEmpty(phone))
+                return RedirectToAction("AddUserInfo","User");
+
             User user = new User() { Username = username, Phone = phone, InviteCodes = (string)Session["inviteCode"] };
             userService.registeUser(user);
 
