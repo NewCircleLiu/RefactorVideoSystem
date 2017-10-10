@@ -21,11 +21,14 @@ namespace GoodVideoSystem.Services.Service
 
 
         private ICodeRepository codeRepository { get; set; }
+        private IVideoService videoService { get; set; }
 
-        public CodeService(ICodeRepository codeRepository)
+        public CodeService(ICodeRepository codeRepository, IVideoService videoService)
         {
             this.codeRepository = codeRepository;
+            this.videoService = videoService;
             this.AddDisposableObject(codeRepository);
+            this.AddDisposableObject(videoService);
         }
 
         public IEnumerable<Code> getInviteCodes(string deviceUniqueCode)
@@ -61,7 +64,11 @@ namespace GoodVideoSystem.Services.Service
             if (inviteCode.BindedDeviceCount < MAX_DEVICE_COUNT)
             {
                 inviteCode.CodeStatus = USED_;
-                inviteCode.DeviceUniqueCode += ("," + deviceUniqueCode);
+
+                if (inviteCode.DeviceUniqueCode == null)
+                    inviteCode.DeviceUniqueCode += ("," + deviceUniqueCode);
+                else if(!inviteCode.DeviceUniqueCode.Contains(deviceUniqueCode))
+                    inviteCode.DeviceUniqueCode += ("," + deviceUniqueCode);
                 inviteCode.BindedDeviceCount = inviteCode.DeviceUniqueCode.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Count();
                 codeRepository.updateInviteCode(inviteCode);
             }
@@ -104,7 +111,29 @@ namespace GoodVideoSystem.Services.Service
 
         public void deleteInviteCode(Code code)
         {
+            if (code == null)
+                return;
+
+            //修改视频邀请码数量
+            Video video = videoService.getVideo(code.vid);
+            if (video == null)
+                return;
+
+            int codeCounts, codesNotUsed, codesNotExport, codesUsed;
+            getCounts(video.vid, out codeCounts, out codesNotExport, out codesNotUsed, out codesUsed);
+            video.CodeNotUsed = codesNotUsed;
+            video.CodeUsed = codesUsed;
+            video.CodeCounts = codeCounts - 1;
+
+            videoService.updateVideo(video);
             codeRepository.deleteInviteCode(code);
+        }
+
+        public void deleteInviteCode(string codeStr)
+        {
+            Code code = codeRepository.getInviteCode(codeStr.Trim());
+            if(code != null)
+                codeRepository.deleteInviteCode(code);
         }
 
         public IEnumerable<Code> getAllInviteCodes()

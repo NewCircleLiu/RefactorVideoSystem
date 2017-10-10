@@ -27,5 +27,8 @@ namespace GoodVideoSystem.Repositories.IRepository
 
         //更新用户
         void updateUser(User user);
+
+        //删除用户
+        void deleteUser(User user);
     }
 }

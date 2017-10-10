@@ -995,7 +995,7 @@ i.tw2{
 }
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
     font-size: 0.85em;
-    color: #999;
+    color: #555;
 }
 .radio, .checkbox {
     display: block;

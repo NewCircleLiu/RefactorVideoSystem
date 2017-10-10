@@ -665,7 +665,6 @@
   <ItemGroup>
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <Content Include="Views\Error.cshtml" />
-    <Content Include="Views\Front\User\TestPhone.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

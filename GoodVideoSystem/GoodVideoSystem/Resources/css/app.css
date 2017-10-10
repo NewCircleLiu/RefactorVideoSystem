@@ -6,6 +6,11 @@
     #welcome {
          display:none;
     }
+    #footContainer, #footContainer_content {
+        padding-left:0;
+        padding-right:0;
+    }
+
     #welcome_ph {
          display:block;
     }
@@ -14,6 +19,10 @@
     }
     #top_bar {
         margin-top:0px;
+    }
+
+    #userInfoDiv {
+        width:100%;
     }
 
     #systemTitle {
@@ -161,7 +170,9 @@
         width:400px;
         height:50px;
     }
-
+    #userInfoDiv {
+        width:60%;
+    }
     #systemTitle {
         display:none;
     }

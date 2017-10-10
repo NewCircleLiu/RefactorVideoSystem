@@ -21,7 +21,7 @@ namespace GoodVideoSystem.Controllers.Back
         private ISuggestService suggestService;
         private ICodeService codeService;
         private IPaging ip;
-        public UserManagerController(IUserService userService,ISuggestService suggestService, IPaging ip, ICodeService codeService)
+        public UserManagerController(IUserService userService, ISuggestService suggestService, IPaging ip, ICodeService codeService)
         {
             this.suggestService = suggestService;
             this.userService = userService;
@@ -58,18 +58,28 @@ namespace GoodVideoSystem.Controllers.Back
         {
             string userid = Convert.ToString(userID);
             User user = userService.getUserById(userID);
-            string[] codes = user.InviteCodes.Split(',');
+            string[] codes = user.InviteCodes.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
             List<Code> codeList = new List<Code>();
             //List<Code> temp = new List<Code>();
-            foreach(string inviteCode in codes)
+            foreach (string inviteCode in codes)
             {
                 //temp=codeService.getInviteCodesContainsCode(inviteCode, -1).ToList();
                 codeList.AddRange(codeService.getInviteCodesContainsCode(inviteCode, -1).ToList());
             }
-            
+
             //codeArray = getInviteCode.getInviteCodeArray(codeArray, userid).ToArray();
 
             return View(codeList.ToArray());
+        }
+
+        //查看用户视频
+        public ActionResult DeleteUser(int userID)
+        {
+            bool ret = userService.deleteUser(userID);
+            if (ret)
+                return Content("success");
+            else
+                return Content("error");
         }
     }
 }

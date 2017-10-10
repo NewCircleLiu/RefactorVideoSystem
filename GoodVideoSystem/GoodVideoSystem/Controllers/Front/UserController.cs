@@ -51,15 +51,13 @@ namespace GoodVideoSystem.Controllers.Front
         public ActionResult Home()
         {
             string deviceUniqueCode = (string)Session["deviceUniqueCode"];
+            if (string.IsNullOrEmpty(deviceUniqueCode))
+                return RedirectToAction("Index", "User");
+
             Code[] inviteCodes = codeService.getInviteCodes(deviceUniqueCode).ToArray();
             User user = userService.getUserByDevice(deviceUniqueCode);
             Session["CurrentUser"] = user;
             return View(inviteCodes);
-        }
-
-        public ActionResult TestPhone()
-        {
-            return View();
         }
 
         /*
@@ -125,8 +123,12 @@ namespace GoodVideoSystem.Controllers.Front
             if (codes == null || codes.Count() == 0)
                 return RedirectToAction("Error");
 
-            //3.当前用户是否有权限
-            User currentUser = userService.getUserByDevice((string)Session["deviceUniqueCode"]);
+            //3.当前用户是否有权限，如果Session失效，跳转到Index
+            string deviceUniqueCode = (string)Session["deviceUniqueCode"];
+            if (string.IsNullOrEmpty(deviceUniqueCode))
+                return RedirectToAction("Index", "User");
+
+            User currentUser = userService.getUserByDevice(deviceUniqueCode);
             for (int i = 0; i < codes.Count(); i++)
             {
                 if (currentUser.InviteCodes.Contains(codes[i].CodeValue))
@@ -147,19 +149,58 @@ namespace GoodVideoSystem.Controllers.Front
             if(string.IsNullOrEmpty(username) || string.IsNullOrEmpty(phone))
                 return RedirectToAction("AddUserInfo","User");
 
-            User user = new User() { Username = username, Phone = phone, InviteCodes = (string)Session["inviteCode"] };
-            userService.registeUser(user);
+            //Session失效处理，跳转到Index
+            string deviceUniqueCode_ = (string)Session["deviceUniqueCode"];
+            if (string.IsNullOrEmpty(deviceUniqueCode_))
+                return RedirectToAction("Index", "User");
 
-            string deviceUniqueCode = (string)Session["deviceUniqueCode"];
-            string videoInviteCode = Session["inviteCode"].ToString();
+            string inviteCode_ = (string)Session["inviteCode"];
+            if (string.IsNullOrEmpty(inviteCode_))
+                return RedirectToAction("Index", "User");
 
+            //根据电话号码查找用户，如果用户不存在则新建用户，否则更新邀请码
+            User user = userService.getUserByPhone(phone.Trim());
+            if (user == null)
+            {
+                user = new User() { Username = username, Phone = phone, InviteCodes = inviteCode_ };
+                userService.registeUser(user);
+            }
+
+            else
+            {
+                if (!user.InviteCodes.Contains(inviteCode_))
+                {
+                    user.InviteCodes += "," + inviteCode_;
+                    userService.updateUser(user);
+                }
+            }
+
+            //邀请码加入当前硬件信息（如果需要的话）
+            string videoInviteCode = inviteCode_.ToString();
             Code returnCode = null;
             string returnInfo = codeService.checkInviteCode(videoInviteCode, out returnCode);
 
             if (returnInfo.Equals("AVAILABLE")) //如果输入合法的邀请码（数据库中存在）
-                codeService.updateInviteCodeInfo(returnCode, deviceUniqueCode);
+                codeService.updateInviteCodeInfo(returnCode, deviceUniqueCode_);
 
             return RedirectToAction("Home");
+        }
+
+        /*
+        * @desc 意见反馈
+        * @url /user/suggest
+        * @method POST
+        */
+        [HttpPost]
+        public ActionResult Suggest(string suggestText, string phone)
+        {
+            Suggest suggest = new Suggest();
+            suggest.Text = suggestText;
+            suggest.CreateTime = DateTime.Now;
+            suggest.UserPhone = phone;
+
+            suggestService.addSuggest(suggest);
+            return Content("success");
         }
 
         /*
@@ -193,22 +234,6 @@ namespace GoodVideoSystem.Controllers.Front
             return View(productService.getProducts(out record).ToArray());
         }
 
-        /*
-        * @desc 意见反馈
-        * @url /user/suggest
-        * @method POST
-        */
-        [HttpPost]
-        public ActionResult Suggest(string suggestText, string phone)
-        {
-            Suggest suggest = new Suggest();
-            suggest.Text = suggestText;
-            suggest.CreateTime = DateTime.Now;
-            suggest.UserPhone = phone;
-
-            suggestService.addSuggest(suggest);
-            return Content("success");
-        }
         /*
         * @desc 404
         * @url /user/Error

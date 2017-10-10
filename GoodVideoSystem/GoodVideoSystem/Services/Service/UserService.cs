@@ -1,5 +1,6 @@
 ﻿using GoodVideoSystem.Models.VO;
 using GoodVideoSystem.Repositories.IRepository;
+using GoodVideoSystem.Services.IService;
 using RefactorVideoSystem.Models.Models;
 using System;
 using System.Collections.Generic;
@@ -12,14 +13,18 @@ namespace GoodVideoSystem.Services.Service
     {
         private IUserRepository userRepository { get; set; }
         private ICodeRepository codeRepository { get; set; }
+        private IVideoService videoService { get; set; }
 
-        public UserService(IUserRepository userRepository, ICodeRepository codeRepository)
+        public UserService(IUserRepository userRepository, ICodeRepository codeRepository, IVideoService videoService)
         {
             this.userRepository = userRepository;
             this.AddDisposableObject(userRepository);
 
             this.codeRepository = codeRepository;
             this.AddDisposableObject(codeRepository);
+
+            this.videoService = videoService;
+            this.AddDisposableObject(videoService);
         }
 
         public void updateUserInfo(Code inviteCode, string deviceUniqueCode)
@@ -53,6 +58,54 @@ namespace GoodVideoSystem.Services.Service
             }
         }
 
+        public void deleteInviteCode(Code inviteCode)
+        {
+            User currentUser = getUserByInviteCode(inviteCode);
+            if (currentUser == null)
+                return;
+
+            string toDelInviteCodeStr = inviteCode.CodeValue.Trim();
+            string[] splitCodes = currentUser.InviteCodes.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            string updatedInviteCodes = "";
+            for (int i = 0; i < splitCodes.Count(); i++)
+            {
+                string currStr = splitCodes[i].Trim();
+                if(!currStr.Equals(toDelInviteCodeStr))
+                    updatedInviteCodes += "," + currStr;
+            }
+            currentUser.InviteCodes = updatedInviteCodes;
+            updateUser(currentUser);
+        }
+
+        public bool deleteUser(int userID)
+        {
+            User user = userRepository.getUserById(userID);
+
+            if(user == null)
+                return false;
+
+            string[] splitCodes = user.InviteCodes.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < splitCodes.Count(); i++)
+            {
+                Code currCode = codeRepository.getInviteCode(splitCodes[i].Trim());
+                if (currCode != null)
+                {
+                    Video currVideo = currCode.Video;
+                    if (currVideo != null)
+                    {
+                        currVideo.CodeCounts--;
+                        videoService.updateVideo(currVideo);
+                    }
+
+                    codeRepository.deleteInviteCode(currCode);
+                }
+            }
+
+            userRepository.deleteUser(user);
+            return true;
+        }
+
+
         //用户注册
         public void registeUser(User user)
         {
@@ -83,6 +136,12 @@ namespace GoodVideoSystem.Services.Service
         public User getUserById(int userid)
         {
             return userRepository.getUserById(userid);
+        }
+
+        //根据电话号码获取用户
+        public User getUserByPhone(string phone)
+        {
+            return userRepository.getUserByPhone(phone.Trim());
         }
 
         public User getUserByInviteCode(Code inviteCode)

@@ -22,13 +22,15 @@ namespace GoodVideoSystem.Controllers.Back
 
         // GET: /VideoCode/
         private ICodeService codeService;
+        private IUserService userService;
         private ICreateCode createCode;
         private IVideoService videoService;
         private IExportExcel exportExcel;
 
-        public VideoCodeController(ICodeService codeService, ICreateCode createCode, IVideoService videoService, IExportExcel exportExcel)
+        public VideoCodeController(ICodeService codeService, IUserService userService, ICreateCode createCode, IVideoService videoService, IExportExcel exportExcel)
         {
             this.codeService = codeService;
+            this.userService = userService;
             this.createCode = createCode;
             this.videoService = videoService;
             this.exportExcel = exportExcel;
@@ -51,7 +53,14 @@ namespace GoodVideoSystem.Controllers.Back
         //删除邀请码
         public ActionResult deleteInviteCode(int codeID)
         {
+            //1.从邀请码表中删除邀请码
             Code code = codeService.getInviteCodeById(codeID);
+            codeService.deleteInviteCode(code);
+
+            //2.从用户表中删除该邀请码
+            userService.deleteInviteCode(code);
+
+            /*
             if (ModelState.IsValid)
             {
                 codeService.deleteInviteCode(code);
@@ -68,13 +77,11 @@ namespace GoodVideoSystem.Controllers.Back
                 video.CodeCounts = codeCounts;
 
                 if (ModelState.IsValid)
-                {
                     videoService.updateVideo(video);
-                    return Content("success");
-                }
-            }
-
-            return Content("error");
+                else
+                    return Content("error");
+            }*/
+            return Content("success");
         }
 
         //生成邀请码

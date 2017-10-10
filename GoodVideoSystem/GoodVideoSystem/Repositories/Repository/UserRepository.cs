@@ -47,5 +47,12 @@ namespace GoodVideoSystem.Models.Repository
         {
             this.Update(user);
         }
+
+        //删除用户
+        public void deleteUser(User user)
+        {
+            if (user != null)
+                this.Delete(user);
+        }
     }
 }

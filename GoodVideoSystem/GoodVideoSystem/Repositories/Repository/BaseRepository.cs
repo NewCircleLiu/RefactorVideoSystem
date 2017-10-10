@@ -79,10 +79,17 @@ namespace GoodVideoSystem.Models.Repository
 
         public void Update(T instance)
         {
-            Guard.ArgumentNotNull(instance, "instance");
-            this.DbSet.Attach(instance);
-            this.DbContext.Entry(instance).State = EntityState.Modified;
-            this.DbContext.SaveChanges();
+            try
+            {
+                Guard.ArgumentNotNull(instance, "instance");
+                this.DbSet.Attach(instance);
+                this.DbContext.Entry(instance).State = EntityState.Modified;
+                this.DbContext.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                return;
+            }
         }
 
         public void Delete(T instance)

@@ -86,7 +86,7 @@
                                     <td>
                                         <a href="~/UserManager/GetUserVideo?userID=@u.UserId">查看</a>
                                     </td>
-                                    <td></td>
+                                    <td><a href="#" onclick="deleteUser(@u.UserId)">删除用户</a></td>
                                 </tr>
                                     userSeq++;
                             }
@@ -126,4 +126,25 @@
         }
         searchValue.html("<input type='text' class='form-control' name='searchValue' style='width: 200px;' placeholder=" + placeholder + " required/>");
     });
+
+    //删除用户
+    function deleteUser(userID) {
+        var ok = confirm("删除用户将同时删除用户持有的全部邀请码，请再次确定！");
+        if (ok) {
+            jQuery.get(
+                "/UserManager/DeleteUser",
+                {
+                    "userID": userID
+                },
+                function (data) {
+                    if (data == "success") {
+                        alert("删除成功");
+                        location.reload();
+                    } else {
+                        alert("删除失败");
+                    }
+                }
+            );
+        }
+    }
 </script>
