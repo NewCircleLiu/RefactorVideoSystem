@@ -1,0 +1,171 @@
+﻿@{
+    ViewBag.Title = "古驿平安-视频管理";
+    Layout = "~/Views/Shared/_BackLayout.cshtml";
+}
+
+@using RefactorVideoSystem.Models.Models;
+@model GoodVideoSystem.Models.Concrete.Paging
+
+<style>
+    th {
+        font-weight: normal;
+        vertical-align: middle;
+    }
+
+    a:hover {
+        cursor: pointer;
+    }
+
+    #searchType {
+        height: 42px;
+        margin-left: 5px;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+
+    #searchButton {
+        margin-left: 5px;
+        background-color: #373B3E;
+        border-color: #2C343A;
+        color: white;
+    }
+
+    #headTitle th {
+        font-family: 'Microsoft YaHei';
+        font-size: 14px;
+        color: black;
+    }
+
+    .jbox-button-panel {
+        height: 30px !important;
+    }
+
+    .pagination li a {
+        color: black;
+    }
+</style>
+
+<div class="main" style="margin-left: 290px; width: 80%">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="@Url.Content("~/Qhgypacz/BackMain/")"><span class="glyphicon glyphicon-home"></span></a></li>
+            <li class="active">视频列表</li>
+        </ol>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">视频列表</div>
+                <div class="panel-body">
+                    <form role="form" action="@Url.Content("~/Search")" method="get">
+                        <input type="hidden" name="model" value="Video" />
+                        <table>
+                            <tr>
+                                <td id="searchValue">
+                                    <input type="text" class="form-control" name="searchValue" placeholder="请输入视频名称" style="width: 200px;" />
+                                </td>
+                                <td>
+                                    <select class="form-control" style="width: 100px;" id="searchType" name="searchType">
+                                        <option value="videoName" selected>按名称</option>
+                                        <option value="vid">按编号</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <button type="submit" class="btn btn-default" id="searchButton">搜索</button>
+                                </td>
+                                <td style="padding-left: 30px;">
+                                    <button type="button" class="btn btn-primary" onclick="window.location.href ='/VideoCode/ExportExcel?vid=-1'">导出全部邀请码</button>
+                                </td>
+                                <td style="padding-left: 30px;">
+                                    <button type="button" class="btn btn-primary">视频总数：<span class="badge" style="color: red">@TempData["videoCount"]</span></button>
+                                </td>
+                                <td style="padding-left: 10px;">
+                                    <a href="@Url.Content("~/VideoManager")" class="btn btn-primary" >刷新</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                    <table class="table table-bordered table-hover class" style="margin-top: 10px;">
+                        <thead>
+                            <tr id="headTitle">
+                                <th>视频序号</th>
+                                <th>视频名称</th>
+                                <th style="width: 140px;">视频封面</th>
+                                <th>上传时间</th>
+                                <th>邀请码数量</th>
+                                <th colspan="2">操作</th>
+                            </tr>
+                        </thead>
+                        @{int videoSeq = Model.every_page_items * (Model.request_page - 1) + 1;}
+                        <tbody>
+                            @foreach (Video v in Model.returnData)
+                            { 
+                                <tr>
+                                    <td>@videoSeq</td>
+                                    <td>
+                                        @v.VideoName.Split('.')[0]
+                                    </td>
+                                    <td>
+                                        <img src="@v.coverImage" width="120" />
+                                    </td>
+                                    <td>@v.CreateTime.ToString("yyyy-MM-dd")</td>
+                                    <td>@v.CodeCounts</td>
+
+
+                                    @if (@v.CodeCounts != 0)
+                                    { 
+                                        <td style="border-right: none; width: 110px">
+                                            <a onclick="createCode(@v.vid);">[ 生成邀请码 ]</a>
+                                            <br />
+                                            <br />
+                                            <a href="@Url.Content("~/VideoManager/getInviteCode?vid=" + v.vid)" target="_blank">[ 查看邀请码 ]</a>
+                                            <br />
+                                        </td>
+                                        <td style="border-left: none; width: 110px">
+                                            <a onclick="window.location.href ='/VideoCode/ExportExcel?vid=@v.vid'">[ 导出邀请码 ]</a><br />
+                                            <br />
+                                            <a onclick="deleteVideo('@v.polyVid');">[ 删除该视频 ]</a>
+                                        </td>
+                                    }
+
+                                    else{
+                                        <td colspan="2">
+                                            <a onclick="createCode(@v.vid);">[ 生成邀请码 ]</a>
+                                            <br />
+                                            <br />
+                                            <a  onclick="deleteVideo('@v.polyVid');">[ 删除该视频 ]</a>
+                                        </td>
+                                    }
+                                </tr>
+                                    videoSeq++;
+                            }
+                        </tbody>
+                    </table>
+
+                    @{
+                        int prePageId = (Model.request_page > 1) ? Model.request_page - 1 : 1;
+                        int nextPageId = (Model.request_page < Model.total_pages) ? Model.request_page + 1 : Model.total_pages;
+                    }
+
+                    <div style="text-align: center">
+                        <ul class="pagination">
+                            <li><a href="@ViewBag.searchAction">首页</a></li>
+                            <li><a href="@ViewBag.searchAction@prePageId">&laquo;</a></li>
+                            @for (int i = Model.start_page_num; i <= Model.end_page_num; i++)
+                            {
+                                <li><a id="@i" href="@ViewBag.searchAction@i">@i</a></li>
+                            }
+                            <li><a href="@ViewBag.searchAction@nextPageId">&raquo;</a></li>
+                            <li><a href="@ViewBag.searchAction@Model.total_pages">末页</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="~/Resources/js/custom/videoManager.js"></script>

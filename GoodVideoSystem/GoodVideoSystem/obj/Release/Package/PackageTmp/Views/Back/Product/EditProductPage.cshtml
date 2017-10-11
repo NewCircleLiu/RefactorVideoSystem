@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "古驿平安-编辑产品";
+    Layout = "~/Views/Shared/_BackLayout.cshtml";
+}
+
+<link rel="stylesheet" type="text/css" href="~/Resources/Plugin/WebUploader/webuploader.css">
+
+<script type="text/javascript" src="~/Resources/Plugin/WebUploader/webuploader.js"></script>
+<script type="text/javascript" src="~/Resources/Plugin/WebUploader/MyUpload.js"></script>
+
+<style>
+    a:hover {
+        text-decoration: none;
+    }
+    .webuploader-pick {
+        background-color: #373B3E;
+        border-color: #2C343A;
+    }
+</style>
+
+@using RefactorVideoSystem.Models.Models;
+@model RefactorVideoSystem.Models.Models.Product
+<div class="main" style="margin-left: 290px; width: 80%">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="@Url.Content("~/Qhgypacz/BackMain/")"><span class="glyphicon glyphicon-home"></span></a></li>
+            <li><a href="@Url.Content("~/Product/")" style="color:#777">产品管理</a></li>
+            <li class="active">产品编辑</li>
+        </ol>
+    </div>
+    <!--/.row-->
+    <div class="row">
+        <div>
+            <div class="panel panel-default">
+                <div class="panel-heading">产品编辑</div>
+                <div class="panel-body">
+                    <form role="form" style="width:100%;margin-top:20px;" id="uploadForm" action="@Url.Action("EditProduct", "Product")" method="post">
+                        <table class="uploadTable" style="width: 90%; background-color: white; margin-left: 0">
+                            <tr>
+                                <td class="ut_title">
+                                    <label class=" control-label">产品名称</label>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="ProductName" name="Name" value="@Model.Name" required>
+                                    <input type="hidden" name="ProductID" value="@Model.ProductId"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="ut_title">
+                                    <label class=" control-label">产品价格</label>
+                                </td>
+                                <td>
+                                    <input type="text" style="font-family:'Microsoft YaHei'" class="form-control" id="ProductPrice" name="Price" value="@string.Format("{0:C}", Model.Price)" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="ut_title">
+                                    <label class=" control-label">产品链接</label>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="ProductUrl" name="Url" value="@Model.Url" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="ut_title">
+                                    <label class=" control-label">产品图片</label>
+                                </td>
+                                <td>
+                                    <input type="hidden" class="form-control" id="ImageUrl" name="Img" value="@Model.Img">
+                                    <div id="uploader-demo">
+                                        <!--用来存放item-->
+                                        <div id="thelist" class="uploader-list"></div>
+                                        <div id="picker">选择图片</div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div style="text-align: center; margin-top: 20px;">
+                            <button type="submit" id="" class="btn btn-primary" style="width:200px">确定</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

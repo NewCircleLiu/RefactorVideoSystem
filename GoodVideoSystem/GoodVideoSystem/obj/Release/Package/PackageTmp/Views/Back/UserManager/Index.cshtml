@@ -1,0 +1,150 @@
+﻿@{
+    ViewBag.Title = "古驿平安-用户管理";
+    Layout = "~/Views/Shared/_BackLayout.cshtml";
+}
+@using RefactorVideoSystem.Models.Models;
+@model GoodVideoSystem.Models.Concrete.Paging
+
+
+<style>
+    th {
+        font-weight: normal;
+        vertical-align: middle;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+
+    #headTitle th {
+        font-family: 'Microsoft YaHei';
+        font-size: 14px;
+        color: black;
+    }
+
+    #searchButton {
+        margin-left: 5px;
+        background-color: #373B3E;
+        border-color: #2C343A;
+        color: white;
+    }
+
+    .pagination li a {
+        color: black;
+    }
+</style>
+
+<div class="main" style="margin-left: 290px; width: 80%">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="@Url.Content("~/Qhgypacz/BackMain/")"><span class="glyphicon glyphicon-home"></span></a></li>
+            <li class="active">用户列表</li>
+        </ol>
+    </div>
+    <!--/.row-->
+    <div class="row">
+        <div>
+            <div class="panel panel-default">
+                <div class="panel-heading">用户列表</div>
+                <div class="panel-body">
+                    <form role="form" action="@Url.Content("~/Search")" method="get">
+                        <input type="hidden" name="model" value="User" />
+                        <table>
+                            <tr>
+                                <td id="searchValue">
+                                    <input type="text" class="form-control" name="searchValue" placeholder="请输入用户手机号" style="width: 200px; padding: 4px" />
+                                </td>
+                                <td>
+                                    <select class="form-control" style="width: 120px; margin-left: 10px" id="searchType" name="searchType">
+                                        <option value="phone">按电话</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <button type="submit" class="btn btn-default" id="searchButton">搜索</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                    <table class="table table-bordered table-hover class" style="margin-top: 10px;">
+                        <thead>
+                            <tr id="headTitle">
+                                <th>序号</th>
+                                <th>用户名</th>
+                                <th>电话</th>
+                                <th>视频</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        @{int userSeq = Model.every_page_items * (Model.request_page - 1) + 1;}
+                        <tbody>
+                            @foreach (User u in Model.returnData)
+                            {
+                                <tr>
+                                    <td>@userSeq</td>
+                                    <td>@u.Username</td>
+                                    <td>@u.Phone</td>
+                                    <td>
+                                        <a href="~/UserManager/GetUserVideo?userID=@u.UserId">查看</a>
+                                    </td>
+                                    <td><a href="#" onclick="deleteUser(@u.UserId)">删除用户</a></td>
+                                </tr>
+                                    userSeq++;
+                            }
+                        </tbody>
+                    </table>
+
+                    @{
+                        int prePageId = (Model.request_page > 1) ? Model.request_page - 1 : 1;
+                        int nextPageId = (Model.request_page < Model.total_pages) ? Model.request_page + 1 : Model.total_pages;
+                    }
+
+                    <div style="text-align: center">
+                        <ul class="pagination">
+                            <li><a href="@ViewBag.searchAction">首页</a></li>
+                            <li><a href="@ViewBag.searchAction@prePageId">&laquo;</a></li>
+                            @for (int i = Model.start_page_num; i <= Model.end_page_num; i++)
+                            {
+                                <li><a id="@i" href="@ViewBag.searchAction@i">@i</a></li>
+                            }
+                            <li><a href="@ViewBag.searchAction@nextPageId">&raquo;</a></li>
+                            <li><a href="@ViewBag.searchAction@Model.total_pages">末页</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    jQuery("#searchType").on("change", function () {
+        var searchType = this.value;
+        var searchValue = jQuery("#searchValue");
+        var placeholder = "";
+
+        if (searchType == "phone") {
+            placeholder = "请输入用户电话";
+        }
+        searchValue.html("<input type='text' class='form-control' name='searchValue' style='width: 200px;' placeholder=" + placeholder + " required/>");
+    });
+
+    //删除用户
+    function deleteUser(userID) {
+        var ok = confirm("删除用户将同时删除用户持有的全部邀请码，请再次确定！");
+        if (ok) {
+            jQuery.get(
+                "/UserManager/DeleteUser",
+                {
+                    "userID": userID
+                },
+                function (data) {
+                    if (data == "success") {
+                        alert("删除成功");
+                        location.reload();
+                    } else {
+                        alert("删除失败");
+                    }
+                }
+            );
+        }
+    }
+</script>

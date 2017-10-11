@@ -1,0 +1,64 @@
+﻿<style>
+    .homeTitle:hover {
+        text-decoration: none;
+        color:white !important;
+    }
+    body{
+        background: #fff;
+        padding-top:0px;
+    }
+    .navbar {
+        min-height:50px;
+        margin-bottom: 0px;
+    }
+    #top_bar {
+        margin-top:50px;
+    }
+    .navbar-header {
+    float: left;
+    width:auto;
+    }
+    .navbar-default .navbar-toggle {
+        border-color:#31708f;
+        background-color:#31708f;
+
+    }
+        .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+            background-color:#31708f;
+        }
+</style>
+
+<p id ="systemTitle" style="color:red; text-align:center; margin-top:10px; font-family:'Microsoft YaHei'; font-size:20px">古驿平安串珠教学视频点播系统</p>
+<nav class="navbar navbar-default" role="navigation" id="top_bar">      
+    <div class="container">   
+        <div class="navbar-header" style="float:left;">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+	        <img src="~/Resources/img/logo_white.png" id="top_img">
+            
+        </div>
+        <!--/.navbar-header-->
+        <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height: 1px; padding-bottom: 10px">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a class="homeTitle" href="@Url.Content("~/User/Home/")">我的视频</a>
+                </li>
+                <li>
+                    <a class="homeTitle" href="@Url.Content("~/User/About/")">公司简介</a>
+                </li>
+                <li>
+                    <a class="homeTitle" href="@Url.Content("~/User/Product/")">产品展示</a>
+                </li>
+
+                <li>
+                    <a class="homeTitle" href="@Url.Content("~/User/Contact")">联系我们</a>
+                </li>
+            </ul>
+        </div      
+        <div class="clearfix"></div>
+    </div>
+</nav>

@@ -116,20 +116,45 @@ namespace GoodVideoSystem.Controllers.Back
         public ActionResult ExportExcel(int vid = -1)
         {
             string fileName = "全部视频-邀请码";
-            Code[] codeArray = null;
-            if (vid == -1)
-                codeArray = codeService.getAllInviteCodes().ToArray();
-            else
+            
+             List<Code> codeList = codeService.getAllInviteCodes().ToList();
+             if(codeList == null)
+                 return RedirectToAction("", "VideoManager");
+             if (codeList.Count() == 0)
+                 return RedirectToAction("", "VideoManager");
+
+             if (vid != -1)
             {
-                codeArray = videoService.getInviteCodes(vid).ToArray();
+                for (int i = codeList.Count() - 1; i >= 0; i--)
+                {
+                    if (codeList[i].vid != vid)
+                        codeList.Remove(codeList[i]);
+                }
+
+                if (codeList == null)
+                    return RedirectToAction("", "VideoManager");
+                if (codeList.Count() == 0)
+                    return RedirectToAction("", "VideoManager");
+
                 Video video = videoService.getVideo(vid);
                 fileName = video.VideoName + "-邀请码";
             }
 
-            if (codeArray.Count() <= 0)
+             if (codeList.Count() <= 0)
                 return RedirectToAction("", "VideoManager");
 
-            byte[] bytes = exportExcel.WriteExcel(codeArray);
+            //设置为已打印=======================================
+            for (int i = 0; i < codeList.Count(); i++)
+            {
+                if (codeList[i].CodeStatus == UNACTIVE_)
+                {
+                    codeList[i].CodeStatus = ACTIVE_;
+                    codeService.updateInviteCode(codeList[i]);
+                }
+            }
+            //===================================================
+
+            byte[] bytes = exportExcel.WriteExcel(codeList.ToArray());
             return File(bytes, "application/vnd.ms-excel", fileName + ".xls");
         }
     }

@@ -1,0 +1,191 @@
+﻿@{
+    ViewBag.Title = "古驿平安-视频管理";
+    Layout = "~/Views/Shared/_BackLayout.cshtml";
+}
+
+@using RefactorVideoSystem.Models.Models;
+@model GoodVideoSystem.Models.Concrete.Paging
+
+<style>
+    .badge {
+        color: red !important;
+    }
+
+    #headTitle th {
+        font-family: 'Microsoft YaHei';
+        font-size: 14px;
+        color: black;
+    }
+</style>
+
+
+<div class="main" style="margin-left: 290px; width: 80%">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="@Url.Content("~/Qhgypacz/BackMain/")"><span class="glyphicon glyphicon-home"></span></a></li>
+            <li class="active">邀请码列表</li>
+        </ol>
+    </div>
+    <!--/.row-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">邀请码列表</div>
+                <div class="panel-body">
+                    <form role="form" action="@Url.Content("~/Search")" method="get">
+                        <input type="hidden" name="model" value="VideoCode" />
+                        <table>
+                            <tr>
+                                <td id="searchValue">
+                                    <input type="text" class="form-control" name="searchValue" style="width: 200px; height: 35px; padding: 4px" placeholder='请输入邀请码' required />
+                                </td>
+                                <td>
+                                    <select class="form-control" style="width: 120px; margin-left: 10px" id="searchType" name="searchType">
+                                        <option value="code" selected>按邀请码</option>
+                                        <option value="status">按状态</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <button type="submit" style="margin-left: 10px; background-color: #373B3E; border-color: #2C343A; color: white" class="btn btn-default">搜索</button>
+                                </td>
+                                <td style="padding-left: 30px;">
+                                    <button type="button" class="btn btn-primary">邀请码总数：<span class="badge">@TempData["codeCount"]</span></button>
+                                </td>
+                                <td style="padding-left: 10px;">
+                                    <button type="button" class="btn btn-primary">未打印数量：<span class="badge">@TempData["codeCountNotExport"]</span></button>
+                                </td>
+                                <td style="padding-left: 10px;">
+                                    <button type="button" class="btn btn-primary">用户已使用数量：<span class="badge">@TempData["codeCountUsed"]</span></button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                     @{int codeSeq = Model.every_page_items * (Model.request_page - 1) + 1;}
+                    <table class="table table-bordered table-hover class" style="margin-top: 10px;">
+                        <thead>
+                            <tr id="headTitle">
+                                <th>序号</th>
+                                <th>视频名称</th>
+                                <th>邀请码</th>
+                                <th>状态</th>
+                                <th>使用次数</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (Code c in Model.returnData)
+                            { 
+                                <tr>
+                                    <td>@codeSeq</td>
+                                    <td>@c.Video.VideoName</td>
+                                    <td>@c.CodeValue</td>
+                                    @if (c.CodeStatus == 0)
+                                    {
+                                        <td style="color: red">未激活</td>
+                                    }
+                                    @if (c.CodeStatus == 1)
+                                    {
+                                        <td style="color: green">已激活</td>
+                                    }
+                                    @if (c.CodeStatus == 2)
+                                    {
+                                        <td style="color: #4800ff">已使用</td>
+                                    }
+                                    <td>@c.BindedDeviceCount</td>
+                                    <td>
+                                        @if (c.CodeStatus == 0)
+                                        {
+                                            <a href="#" onclick="setStatus(@c.CodeID);">[ 激活&nbsp; &nbsp; &nbsp;]</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="#">[ 已激活 ]</a>
+                                        }
+                                        &nbsp; &nbsp; &nbsp; &nbsp;
+                                        <a href="#" onclick="deleteInviteCode(@c.CodeID);">[ 删除 ]</a>
+
+                                    </td>
+                                </tr>
+                                codeSeq++;
+                            }
+                        </tbody>
+                    </table>
+
+                    @{
+                        int prePageId = (Model.request_page > 1) ? Model.request_page - 1 : 1;
+                        int nextPageId = (Model.request_page < Model.total_pages) ? Model.request_page + 1 : Model.total_pages;
+                    }
+
+                    <div style="text-align: center">
+                        <ul class="pagination">
+                            <li><a href="@ViewBag.searchAction">首页</a></li>
+                            <li><a href="@ViewBag.searchAction@prePageId">&laquo;</a></li>
+                            @for (int i = Model.start_page_num; i <= Model.end_page_num; i++)
+                            {
+                                <li><a id="@i" href="@ViewBag.searchAction@i">@i</a></li>
+                            }
+                            <li><a href="@ViewBag.searchAction@nextPageId">&raquo;</a></li>
+                            <li><a href="@ViewBag.searchAction@Model.total_pages">末页</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    jQuery("#searchType").on("change", function () {
+        var searchType = this.value;
+        var searchValue = jQuery("#searchValue");
+        if (searchType == "code") {
+            searchValue.html("<input type='text' class='form-control' name='searchValue' style='width: 200px;' placeholder=请输入邀请码 required/>");
+        }
+        if (searchType == "status") {
+            searchValue.html('<select class="form-control" style="width: 100px;" name="searchValue">'
+                             + '<option value="0" selected>未打印</option>'
+                             + '<option value="1">已打印</option>'
+                             + '<option value="2">已使用</option>'
+                             + '<option value="3">已失效</option>'
+                             + '</select>');
+        }
+        if (searchType == "video") {
+            searchValue.html("<input type='text' class='form-control' name='searchValue' style='width: 200px;' placeholder=请输入视频名称 required/>");
+        }
+    });
+
+    //设置邀请码状态为已打印
+    function setStatus(codeID) {
+        jQuery.get(
+            "/VideoCode/setCodeStatus",
+            {
+                "codeID": codeID
+            },
+            function (data) {
+                if (data == "success")
+                    location.reload();
+                location.reload();
+            }
+        );
+    }
+
+    //删除邀请码
+    function deleteInviteCode(codeID) {
+        var ok = confirm("删除此邀请码将使用户无法通过此邀请码获取视频，并且用户通过此邀请码获取过的视频将无法再观看，请再次确定");
+        if (ok) {
+            jQuery.get(
+                "/VideoCode/deleteInviteCode",
+                {
+                    "codeID": codeID
+                },
+                function (data) {
+                    if (data == "success") {
+                        alert("删除成功");
+                        location.reload();
+                    } else {
+                        alert("删除失败");
+                    }
+                }
+            );
+        }
+    }
+</script>

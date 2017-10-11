@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>青海古驿平安串珠欢迎您</title>
+    @Styles.Render("~/Resources/css")
+    @Scripts.Render("~/Resources/js")
+    <style>
+        body {
+            background: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="div_1" style="text-align: center; margin-top: 10px">
+        <p id="info" style="margin-bottom: 20px; color: #ff006e; text-align: center; font-family: 'Microsoft YaHei'; font-size: 22px"></p>
+        <img id="welcome" src="/Resources/img/welcome2.jpg" style="vertical-align:middle; border:5px solid rgba(79, 6, 108, 0.70)" > 
+        <img id="welcome_ph" src="/Resources/img/tip.png"  style="vertical-align:middle" width=100%> 
+    </div>
+</body>
+</html>
+<script src="~/Resources/js/utility/welcome.js"></script>
+<script src="~/Resources/js/utility/getBrowserInfo.js"></script>
+

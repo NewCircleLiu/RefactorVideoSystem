@@ -1,0 +1,12 @@
+﻿/*手机端、iPad端竖屏*/
+@media (min-width: 1200px) {
+    .playerDiv {
+        width: 960px !important;
+        height: 520px !important;
+    }
+
+    .playerDiv :first-child{
+        width: 960px !important;
+        height: 520px !important;
+    }
+}
