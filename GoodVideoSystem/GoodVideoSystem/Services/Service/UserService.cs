@@ -90,7 +90,9 @@ namespace GoodVideoSystem.Services.Service
                 Code currCode = codeRepository.getInviteCode(splitCodes[i].Trim());
                 if (currCode != null)
                 {
-                    Video currVideo = currCode.Video;
+                    int vid = currCode.vid;
+                    Video currVideo = videoService.getVideo(vid);
+
                     if (currVideo != null)
                     {
                         currVideo.CodeCounts--;

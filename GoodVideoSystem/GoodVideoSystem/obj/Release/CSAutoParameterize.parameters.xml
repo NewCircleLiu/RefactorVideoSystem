@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<parameters>
-  <parameter name="PingAnVIdeoSystemDataBase-Web.config Connection String" description="PingAnVIdeoSystemDataBase 由应用程序在 web.config 中用来访问数据库的连接字符串。" defaultValue="Data Source=(LocalDb)\.\share_PingAnVIdeoSystemDataBase;Initial Catalog=PingAnVIdeoSystemDataBase;Integrated Security=SSPI;AttachDBFilename=|DataDirectory|PingAnVIdeoSystemDataBase.mdf" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="E:\\我的项目\\平安串珠视频系统\\ReConstuctByLXY\\RefactorVideoSystem\\GoodVideoSystem\\GoodVideoSystem\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='PingAnVIdeoSystemDataBase']/@connectionString" />
-  </parameter>
-</parameters>

@@ -29,4 +29,3 @@ E:\我的项目\平安串珠视频系统\ReConstuctByLXY\RefactorVideoSystem\Goo
 E:\我的项目\平安串珠视频系统\ReConstuctByLXY\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
 E:\我的项目\平安串珠视频系统\ReConstuctByLXY\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\obj\Release\GoodVideoSystem.dll
 E:\我的项目\平安串珠视频系统\ReConstuctByLXY\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\obj\Release\GoodVideoSystem.pdb
-E:\我的项目\平安串珠视频系统\ReConstuctByLXY\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\obj\Release\GoodVideoSystem.csprojResolveAssemblyReference.cache
