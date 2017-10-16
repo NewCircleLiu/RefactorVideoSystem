@@ -15,11 +15,8 @@ namespace GoodVideoSystem.Controllers.Back
 {
     public class PolyProcessController : Controller
     {
-        //private string secretkey = "QH8IHKX6JR";
-        //private string userid = "212b30914a";
-
-        private string secretkey = "H4EkSWnQAd";
-        private string userid = "3bac3e52d4";
+        private string secretkey = "QH8IHKX6JR";
+        private string userid = "212b30914a";
 
         private DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1, 0, 0, 0, 0));
 
@@ -105,7 +102,7 @@ namespace GoodVideoSystem.Controllers.Back
             string s = json_["status"].ToString();
             video_.polyVid = vid;
             video_.VideoName = json_["data"][0]["title"].ToString();
-            video_.coverImage = "http://img.videocc.net/uimage/3/" + json_["data"][0]["images"][0].ToString();
+            video_.coverImage = "http://img.videocc.net/uimage/2/" + json_["data"][0]["images"][0].ToString();
 
             return video_;
         }
