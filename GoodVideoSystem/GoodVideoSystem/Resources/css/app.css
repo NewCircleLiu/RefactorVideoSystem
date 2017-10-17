@@ -3,6 +3,10 @@
    #binaryCode {
         border-left:none;
     }
+
+    #product_title {
+        font-size:15px !important;
+    }
     #welcome {
          display:none;
     }

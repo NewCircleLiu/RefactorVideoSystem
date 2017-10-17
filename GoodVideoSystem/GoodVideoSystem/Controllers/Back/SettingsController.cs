@@ -60,18 +60,18 @@ namespace VideoSystem.Controllers.Back
         {
             Manager manager = (Manager)Session["Manager"];
 
-            if (oldPass != manager.Password)
-            {
-                TempData["erroInfo"] = "原始密码不正确";
-                return RedirectToAction("ModifyPassPage", "Settings");
-            }
-            else
+            if (manager.Password.Equals(oldPass) || manager.Password.Equals(oldPass.ToLower()))
             {
                 manager.Password = newPass;
                 managerService.editManager(manager);
                 FormsAuthentication.SignOut();
                 Response.Cookies.Clear();
                 return RedirectToAction("", "Qhgypacz");
+            }
+            else
+            {
+                TempData["erroInfo"] = "原始密码不正确";
+                return RedirectToAction("ModifyPassPage", "Settings");
             }
         }
     }
