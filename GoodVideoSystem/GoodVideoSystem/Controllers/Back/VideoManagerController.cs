@@ -29,14 +29,14 @@ namespace GoodVideoSystem.Controllers.Back
             this.codeService = codeService;
         }
 
-        public ActionResult Index(int page_id = 1)
+        public ActionResult Index(int Page = 1)
         {
             IEnumerable<Video> videoList = videoService.getVideosById(-1);
             TempData["videoCount"] = videoList.Count();
             Manager manager = (Manager)Session["Manager"];
-            ViewBag.searchAction = "/VideoManager/Index/Page";
+            ViewBag.searchAction = "/VideoManager/Index?Page=";
             ViewBag.account = manager.Account;
-            ip.GetCurrentPageData(videoList, page_id);
+            ip.GetCurrentPageData(videoList, Page);
             return View(ip);
         }
         public ActionResult UploadImg(int vid, string coverImage)
@@ -119,7 +119,7 @@ namespace GoodVideoSystem.Controllers.Back
             return Content("erro");
         }
 
-        public ActionResult getInviteCode(int vid = -1, int page_id = 1)
+        public ActionResult getInviteCode(int vid = -1, int Page = 1)
         {
             if (vid != -1)
             {
@@ -133,7 +133,7 @@ namespace GoodVideoSystem.Controllers.Back
             IEnumerable<Code> codeList = null;
             codeList = videoService.getInviteCodes(vid);
 
-            ip.GetCurrentPageData(codeList, page_id);
+            ip.GetCurrentPageData(codeList, Page);
 
             int codeCount, codeCountNotExport, codeCountNotUsed,codeCountUsed;
             codeService.getCounts(vid, out codeCount, out codeCountNotExport, out codeCountNotUsed, out codeCountUsed);
@@ -143,7 +143,7 @@ namespace GoodVideoSystem.Controllers.Back
 
             TempData["codeCountUsed"] = codeCountUsed;
             Manager manager = (Manager)Session["Manager"];
-            ViewBag.searchAction = "/VideoManager/getInviteCode/Page";
+            ViewBag.searchAction = "/VideoManager/getInviteCode?Page=";
             ViewBag.account = manager.Account;
             return View(ip);
         }
