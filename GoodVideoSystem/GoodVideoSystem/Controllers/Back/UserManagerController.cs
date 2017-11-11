@@ -28,28 +28,28 @@ namespace GoodVideoSystem.Controllers.Back
             this.ip = ip;
             this.codeService = codeService;
         }
-        public ActionResult Index(int page_id = 1)
+        public ActionResult Index(int Page = 1)
         {
             int recordCount;
             IEnumerable<User> userList = userService.getUsers(out recordCount);
-            ip.GetCurrentPageData(userList, page_id);
+            ip.GetCurrentPageData(userList, Page);
             Manager manager = (Manager)Session["Manager"];
-            ViewBag.searchAction = "/UserManager/Index/Page";
+            ViewBag.searchAction = "/UserManager/Index?Page=";
             ViewBag.account = manager.Account;
             return View(ip);
         }
 
         //查看留言
-        public ActionResult UserSuggestsPage(int page_id = 1)
+        public ActionResult UserSuggestsPage(int Page = 1)
         {
             int recordcount;
             IEnumerable<Suggest> suggestList = suggestService.getSuggests(out recordcount);
             suggestList = suggestList.OrderByDescending(s => s.CreateTime);
 
-            ip.GetCurrentPageData(suggestList, page_id);
+            ip.GetCurrentPageData(suggestList, Page);
             Manager manager = (Manager)Session["Manager"];
             ViewBag.account = manager.Account;
-            ViewBag.searchAction = "/UserManager/UserSuggestPage/Page";
+            ViewBag.searchAction = "/UserManager/UserSuggestPage?Page=";
             return View(ip);
         }
 

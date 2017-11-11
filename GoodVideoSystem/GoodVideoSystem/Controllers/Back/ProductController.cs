@@ -28,14 +28,14 @@ namespace GoodVideoSystem.Controllers.Back
             this.ip = ip;
         }
 
-        public ActionResult Index(int page_id = 1)
+        public ActionResult Index(int Page = 1)
         {
             int recordcount;
             IEnumerable<Product> productList = productService.getProducts(out recordcount);
-            ip.GetCurrentPageData(productList, page_id);
+            ip.GetCurrentPageData(productList, Page);
             TempData["productCount"] = recordcount;
             Manager manager = (Manager)Session["Manager"];
-            ViewBag.searchAction = "/Product/Index/Page";
+            ViewBag.searchAction = "/Product/Index?Page=";
             ViewBag.account = manager.Account;
             return View(ip);
 
