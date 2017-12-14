@@ -50,12 +50,14 @@ namespace GoodVideoSystem.Controllers.Front
         */
         public ActionResult Home()
         {
-            string deviceUniqueCode = (string)Session["deviceUniqueCode"];
-            if (string.IsNullOrEmpty(deviceUniqueCode))
-                return RedirectToAction("Index", "User");
-
-            Code[] inviteCodes = codeService.getInviteCodes(deviceUniqueCode).ToArray();
-            User user = userService.getUserByDevice(deviceUniqueCode);
+            if(Session["UserId"]==null)
+            {
+                return RedirectToAction("Login", "User");
+            }
+            int userid = int.Parse((string)Session["UserId"]);
+           
+            Code[] inviteCodes = codeService.getInviteCodes(userid).ToArray();
+            User user = userService.getUserById(userid);
             Session["CurrentUser"] = user;
             return View(inviteCodes);
         }
@@ -65,12 +67,39 @@ namespace GoodVideoSystem.Controllers.Front
         * @url /user/GetVideo
         * @method POST
         */
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult SaveUserToCookie(string userName, string userPhone)
+        {
 
+            User u ;
+            u = userService.getUserByPhone(userPhone);
+            if (u == null) //那么这个用户就是个新用户
+            {
+                u = new User();
+                u.CreateTime = DateTime.Now;
+                u.Phone = userPhone;
+                u.Username = userName;
+                u.InviteCodes = " ";
+                userService.registeUser(u);
+            }
+            u = userService.getUserByPhone(userPhone);
+            Response.Cookies["User"]["UserName"] = userName;
+            Response.Cookies["User"]["UserPhone"] = userPhone;
+            Response.Cookies["User"]["UserId"] = u.UserId.ToString();
+            Response.Cookies["User"].Expires = DateTime.MaxValue; //永久
+            Session["UserId"] = u.UserId.ToString();
+            return RedirectToAction("Home", "User");
+        }
         public ActionResult GetVideo(string videoInviteCode)
         {
+
             //0.1.异常处理，如果没有获取到地址，则跳转到欢迎页面获取设备标识
-            string deviceUniqueCode = (string)Session["deviceUniqueCode"];
-            if (string.IsNullOrEmpty(deviceUniqueCode))
+            string userId = (string)Session["UserId"];
+            if (string.IsNullOrEmpty(userId))
                 return RedirectToAction("Index", "User");
 
             //0.2.异常处理，如果传过来的邀请码为空，则跳转到获取视频页面
@@ -85,20 +114,23 @@ namespace GoodVideoSystem.Controllers.Front
             if (!returnInfo.Equals("INVALID")) //如果输入合法的邀请码（数据库中存在）
             {
                 //如果是新的邀请码输入新的设备，那么新建用户并且绑定当前邀请码
-                if (!userService.IsCurrentUserExist(deviceUniqueCode, returnCode))
-                    return Content("ADDUSERPAGE");
+/*                if (!userService.IsCurrentUserExist(deviceUniqueCode, returnCode))
+                    return Content("ADDUSERPAGE");*/
 
                 if (returnInfo.Equals("AVAILABLE"))
                 {
                     //若当前设备已经请求了当前邀请码所指示的视频则直接返回（避免重复请求）
-                    if (returnCode.DeviceUniqueCode != null && returnCode.DeviceUniqueCode.Contains(deviceUniqueCode))
+                    if (returnCode.UserID != -1)
+                    {
                         return Content("AVAILABLE");
+                    }
 
                     //若当前邀请码所指示的视频没有在当前设备请求过
                     else
                     {
-                        userService.updateUserInfo(returnCode, deviceUniqueCode);
-                        codeService.updateInviteCodeInfo(returnCode, deviceUniqueCode);
+                        userService.updateUserInfo(returnCode, userId);
+                        //codeService.updateInviteCodeInfo(returnCode, deviceUniqueCode);
+                        codeService.updateInviteCodeInfo(returnCode, userId);
                     }
                 }
             }
@@ -124,11 +156,11 @@ namespace GoodVideoSystem.Controllers.Front
                 return RedirectToAction("Error");
 
             //3.当前用户是否有权限，如果Session失效，跳转到Index
-            string deviceUniqueCode = (string)Session["deviceUniqueCode"];
-            if (string.IsNullOrEmpty(deviceUniqueCode))
+            int userId = (int)Session["UserId"];
+            if (userId==null)
                 return RedirectToAction("Index", "User");
 
-            User currentUser = userService.getUserByDevice(deviceUniqueCode);
+            User currentUser = userService.getUserById(userId);
             for (int i = 0; i < codes.Count(); i++)
             {
                 if (currentUser.InviteCodes.Contains(codes[i].CodeValue))

@@ -660,7 +660,7 @@
     <Content Include="Views\Front\User\Play.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Front\User\AddUserInfo.cshtml" />
+    <Content Include="Views\Front\User\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />

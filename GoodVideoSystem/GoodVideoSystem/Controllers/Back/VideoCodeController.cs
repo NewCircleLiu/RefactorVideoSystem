@@ -86,7 +86,7 @@ namespace GoodVideoSystem.Controllers.Back
 
         //生成邀请码
         [HttpPost]
-        public ActionResult CreateCode(int codeCounts, int vid)
+        public JsonResult CreateCode(int vid, int codeCounts)
         {
             if (vid != -1)
             {
@@ -96,7 +96,7 @@ namespace GoodVideoSystem.Controllers.Back
 
                 foreach (string code in codeList)
                 {
-                    Code c = new Code() { CodeStatus = UNACTIVE_, CodeValue = code, vid = video.vid, UserID = -1 };
+                    Code c = new Code() { CodeStatus = UNACTIVE_, CodeValue = code, vid = video.vid, UserID = -1 ,BindedDeviceCount=0};
                     if (ModelState.IsValid)
                     {
                         codeService.addInviteCode(c);
@@ -108,9 +108,9 @@ namespace GoodVideoSystem.Controllers.Back
                 {
                     videoService.updateVideo(video);
                 }
-                return Content("生成成功");
+                return Json("生成成功");
             }
-            return Content("生成失败");
+            return Json("生成失败");
         }
 
         public ActionResult ExportExcel(int vid = -1)

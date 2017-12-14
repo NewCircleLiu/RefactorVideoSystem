@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -18,7 +18,7 @@ namespace RefactorVideoSystem.Models.Models
         public int BindedDeviceCount { get; set; } //视频邀绑定的设备总数
         public string DeviceUniqueCode { get; set; } //统一视频邀请码对应的最多3个设备，用逗号分隔
 
-        public int UserID { get; set; } //暂时不用
+        public int UserID { get; set; } //一个视频邀请码对应一个ID
         [Required]
         public int vid { get; set; } //视频邀请码对应的唯一视频
 

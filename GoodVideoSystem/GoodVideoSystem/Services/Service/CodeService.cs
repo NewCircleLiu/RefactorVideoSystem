@@ -35,6 +35,10 @@ namespace GoodVideoSystem.Services.Service
         {
             return codeRepository.getInviteCodes(deviceUniqueCode);
         }
+        public IEnumerable<Code> getInviteCodes(int userid)
+        {
+            return codeRepository.getInviteCodesByUserId(userid);
+        }
 
         public void addInviteCode(Code code)
         {
@@ -53,23 +57,17 @@ namespace GoodVideoSystem.Services.Service
             return AVAILABLE;
         }
 
-        public void updateInviteCodeInfo(Code inviteCode, string deviceUniqueCode)
+        public void updateInviteCodeInfo(Code inviteCode, string userId)
         {
-            deviceUniqueCode = deviceUniqueCode.Trim();
-
-            if (string.IsNullOrEmpty(deviceUniqueCode))
+            userId = userId.Trim();
+            if (string.IsNullOrEmpty(userId))
+            {
                 return;
-
-            //但凡请求信的视频，需要绑定邀请码的硬件信息
-            if (inviteCode.BindedDeviceCount < MAX_DEVICE_COUNT)
+            }
+            if (inviteCode.UserID != null)
             {
                 inviteCode.CodeStatus = USED_;
-
-                if (inviteCode.DeviceUniqueCode == null)
-                    inviteCode.DeviceUniqueCode += ("," + deviceUniqueCode);
-                else if(!inviteCode.DeviceUniqueCode.Contains(deviceUniqueCode))
-                    inviteCode.DeviceUniqueCode += ("," + deviceUniqueCode);
-                inviteCode.BindedDeviceCount = inviteCode.DeviceUniqueCode.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Count();
+                inviteCode.UserID = int.Parse(userId);
                 codeRepository.updateInviteCode(inviteCode);
             }
         }

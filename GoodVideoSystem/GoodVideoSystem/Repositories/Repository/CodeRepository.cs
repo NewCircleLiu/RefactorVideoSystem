@@ -17,7 +17,11 @@ namespace GoodVideoSystem.Models.Repository
         {
             return Get(item => item.DeviceUniqueCode.Contains(deviceUniqueCode));
         }
-
+        //根据用户的Id来获取视频邀请码
+        public IEnumerable<Code> getInviteCodesByUserId(int userid)
+        {
+            return Get(item => item.UserID == userid);
+        }
 
         public void addInviteCode(Code code)
         {

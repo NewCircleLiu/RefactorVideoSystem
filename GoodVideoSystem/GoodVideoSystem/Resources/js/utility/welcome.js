@@ -1,11 +1,9 @@
 ﻿jQuery(function () {
     jQuery.get(
-    "/Login/SavedeviceUniqueCode",
-    {
-        "deviceUniqueCode": getBrowserInfo()
-    },
+    "/Login/GetUserInfoFromCookie",
+    {},
     function (data) {
-        showTime();
+        showTime(data);
     }
 );
 })
@@ -14,12 +12,16 @@
 var t = 4;
 
 //显示倒数秒数
-function showTime() {
+function showTime(info) {
     jQuery("#info").text("欢迎您访问古驿平安串珠视频系统！正在准备，稍后将进入系统...");
     if (t == 1) {
         clearTimeout(showTime);
-        location.href = '/User/Home';
+        if (info == "success") {
+            location.href = '/User/Home';
+        } else {
+            location.href = '/User/Login';
+        }
     }
     t -= 1;
-    setTimeout(showTime, 1000);
+    setTimeout(showTime(info), 1000);
 }

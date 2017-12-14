@@ -15,7 +15,6 @@ namespace RefactorVideoSystem.Models.Models
         public string Phone { get; set; } //用户的手机号
         [Required]
         public string InviteCodes { get; set; } //用户所有的邀请码，格式："code1,code2...coden"
-
         public ICollection<ActionLog> ActionLogs { get; set; } //用户相关的LOG
     }
 }

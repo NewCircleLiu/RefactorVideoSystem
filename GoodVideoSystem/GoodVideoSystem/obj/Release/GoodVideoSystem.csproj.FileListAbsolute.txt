@@ -30,3 +30,35 @@ E:\我的项目\平安串珠视频系统\ReConstuctByLXY\RefactorVideoSystem\Goo
 E:\我的项目\平安串珠视频系统\ReConstuctByLXY\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\obj\Release\GoodVideoSystem.dll
 E:\我的项目\平安串珠视频系统\ReConstuctByLXY\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\obj\Release\GoodVideoSystem.pdb
 E:\我的项目\平安串珠视频系统\ReConstuctByLXY\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\obj\Release\GoodVideoSystem.csprojResolveAssemblyReference.cache
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\GoodVideoSystem.dll
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\GoodVideoSystem.pdb
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\Antlr3.Runtime.dll
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\EntityFramework.dll
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\Newtonsoft.Json.dll
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\System.Web.Mvc.dll
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\System.Web.Optimization.dll
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\System.Web.Providers.dll
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\System.Web.Razor.dll
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\System.Web.WebPages.Deployment.dll
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\System.Web.WebPages.dll
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\System.Web.WebPages.Razor.dll
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\WebGrease.dll
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\EntityFramework.xml
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\Newtonsoft.Json.xml
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\System.Web.Mvc.xml
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\System.Web.Razor.xml
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\System.Web.WebPages.xml
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\System.Web.WebPages.Deployment.xml
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\System.Web.WebPages.Razor.xml
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\zh-Hans\EntityFramework.resources.dll
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\zh-Hans\System.Web.Mvc.resources.dll
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\zh-Hans\System.Web.Optimization.resources.dll
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\zh-Hans\System.Web.Providers.resources.dll
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\zh-Hans\System.Web.Razor.resources.dll
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\zh-Hans\System.Web.WebPages.resources.dll
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\zh-Hans\System.Web.WebPages.Deployment.resources.dll
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\obj\Release\GoodVideoSystem.csprojResolveAssemblyReference.cache
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\obj\Release\GoodVideoSystem.dll
+C:\Users\IMAC\Documents\Visual Studio 2012\Projects\RefactorVideoSystem\RefactorVideoSystem\GoodVideoSystem\GoodVideoSystem\obj\Release\GoodVideoSystem.pdb
